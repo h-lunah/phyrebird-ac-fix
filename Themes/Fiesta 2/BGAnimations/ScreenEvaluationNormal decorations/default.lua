@@ -1,4 +1,4 @@
-local MachineText = "StepP1+"
+local MachineText = "Phyrebird"
 
 local t = Def.ActorFrame {
 	GoNextScreenMessageCommand=cmd(playcommand,'Off');
@@ -713,5 +713,46 @@ t[#t+1] = Def.ActorProxy {
 	OnCommand=cmd(x,SCREEN_CENTER_X;y,20;basezoom,.66;zoom,0;sleep,.2;linear,.05;zoom,1);
 	OffCommand=cmd(finishtweening;zoom,1;linear,.2;zoom,0);
 }
+
+-- QR Code shenanigans
+local QRView = { PLAYER_1 = false, PLAYER_2 = false }
+
+t[#t+1] = LoadFont("_century gothic 20px")..{
+	InitCommand=function(self) 
+        self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y + 80)
+        self:zoom(0.66)
+        self:settext(ScreenString("QRInstructions"))
+    end,
+    OffCommand=cmd(finishtweening;linear,.25;rotationx,90)
+};
+
+local Players = GAMESTATE:GetHumanPlayers()
+for player in ivalues(Players) do
+    t[#t+1] = Def.ActorFrame {
+        InitCommand=function(self)
+            self:xy(SCREEN_CENTER_X + (player == PLAYER_1 and -105 or 105), SCREEN_CENTER_Y + 148)
+            self:zoomx(0)
+        end,
+        CodeMessageCommand=function(self, params)
+            if params.PlayerNumber == player then
+                if params.Name == "UpLeft" or params.Name == "UpRight" then
+                    QRView[player] = not QRView[player]
+                    if QRView[player] then
+                        self:finishtweening()
+                        self:linear(0.2)
+                        self:zoomx(1)
+                    else
+                        self:finishtweening()
+                        self:linear(0.2)
+                        self:zoomx(0)
+                    end
+                end
+            end
+        end,
+        OffCommand=cmd(stoptweening;linear,.2;y,SCREEN_BOTTOM+100),
+            
+        LoadActor("QR/default.lua", player) .. {}
+    }
+end
 
 return t;
