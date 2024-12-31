@@ -110,6 +110,30 @@ function AddDots( score )
 end;
 
 
+function ScoreToPercent( score )
+	local formatted_score = ""
+	if score < 100 then
+		formatted_score = "00.00"
+	elseif score < 1000 then
+		formatted_score = "00.0" .. math.floor(score/100);
+	elseif score < 10000 then
+		formatted_score = "00." .. math.floor(score/100);
+	elseif score < 100000 then
+		local relevant_digits = math.floor(score/100);
+		local integer_part = "0" .. string.sub(relevant_digits,1,1);
+		local decimal_part = string.sub(relevant_digits,2,2) .. string.sub(relevant_digits,3,3);
+		formatted_score = integer_part .. "." .. decimal_part;
+	elseif score < 1000000 then
+		local relevant_digits = math.floor(score/100);
+		local integer_part = string.sub(relevant_digits,1,2);
+		local decimal_part = string.sub(relevant_digits,3,4);
+		formatted_score = integer_part .. "." .. decimal_part;
+	else
+		formatted_score = "100.00"
+	end
+	return formatted_score .. "%"
+end
+
 --/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 -- P. SCORE FUNCTIONS --
 
@@ -118,7 +142,7 @@ function CalcPScore(perfects, greats, goods, bads, misses, maxcombo)
 	local notestotal = perfects + greats + goods + bads + misses;
 	if notestotal <= 1 then notestotal = 1 end;
 	local weightednotes = perfects + 0.6*greats + 0.2*goods + 0.1*bads;
-	local pscore = math.round(((weightednotes * 0.995 + maxcombo * 0.005) / notestotal) * 1000000 );
+	local pscore = math.floor(995000*(weightednotes/notestotal) + 5000*(maxcombo/notestotal))
 	if pscore < 0 then
 		pscore = 0;
 	elseif pscore > 1000000 then
@@ -1146,3 +1170,4 @@ function FormatTime(totalseconds)
 	end
 	return minutes..":"..seconds
 end
+

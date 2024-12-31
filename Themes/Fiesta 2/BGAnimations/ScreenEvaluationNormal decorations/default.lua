@@ -267,6 +267,30 @@ if GAMESTATE:HasProfile( pn ) then
 			end;
 			OffCommand=cmd(stoptweening;visible,false);
 		};
+		a[#a+1] = LoadFont("_karnivore lite white 20px")..{
+			InitCommand=cmd(settext,"+";zoom,.38;maxwidth,85;x,-40;y,-40;diffusealpha,0;sleep,.5;diffusealpha,1);
+			OnCommand=function(self)
+				if not SCREENMAN:GetTopScreen():PlayerHasNewRecord(pn) then
+					self:visible(false);
+				end;
+				if (NewHS-OldHS) < 1 then
+					self:visible(false);
+				end;
+			end;
+			OffCommand=cmd(stoptweening;visible,false);
+		};
+		a[#a+1] = DrawRollingNumberSmall(-35,-40,0,NewHS-OldHS,left,.6)..{
+			InitCommand=cmd(zoom,.62;maxwidth,85;diffusealpha,0;sleep,.5;diffusealpha,1);
+			OnCommand=function(self)
+				if not SCREENMAN:GetTopScreen():PlayerHasNewRecord(pn) then
+					self:visible(false);
+				end;
+				if (NewHS-OldHS) < 1 then
+					self:visible(false);
+				end;
+			end;
+			OffCommand=cmd(stoptweening;visible,false);
+		};
 		a[#a+1] = DrawRollingNumberSmall(-40,-14,NewHS,NewHS,left,.6)..{
 			InitCommand=cmd(zoom,.62;maxwidth,85;diffusealpha,0;sleep,.5;diffusealpha,1);
 			OnCommand=function(self)
