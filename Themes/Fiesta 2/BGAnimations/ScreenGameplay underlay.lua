@@ -376,7 +376,9 @@ end;
 -- Song Title --
 
 local songtitle = GAMESTATE:GetCurrentSong():GetDisplayMainTitle();
-songtitle = string.upper(string.sub(songtitle,1,46));
+local cur_song = GAMESTATE:GetCurrentSong();
+local cur_steps = GAMESTATE:GetCurrentSteps(PLAYER_1);
+songtitle = string.upper(songtitle);
 
 t[#t+1] = Def.BitmapText {
 	Font="_myriad pro 20px",
