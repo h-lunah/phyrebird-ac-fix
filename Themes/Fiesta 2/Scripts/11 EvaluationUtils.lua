@@ -27,7 +27,7 @@ local cur_text_digits = "";
 local cur_digit = 1;
 local cur_loop_digit = 0;
 
-return LoadFont("_karnivore lite white 20px")..{
+return LoadFont("_plateia 28px")..{
 	OnCommand=function(self)
 		self:x(x);
 		self:y(y);
@@ -73,7 +73,7 @@ local cur_text_digits = "";
 local cur_digit = 1;
 local cur_loop_digit = 0;
 
-return LoadFont("_karnivore lite white 20px")..{
+return LoadFont("_myriad pro 20px")..{
 	OnCommand=function(self)
 		self:x(x);
 		self:y(y);

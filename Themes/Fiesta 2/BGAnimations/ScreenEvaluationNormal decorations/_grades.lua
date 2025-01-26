@@ -87,13 +87,13 @@ end;
 -- Grades
 if p1_joined then
 	t[#t+1] = GradeActor(PLAYER_1)..{
-		InitCommand=cmd(x,SCREEN_CENTER_X-156;y,SCREEN_CENTER_Y-40);
+		InitCommand=cmd(x,SCREEN_CENTER_X-265;y,SCREEN_CENTER_Y+20);
 	};
 end;
 
 if p2_joined then
 	t[#t+1] = GradeActor(PLAYER_2)..{
-		InitCommand=cmd(x,SCREEN_CENTER_X+156;y,SCREEN_CENTER_Y-40);
+		InitCommand=cmd(x,SCREEN_CENTER_X+295;y,SCREEN_CENTER_Y+20);
 	};
 end;
 
