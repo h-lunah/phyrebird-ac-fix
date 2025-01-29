@@ -110,6 +110,20 @@ function AddDots( score )
 end;
 
 
+function AddCommas(number)
+    -- Converte o número para string
+    local str = tostring(number)
+    -- Adiciona vírgulas como separadores de milhares
+    local formatted = str:reverse():gsub("(%d%d%d)", "%1,"):reverse()
+    -- Remove vírgula extra, se houver
+    if formatted:sub(1, 1) == "," then
+        formatted = formatted:sub(2)
+    end
+    return formatted
+end
+
+
+
 function ScoreToPercent( score )
 	local formatted_score = ""
 	if score < 100 then
