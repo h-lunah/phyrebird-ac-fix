@@ -65,16 +65,7 @@ local function GradeActor(pn)
 		InitCommand=cmd(basezoom,.66;blend,'BlendMode_Add');
 		OnCommand=cmd(zoom,.5;diffusealpha,0;sleep,t_sleep;sleep,.2;diffusealpha,1;decelerate,.35;zoom,2;diffusealpha,0);
 	};
-	--[[
-	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenEvaluation/R_"..grade.."_SB.png") )..{
-		InitCommand=cmd(basezoom,.66);
-		OnCommand=cmd(zoom,1;diffusealpha,0;sleep,t_sleep;sleep,.2;sleep,.35;sleep,1;diffusealpha,1);
-	};
 
-	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenEvaluation/GLASS.png") )..{
-		InitCommand=cmd(basezoom,.66;blend,'BlendMode_Add');
-		OnCommand=cmd(zoom,.8;diffusealpha,0;sleep,t_sleep;sleep,.2;sleep,.35;sleep,1;diffusealpha,1;decelerate,1;zoom,1.2;diffusealpha,0);
-	};]]--
 	if igrade==1 then
 	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenEvaluation/_shine.png") )..{
 		InitCommand=cmd(basezoom,.66;blend,'BlendMode_Add');
@@ -87,13 +78,13 @@ end;
 -- Grades
 if p1_joined then
 	t[#t+1] = GradeActor(PLAYER_1)..{
-		InitCommand=cmd(x,SCREEN_CENTER_X-265;y,SCREEN_CENTER_Y+20);
+		InitCommand=cmd(x,SCREEN_LEFT+150;y,SCREEN_CENTER_Y+20;zoom, 1.1);
 	};
 end;
 
 if p2_joined then
 	t[#t+1] = GradeActor(PLAYER_2)..{
-		InitCommand=cmd(x,SCREEN_CENTER_X+295;y,SCREEN_CENTER_Y+20);
+		InitCommand=cmd(x,SCREEN_RIGHT-150;y,SCREEN_CENTER_Y+20;zoom, 1.1);
 	};
 end;
 

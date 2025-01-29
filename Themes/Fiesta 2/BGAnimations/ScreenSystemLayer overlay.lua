@@ -164,7 +164,7 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 		else
 			self:x(SCREEN_CENTER_X-170);
 		end;
-	(cmd(y,SCREEN_TOP-15;basezoom,.66))(self);
+	(cmd(y,SCREEN_TOP-50;basezoom,.66))(self);
 	end;
 	PlayerStartedSelectProfileMessageCommand=function( self, params )
 		local la = SCREENMAN:GetTopScreen():GetName();
@@ -207,7 +207,7 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 				local progressbar = self:GetChild("ProgressBarFill");
 				progressbar:zoomto((0),4);
 			end;
-			(cmd(stoptweening;y,SCREEN_TOP-15;linear,.2;y,SCREEN_TOP+15))(self);
+			(cmd(stoptweening;y,SCREEN_TOP-50;linear,.2;y,SCREEN_TOP+15))(self);
 		end;
 	end;
 	ScreenChangedMessageCommand=function(self)
@@ -366,7 +366,7 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 		player_level_text:settext("0001".." (0%)");
 		local progressbar = self:GetChild("ProgressBarFill");
 		progressbar:zoomto((0),4);
-		self:y(SCREEN_TOP-15);
+		self:y(SCREEN_TOP-50);
 	end;
 	JudgmentMessageCommand=function(self,param)
 		if GAMESTATE:IsSideJoined(PLAYER_1) then
@@ -404,7 +404,7 @@ t[#t+1] = PlayerName( PLAYER_2 )..{
 		else
 			self:x(SCREEN_CENTER_X+170);
 		end;
-	(cmd(y,SCREEN_TOP-15;basezoom,.66;zoomx,-1))(self);
+	(cmd(y,SCREEN_TOP-50;basezoom,.66;zoomx,-1))(self);
 	end;
 	PlayerStartedSelectProfileMessageCommand=function( self, params )
 		if (params.Player == PLAYER_2) then
@@ -456,7 +456,7 @@ t[#t+1] = PlayerName( PLAYER_2 )..{
 				local progressbar = self:GetChild("ProgressBarFill");
 				progressbar:zoomto((0),4);
 			end;
-			(cmd(stoptweening;y,SCREEN_TOP-15;linear,.2;y,SCREEN_TOP+15))(self);
+			(cmd(stoptweening;y,SCREEN_TOP-50;linear,.2;y,SCREEN_TOP+15))(self);
 		end;
 	end;
 	ScreenChangedMessageCommand=function(self)
@@ -619,7 +619,7 @@ t[#t+1] = PlayerName( PLAYER_2 )..{
 		player_level_text:settext("0001".." (0%)");
 		local progressbar = self:GetChild("ProgressBarFill");
 		progressbar:zoomto((0),4);
-		self:y(SCREEN_TOP-15);
+		self:y(SCREEN_TOP-50);
 	end;
 	JudgmentMessageCommand=function(self,param)
 		if GAMESTATE:IsSideJoined(PLAYER_2) then 

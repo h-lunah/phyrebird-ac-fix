@@ -5,7 +5,8 @@ local t = Def.ActorFrame {
 local init_pos = 150;
 local delta = 19;
 local spacing = 1.8;
-local zoom_number = .70
+local zoom_number = .70;
+local baseScale = 270;
 
 -- Tick sound
 local times = 1;
@@ -76,16 +77,16 @@ if GAMESTATE:IsSideJoined(PLAYER_1) then
 	t[#t+1] = LoadFont("_myriad pro 20px")..{ InitCommand=cmd(settext,".";y,spacing*6+init_pos+delta*9;x,WideScale(101, 290);zoom,zoom_number;diffusealpha,0;sleep,2.56;diffusealpha,1); };
 	
 	--totalScore
-	t[#t+1] = DrawRollingNumberP2( WideScale(66, 80), init_pos+delta*2, displayscore, 'HorizAlign_Left', 3 )..{InitCommand=cmd(zoom,2);};
+	t[#t+1] = DrawRollingNumberP2( SCREEN_CENTER_X-189, init_pos+delta*1.4, displayscore, "HorizAlign_Right",3.5 )..{InitCommand=cmd(zoom,2);};
 
 	--plate
 	if plate ~= "" then
 	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenEvaluation/"..plate..".png") )..{
-		InitCommand=cmd(basezoom,.44;y,init_pos+delta*9;x,SCREEN_CENTER_X-275);
+		InitCommand=cmd(basezoom,.50;y,init_pos+delta*10;x,SCREEN_LEFT+150);
 		OnCommand=cmd(zoom,1.0;diffusealpha,0;sleep,4.2;linear,.2;zoom,0.66;diffusealpha,1);
 	};
 	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenEvaluation/"..plate..".png") )..{
-		InitCommand=cmd(basezoom,.44;blend,'BlendMode_Add';y,init_pos+delta*9;x,SCREEN_CENTER_X-275,1.33;diffusealpha,0);
+		InitCommand=cmd(basezoom,.50;blend,'BlendMode_Add';y,init_pos+delta*10;x,SCREEN_LEFT+150,1.33;diffusealpha,0);
 		OnCommand=cmd(zoom,.33;diffusealpha,0;sleep,4.2;sleep,.2;diffusealpha,1;decelerate,.35;zoom,1.33;diffusealpha,0);
 	};
 	end;
@@ -136,16 +137,16 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 	t[#t+1] = LoadFont("_myriad pro 20px")..{ InitCommand=cmd(settext,".";y,spacing*6+init_pos+delta*9;x,SCREEN_RIGHT-WideScale(101, 290);zoom,zoom_number;diffusealpha,0;sleep,2.56;diffusealpha,1); };
 
 	--totalScore
-	t[#t+1] = DrawRollingNumberP2( SCREEN_RIGHT-WideScale(66, 60), init_pos+delta*2, displayscore, 'HorizAlign_Right', 3 )..{InitCommand=cmd(zoom,2);};
+	t[#t+1] = DrawRollingNumberP2( SCREEN_CENTER_X+372, init_pos+delta*1.4, displayscore, "HorizAlign_Right", 3.5 )..{InitCommand=cmd(zoom,2);};
 
 	--plate
 	if plate ~= "" then
 	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenEvaluation/"..plate..".png") )..{
-		InitCommand=cmd(basezoom,.44;y,init_pos+delta*9;x,SCREEN_CENTER_X+285);
+		InitCommand=cmd(basezoom,.50;y,init_pos+delta*10;x,SCREEN_RIGHT-150);
 		OnCommand=cmd(zoom,1.0;diffusealpha,0;sleep,4.2;linear,.2;zoom,0.66;diffusealpha,1);
 	};
 	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenEvaluation/"..plate..".png") )..{
-		InitCommand=cmd(basezoom,.44;blend,'BlendMode_Add';y,init_pos+delta*8;x,SCREEN_RIGHT-WideScale(221, 270));
+		InitCommand=cmd(basezoom,.50;blend,'BlendMode_Add';y,init_pos+delta*10;x,SCREEN_RIGHT-150);
 		OnCommand=cmd(zoom,.33;diffusealpha,0;sleep,4.2;sleep,.2;diffusealpha,1;decelerate,.35;zoom,1.33;diffusealpha,0);
 	};
 	end;
