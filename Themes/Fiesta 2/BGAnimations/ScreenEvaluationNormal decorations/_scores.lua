@@ -82,13 +82,15 @@ if GAMESTATE:IsSideJoined(PLAYER_1) then
 	--plate
 	if plate ~= "" then
 	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenEvaluation/"..plate..".png") )..{
-		InitCommand=cmd(basezoom,.50;y,init_pos+delta*10;x,SCREEN_LEFT+150);
-		OnCommand=cmd(zoom,1.0;diffusealpha,0;sleep,4.2;linear,.2;zoom,0.66;diffusealpha,1);
+		InitCommand=cmd(basezoom,.50;y,init_pos+delta*10;x,SCREEN_LEFT-150);
+		OnCommand=cmd(zoom,.66;sleep,4.5;linear,.25;x,SCREEN_LEFT+135;linear,.95;x,SCREEN_LEFT+150);
 	};
+	--[[
 	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenEvaluation/"..plate..".png") )..{
 		InitCommand=cmd(basezoom,.50;blend,'BlendMode_Add';y,init_pos+delta*10;x,SCREEN_LEFT+150,1.33;diffusealpha,0);
 		OnCommand=cmd(zoom,.33;diffusealpha,0;sleep,4.2;sleep,.2;diffusealpha,1;decelerate,.35;zoom,1.33;diffusealpha,0);
 	};
+	]]--
 	end;
 
 end;
@@ -142,13 +144,13 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 	--plate
 	if plate ~= "" then
 	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenEvaluation/"..plate..".png") )..{
-		InitCommand=cmd(basezoom,.50;y,init_pos+delta*10;x,SCREEN_RIGHT-150);
-		OnCommand=cmd(zoom,1.0;diffusealpha,0;sleep,4.2;linear,.2;zoom,0.66;diffusealpha,1);
+		InitCommand=cmd(basezoom,.50;y,init_pos+delta*10;x,SCREEN_RIGHT+150);
+		OnCommand=cmd(zoom,.66;sleep,4.5;linear,.25;x,SCREEN_RIGHT-135;linear,.95;x,SCREEN_RIGHT-150);
 	};
-	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenEvaluation/"..plate..".png") )..{
+	--[[t[#t+1] = LoadActor( THEME:GetPathG("","ScreenEvaluation/"..plate..".png") )..{
 		InitCommand=cmd(basezoom,.50;blend,'BlendMode_Add';y,init_pos+delta*10;x,SCREEN_RIGHT-150);
 		OnCommand=cmd(zoom,.33;diffusealpha,0;sleep,4.2;sleep,.2;diffusealpha,1;decelerate,.35;zoom,1.33;diffusealpha,0);
-	};
+	};]]--
 	end;
 
 end;
