@@ -132,8 +132,8 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 
 	--kcal
 	local kcal = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetCaloriesBurned()*0.70;
-	t[#t+1] = DrawRollingNumberP1( SCREEN_RIGHT-WideScale(66, 293), spacing*6+init_pos+delta*9, math.floor( (kcal - math.floor(kcal))*1000 ), 'HorizAlign_Right', 2.56 )..{InitCommand=cmd(zoom,zoom_number);};
-	t[#t+1] = DrawRollingNumberP1( SCREEN_RIGHT-WideScale(106, 266), spacing*6+init_pos+delta*9, math.floor( kcal ), 'HorizAlign_Right', 2.56 )..{InitCommand=cmd(zoom,zoom_number);};
+	t[#t+1] = DrawRollingNumberP1( SCREEN_RIGHT-WideScale(106, 266), spacing*6+init_pos+delta*9, math.floor( (kcal - math.floor(kcal))*1000 ), 'HorizAlign_Right', 2.56 )..{InitCommand=cmd(zoom,zoom_number);};
+	t[#t+1] = DrawRollingNumberP1( SCREEN_RIGHT-WideScale(66, 293), spacing*6+init_pos+delta*9, math.floor( kcal ), 'HorizAlign_Right', 2.56 )..{InitCommand=cmd(zoom,zoom_number);};
 	t[#t+1] = LoadFont("_myriad pro 20px")..{ InitCommand=cmd(settext,".";y,spacing*6+init_pos+delta*9;x,SCREEN_RIGHT-WideScale(101, 290);zoom,zoom_number;diffusealpha,0;sleep,2.56;diffusealpha,1); };
 
 	--totalScore
