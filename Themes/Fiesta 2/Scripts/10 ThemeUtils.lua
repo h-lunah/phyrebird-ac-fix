@@ -920,11 +920,6 @@ function GetBallLevel( pn, show_dir_arrows )
 		end;
 		children = {
 			
-			-- Frame --
-			LoadActor( THEME:GetPathG("","ScreenSelectMusic/Difficulty_Bigballs frame.png") )..{
-				InitCommand=cmd(pause);
-				UpdateInternalCommand=cmd(stoptweening;diffusealpha,1);
-			};
 
 			LoadActor( THEME:GetPathG("","ScreenSelectMusic/bigball_active.png") )..{
 				InitCommand=cmd(diffusealpha,active_show;glowshift;pause);

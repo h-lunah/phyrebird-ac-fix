@@ -87,7 +87,7 @@ local t = Def.ActorFrame {
 }
 
 --////////////////////////////////////////////////////////
--- Regresa un número según el estilo de los pasos "i"
+-- Regresa un nï¿½mero segï¿½n el estilo de los pasos "i"
 local function GetDiffNum(i)
 	--No regresa ningun step
 	if i > numSteps then return 4; end;
@@ -236,102 +236,136 @@ end
 
 
 --BackDiffList
-t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/fullbar_black") );
+--[[t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/fullbar_black") ).. {
+	InitCommand=cmd(y,250; zoom,1.5;);
+};]]
 
---[[
-for i=1,iChartsToShow do
-	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/ball.png") )..{
-		OnCommand=cmd(x,-378+(i-1)*63);
-	};
-end]]
+local Xqt = 13
+local Yposit = 250
+for i=1, Xqt do
+	local Xposit = -220-377.8+(i-1)*100
+	local YY = 0
+		if i == 1 then 
+			YY = 0
+		end
+		if i == 2 then
+			YY = -5
+		end
+		if i == 3 then 
+			YY = -10
+		end
+		if i > 3 and i < 11 then
+			YY = -15
+		end
+		if i == 11 then
+			YY = -10
+		end
+		if i == 12 then
+			YY = -5
+		end
+		if i == 13 then
+			YY = 0
+		end
+			
+			t[#t+1] = LoadActor(THEME:GetPathG("", "ScreenSelectMusic/blackball")).. {
+				InitCommand=cmd(x,Xposit;y,YY;zoom,1.5);
+				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,0);
+				GoBackSelectingSongMessageCommand=cmd(stoptweening;y,0;sleep,.1;linear,.3;y,YY);
+			};
 
-local Xpos = {}
-for i=1,iChartsToShow do
-	Xpos[i] = -377.8+(i-1)*63;
-end
+			t[#t+1] = LoadActor(THEME:GetPathG("","ScreenSelectMusic/fullbar balls 7x1.png") ) .. {
+				InitCommand=cmd(x,Xposit;y,YY;zoom,1.7;pause);
+				UpDateCommand=cmd( setstate,GetDiffNum(i);visible,GetDiffNum(i)~=4 );
+				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,0);
+				GoBackSelectingSongMessageCommand=cmd(stoptweening;y,0;sleep,.1;linear,.3;y,YY);
+			}
+			t[#t+1] = LoadActor(THEME:GetPathG("","ScreenSelectMusic/active.png") ) .. {
+				InitCommand=cmd(x,Xposit;y,YY;zoom,1.5;diffusealpha,0);
+				UpDateCommand=cmd( diffusealpha,GetActiveBallLabel(i); glowshift );
+			};	
 
-for i=1,iChartsToShow do
+			t[#t+1] = LoadFont("N_SINGLE_N") .. {
+				InitCommand=cmd(x,Xposit;y,YY-1.1;zoom,1.6);
+				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250);
+				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250-1.1);
+				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,0);
+				GoBackSelectingSongMessageCommand=cmd(stoptweening;y,0;sleep,.1;linear,.3;y,YY);
+				UpDateCommand=cmd( SetMeterValue,i,0 );
+			};
+			
+			t[#t+1] = LoadFont("N_SINGLE_P") .. {
+				InitCommand=cmd(x,Xposit;y,YY-1.1;zoom,1.6);
+				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250);
+				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250-1.1);
+				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,0);
+				GoBackSelectingSongMessageCommand=cmd(stoptweening;y,0;sleep,.1;linear,.3;y,YY);
+				UpDateCommand=cmd( SetMeterValue,i,2 );
+			};
+			
+			t[#t+1] = LoadFont("N_DOUBLE_N") .. {
+				InitCommand=cmd(x,Xposit;y,YY-1.1;zoom,1.6);
+				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250);
+				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250-1.1);
+				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,0);
+				GoBackSelectingSongMessageCommand=cmd(stoptweening;y,0;sleep,.1;linear,.3;y,YY);
+				UpDateCommand=cmd( SetMeterValue,i,1 );
+			};
+			
+			t[#t+1] = LoadFont("N_DOUBLE_P") .. {
+				InitCommand=cmd(x,Xposit;y,YY-1.1;zoom,1.6);
+				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250);
+				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250-1.1);
+				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,0);
+				GoBackSelectingSongMessageCommand=cmd(stoptweening;y,0;sleep,.1;linear,.3;y,YY);
+				UpDateCommand=cmd( SetMeterValue,i,3 );
+			};
+		
+			t[#t+1] = LoadFont("N_DOUBLE_N") .. {
+				InitCommand=cmd(x,Xposit;y,YY-1.1;zoom,1.6);
+				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250);
+				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250-1.1);
+				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,0);
+				GoBackSelectingSongMessageCommand=cmd(stoptweening;y,0;sleep,.1;linear,.3;y,YY);
+				UpDateCommand=cmd( SetMeterValue,i,5 );
+			};
+		
+			t[#t+1] = LoadFont("N_COOP") .. {
+				InitCommand=cmd(x,Xposit;y,YY-1.1;zoom,1.6);
+				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250);
+				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250-1.1);
+				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,0);
+				GoBackSelectingSongMessageCommand=cmd(stoptweening;y,0;sleep,.1;linear,.3;y,YY);
+				UpDateCommand=cmd( SetMeterValue,i,6 );
+			};
+			
+			-- Labels --
+			t[#t+1] = LoadActor( THEME:GetPathG("","Common Resources/B_LABELS 1x12.png") ) .. {
+				InitCommand=cmd(x,Xposit;pause;y,YY-25;zoom,.55);
+				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i];linear,.3;y,21);
+				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i];linear,.3;y,22);
+				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY-25;sleep,.1;linear,.3;);
+				GoBackSelectingSongMessageCommand=cmd(stoptweening;y,0;sleep,.1;linear,.3;y,YY-25);
+				UpDateCommand=cmd( setstate,GetSmallBallLabel(i) );
+			};
 
-	-- Active Border --
-	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/active.png") ).. {
-		InitCommand=cmd(x,Xpos[i];diffusealpha,0);
-		UpDateCommand=cmd( diffusealpha,GetActiveBallLabel(i); glowshift );
-	};
-
-	--	Glowing Ring --
-	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/glow_ring") ) .. {
-		InitCommand=cmd(x,Xpos[i];blend,'BlendMode_Add';diffusealpha,.2;playcommand,'Spin');
-		SpinCommand=cmd(stoptweening;rotationz,0;linear,2;rotationz,-359;queuecommand,'Spin');
-	}
-	
-	--	Dots Glow --
-	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/dots_glow") ) .. {
-		InitCommand=cmd(x,Xpos[i];blend,'BlendMode_Add';playcommand,'Loop');
-		LoopCommand=cmd(stoptweening;y,-20;diffusealpha,0;linear,.5;y,0;diffusealpha,.2;linear,.5;y,20;diffusealpha,0;sleep,.5;queuecommand,'Loop');
-	}
-	
-	--	DifficultyBalls --
-	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/fullbar balls 7x1.png") )..{
-		InitCommand=cmd(x,Xpos[i];pause);
-		UpDateCommand=cmd( setstate,GetDiffNum(i);visible,GetDiffNum(i)~=4 );
-	}
-	
-	-- Meters --
-	t[#t+1] = LoadFont("N_SINGLE_N") .. {
-		InitCommand=cmd(x,Xpos[i]+1;y,-1.1);
-		StartSelectingStepsMessageCommand=cmd(x,Xpos[i]+1;linear,.3;y,0);
-		GoBackSelectingSongMessageCommand=cmd(x,Xpos[i]+1;linear,.3;y,-1.1);
-		UpDateCommand=cmd( SetMeterValue,i,0 );
-	};
-	
-	t[#t+1] = LoadFont("N_SINGLE_P") .. {
-		InitCommand=cmd(x,Xpos[i]+1;y,-1.1);
-		StartSelectingStepsMessageCommand=cmd(x,Xpos[i]+1;linear,.3;y,0);
-		GoBackSelectingSongMessageCommand=cmd(x,Xpos[i]+1;linear,.3;y,-1.1);
-		UpDateCommand=cmd( SetMeterValue,i,2 );
-	};
-	
-	t[#t+1] = LoadFont("N_DOUBLE_N") .. {
-		InitCommand=cmd(x,Xpos[i]+1;y,-1.1);
-		StartSelectingStepsMessageCommand=cmd(x,Xpos[i]+1;linear,.3;y,0);
-		GoBackSelectingSongMessageCommand=cmd(x,Xpos[i]+1;linear,.3;y,-1.1);
-		UpDateCommand=cmd( SetMeterValue,i,1 );
-	};
-	
-	t[#t+1] = LoadFont("N_DOUBLE_P") .. {
-		InitCommand=cmd(x,Xpos[i]+1;y,-1.1);
-		StartSelectingStepsMessageCommand=cmd(x,Xpos[i]+1;linear,.3;y,0);
-		GoBackSelectingSongMessageCommand=cmd(x,Xpos[i]+1;linear,.3;y,-1.1);
-		UpDateCommand=cmd( SetMeterValue,i,3 );
-	};
-
-	t[#t+1] = LoadFont("N_DOUBLE_N") .. {
-		InitCommand=cmd(x,Xpos[i]+1;y,-1.1);
-		StartSelectingStepsMessageCommand=cmd(x,Xpos[i]+1;linear,.3;y,0);
-		GoBackSelectingSongMessageCommand=cmd(x,Xpos[i]+1;linear,.3;y,-1.1);
-		UpDateCommand=cmd( SetMeterValue,i,5 );
-	};
-
-	t[#t+1] = LoadFont("N_COOP") .. {
-		InitCommand=cmd(x,Xpos[i]+1;y,-1.1);
-		StartSelectingStepsMessageCommand=cmd(x,Xpos[i]+1;linear,.3;y,0);
-		GoBackSelectingSongMessageCommand=cmd(x,Xpos[i]+1;linear,.3;y,-1.1);
-		UpDateCommand=cmd( SetMeterValue,i,6 );
-	};
-	
-	-- Labels --
-	t[#t+1] = LoadActor( THEME:GetPathG("","Common Resources/B_LABELS 1x12.png") ) .. {
-		InitCommand=cmd(x,Xpos[i];pause;y,-22;zoom,.55);
-		StartSelectingStepsMessageCommand=cmd(x,Xpos[i];linear,.3;y,-21);
-		GoBackSelectingSongMessageCommand=cmd(x,Xpos[i];linear,.3;y,-22);
-		UpDateCommand=cmd( setstate,GetSmallBallLabel(i) );
-	};
-
+			--[[ Verificar depopis?!
+			-- Labels --
+			t[#t+1] = LoadActor( THEME:GetPathG("","Common Resources/B_LABELS 1x12.png") ) .. {
+				InitCommand=cmd(x,Xposit;pause;y,YY-22;zoom,.55);
+				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i];linear,.3;y,250-21);
+				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i];linear,.3;y,250-22);
+				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,0);
+				GoBackSelectingSongMessageCommand=cmd(stoptweening;y,0;sleep,.1;linear,.3;y,YY);
+				UpDateCommand=cmd( setstate,GetSmallBallLabel(i) );
+			};
+]]
 	-- Top Rank
 	t[#t+1] = Def.Sprite {
 		Name="RankP1";
 		Texture=THEME:GetPathG("", "RecordGrades/R_F (doubleres).png");
-		InitCommand=cmd(x,Xpos[i];y,-30;zoom,0.65);
+		InitCommand=cmd(x,Xposit;y,-50;zoom,0.65);
+		StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY-50;sleep,.1;linear,.3;y,-50);
+		GoBackSelectingSongMessageCommand=cmd(stoptweening;y,-50;sleep,.1;linear,.3;y,YY-50);
 		UpDateCommand=function(self)
 			local Grade = GetPersonalGrade(PLAYER_1, i)
 			if Grade ~= nil then
@@ -346,7 +380,9 @@ for i=1,iChartsToShow do
 	t[#t+1] = Def.Sprite {
 		Name="RankP2";
 		Texture=THEME:GetPathG("", "RecordGrades/R_F (doubleres).png");
-		InitCommand=cmd(x,Xpos[i];y,29;zoom,0.65);
+		InitCommand=cmd(x,Xposit;y,YY+50;zoom,0.65);
+		StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY+50;sleep,.1;linear,.3;y,50);
+		GoBackSelectingSongMessageCommand=cmd(stoptweening;y,50;sleep,.1;linear,.3;y,YY+50);
 		UpDateCommand=function(self)
 			local Grade = GetPersonalGrade(PLAYER_2, i)
 			if Grade ~= nil then
@@ -359,7 +395,229 @@ for i=1,iChartsToShow do
 	
 	-- Under Labels --
 	t[#t+1] = LoadActor( THEME:GetPathG("","Common Resources/B_UNDERLABELS 1x3") ).. {
-		InitCommand=cmd(x,Xpos[i];pause;y,19;zoom,.5);
+
+		InitCommand=cmd(x,Xposit;pause;y,YY+19;zoom,.5);
+		StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY-22;sleep,.1;linear,.3;y,0);
+		GoBackSelectingSongMessageCommand=cmd(stoptweening;y,0;sleep,.1;linear,.3;y,YY);
+		UpDateCommand=cmd( setstate,GetUnderBallLabel(i) );
+	};
+	
+end
+
+------------------------------------------------
+-- Cursor Function --
+local Xpos = {}
+for i=1,iChartsToShow do
+	Xpos[i] = -220-377.8+(i-1)*100;
+	local YY = 0
+		if i == 1 then 
+			YY = 0
+		end
+		if i == 2 then
+			YY = -5
+		end
+		if i == 3 then 
+			YY = -10
+		end
+		if i > 3 and i < 11 then
+			YY = -15
+		end
+		if i == 11 then
+			YY = -10
+		end
+		if i == 12 then
+			YY = -5
+		end
+		if i == 13 then
+			YY = 0
+		end
+end
+
+
+local function GetCursorFor(pn)
+	if GAMESTATE:IsSideJoined(pn) or ( not GAMESTATE:IsSideJoined(pn) and GAMESTATE:IsBasicMode() ) then
+		local a = Def.ActorFrame {
+			InitCommand=function(self)
+				if not GAMESTATE:IsSideJoined(pn) then
+					self:visible(false);
+				end;
+			end;
+			PlayerJoinedMessageCommand=function(self,params)
+				if params.Player == pn then
+					self:visible(true);
+				end;
+			end;
+		};
+		--
+		a[#a+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/fullbar_"..pn.."_cursor") )..{
+			InitCommand=cmd(zoom, 2);
+			OnCommand=cmd(stoptweening;diffusealpha,0);
+			StartSelectingStepsMessageCommand=function(self)
+				if not GAMESTATE:IsSideJoined(pn) then return; end;
+				(cmd(zoom, 2;stoptweening;x,Xpos[GetActiveIndex(pn)];diffusealpha,0;zoom,2;sleep,.25;linear,.05;diffusealpha,1;queuecommand,'Loop'))(self);
+			end;
+			UpDateCursorCommand=function(self,params)
+				if params.Player ~= pn then return; end;
+				(cmd(zoom, 2;stoptweening;diffusealpha,1;x,Xpos[GetActiveIndex(pn)];queuecommand,'Loop'))(self);
+			end;
+			LoopCommand=cmd(zoom, 2;stoptweening;zoom,2;diffusealpha,1;linear,.4;zoom,2;diffusealpha,.6;linear,.4;zoom,2;diffusealpha,1;queuecommand,'Loop');
+			GoBackSelectingSongMessageCommand=cmd(zoom, 2;stoptweening;diffusealpha,0);
+			OffCommand=cmd(zoom, 2;stoptweening;diffusealpha,0);
+	
+		};
+		--
+		a[#a+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/fulllevel_"..pn.."_text") )..{
+			InitCommand=function(self)
+				if pn == PLAYER_1 then
+					self:y(-34);	
+				else
+					self:y(34);
+				end;
+			end;
+			OnCommand=cmd(stoptweening;diffusealpha,0);
+			StartSelectingStepsMessageCommand=function(self)
+				if not GAMESTATE:IsSideJoined(pn) then return; end;
+				(cmd(stoptweening;x,Xpos[GetActiveIndex(pn)];diffusealpha,0;zoom,1;sleep,.25;linear,.05;diffusealpha,1;queuecommand,'Loop'))(self);
+			end;
+			UpDateCursorCommand=function(self,params)
+				if params.Player ~= pn then return; end;
+				(cmd(stoptweening;diffusealpha,1;x,Xpos[GetActiveIndex(pn)];queuecommand,'Loop'))(self);
+			end;
+			LoopCommand=cmd(stoptweening;diffusealpha,1;zoom,1;linear,.4;zoom,1.1;diffusealpha,.6;linear,.4;zoom,1;diffusealpha,1;queuecommand,'Loop');
+			GoBackSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,0);
+			OffCommand=cmd(stoptweening;diffusealpha,0);
+	
+		};
+		return a;
+	else 
+		return nil;
+	end;
+end;
+	
+	t[#t+1] = GetCursorFor(PLAYER_1);
+	t[#t+1] = GetCursorFor(PLAYER_2);
+	
+	
+return t;
+
+--[[
+for i=1,iChartsToShow do
+	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/ball.png") )..{
+		OnCommand=cmd(x,-378+(i-1)*63);
+	};
+end
+
+
+for i=1,iChartsToShow do
+
+	-- Active Border --
+	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/active.png") ).. {
+		InitCommand=cmd(x,-191+Xpos[i];y,250;zoom,1.5;diffusealpha,0);
+		UpDateCommand=cmd( diffusealpha,GetActiveBallLabel(i); glowshift );
+	};
+
+	--	Glowing Ring --
+	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/glow_ring") ) .. {
+		InitCommand=cmd(x,-191+Xpos[i];y,250;zoom,1.5;blend,'BlendMode_Add';diffusealpha,.2;playcommand,'Spin');
+		SpinCommand=cmd(stoptweening;rotationz,0;linear,2;rotationz,-359;queuecommand,'Spin');
+	}
+	
+	--	Dots Glow --
+	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/dots_glow") ) .. {
+		InitCommand=cmd(x,-191+Xpos[i];y,250;zoom,1.5;blend,'BlendMode_Add';playcommand,'Loop');
+		LoopCommand=cmd(stoptweening;y,-20;diffusealpha,0;linear,.5;y,0;diffusealpha,.2;linear,.5;y,20;diffusealpha,0;sleep,.5;queuecommand,'Loop');
+	}
+	
+	--	DifficultyBalls --
+	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/fullbar balls 7x1.png") )..{
+		InitCommand=cmd(x,-191+Xpos[i];y,250;zoom,1.5;pause);
+		UpDateCommand=cmd( setstate,GetDiffNum(i);visible,GetDiffNum(i)~=4 );
+	}
+	
+	-- Meters --
+	t[#t+1] = LoadFont("N_SINGLE_N") .. {
+		InitCommand=cmd(x,-191+Xpos[i]+1;y,250-1.1);
+		StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250);
+		GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250-1.1);
+		UpDateCommand=cmd( SetMeterValue,i,0 );
+	};
+	
+	t[#t+1] = LoadFont("N_SINGLE_P") .. {
+		InitCommand=cmd(x,-191+Xpos[i]+1;y,250-1.1);
+		StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250);
+		GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250-1.1);
+		UpDateCommand=cmd( SetMeterValue,i,2 );
+	};
+	
+	t[#t+1] = LoadFont("N_DOUBLE_N") .. {
+		InitCommand=cmd(x,-191+Xpos[i]+1;y,250-1.1);
+		StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250);
+		GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250-1.1);
+		UpDateCommand=cmd( SetMeterValue,i,1 );
+	};
+	
+	t[#t+1] = LoadFont("N_DOUBLE_P") .. {
+		InitCommand=cmd(x,-191+Xpos[i]+1;y,250-1.1);
+		StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250);
+		GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250-1.1);
+		UpDateCommand=cmd( SetMeterValue,i,3 );
+	};
+
+	t[#t+1] = LoadFont("N_DOUBLE_N") .. {
+		InitCommand=cmd(x,-191+Xpos[i]+1;y,250-1.1);
+		StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250);
+		GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250-1.1);
+		UpDateCommand=cmd( SetMeterValue,i,5 );
+	};
+
+	t[#t+1] = LoadFont("N_COOP") .. {
+		InitCommand=cmd(x,-191+Xpos[i]+1;y,250-1.1);
+		StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250);
+		GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250-1.1);
+		UpDateCommand=cmd( SetMeterValue,i,6 );
+	};
+	
+	-- Labels --
+	t[#t+1] = LoadActor( THEME:GetPathG("","Common Resources/B_LABELS 1x12.png") ) .. {
+		InitCommand=cmd(x,-191+Xpos[i];pause;y,250-22;zoom,.55);
+		StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i];linear,.3;y,250-21);
+		GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i];linear,.3;y,250-22);
+		UpDateCommand=cmd( setstate,GetSmallBallLabel(i) );
+	};
+
+	-- Top Rank
+	t[#t+1] = Def.Sprite {
+		Name="RankP1";
+		Texture=THEME:GetPathG("", "RecordGrades/R_F (doubleres).png");
+		InitCommand=cmd(x,Xpos[i];y,250-30;zoom,0.65);
+		UpDateCommand=function(self)
+			local Grade = GetPersonalGrade(PLAYER_1, i)
+			if Grade ~= nil then
+				self:Load(THEME:GetPathG("", "RecordGrades/" .. Grade .. " (doubleres).png"))
+			else
+				self:Load(nil)
+			end
+		end;
+	};
+	
+	-- Bottom Rank
+	t[#t+1] = Def.Sprite {
+		Name="RankP2";
+		Texture=THEME:GetPathG("", "RecordGrades/R_F (doubleres).png");
+		InitCommand=cmd(x,Xpos[i];y,250+29;zoom,0.65);
+		UpDateCommand=function(self)
+			local Grade = GetPersonalGrade(PLAYER_2, i)
+			if Grade ~= nil then
+				self:Load(THEME:GetPathG("", "RecordGrades/" .. Grade .. " (doubleres).png"))
+			else
+				self:Load(nil)
+			end
+		end;
+	};
+	
+	-- Under Labels --
+	t[#t+1] = LoadActor( THEME:GetPathG("","Common Resources/B_UNDERLABELS 1x3") ).. {
+		InitCommand=cmd(x,Xpos[i];pause;y,250+19;zoom,.5);
 		UpDateCommand=cmd( setstate,GetUnderBallLabel(i) );
 	};
 	
@@ -383,71 +641,5 @@ t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/fullbar_arrow") )..{
 		if bIsExtensiveList then self:visible(true); else self:visible(false); end;
 	end;
 }
+]]
 
-------------------------------------------------
--- Cursor Function --
-local function GetCursorFor(pn)
-if GAMESTATE:IsSideJoined(pn) or ( not GAMESTATE:IsSideJoined(pn) and GAMESTATE:IsBasicMode() ) then
-	local a = Def.ActorFrame {
-		InitCommand=function(self)
-			if not GAMESTATE:IsSideJoined(pn) then
-				self:visible(false);
-			end;
-		end;
-		PlayerJoinedMessageCommand=function(self,params)
-			if params.Player == pn then
-				self:visible(true);
-			end;
-		end;
-	};
-	--
-	a[#a+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/fullbar_"..pn.."_cursor") )..{
-		InitCommand=cmd(y,-1);
-		OnCommand=cmd(stoptweening;diffusealpha,0);
-		StartSelectingStepsMessageCommand=function(self)
-			if not GAMESTATE:IsSideJoined(pn) then return; end;
-			(cmd(stoptweening;x,Xpos[GetActiveIndex(pn)];diffusealpha,0;zoom,1;sleep,.25;linear,.05;diffusealpha,1;queuecommand,'Loop'))(self);
-		end;
-		UpDateCursorCommand=function(self,params)
-			if params.Player ~= pn then return; end;
-			(cmd(stoptweening;diffusealpha,1;x,Xpos[GetActiveIndex(pn)];queuecommand,'Loop'))(self);
-		end;
-		LoopCommand=cmd(stoptweening;zoom,1;diffusealpha,1;linear,.4;zoom,1.1;diffusealpha,.6;linear,.4;zoom,1;diffusealpha,1;queuecommand,'Loop');
-		GoBackSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,0);
-		OffCommand=cmd(stoptweening;diffusealpha,0);
-
-	};
-	--
-	a[#a+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/fulllevel_"..pn.."_text") )..{
-		InitCommand=function(self)
-			if pn == PLAYER_1 then
-				self:y(-34);	
-			else
-				self:y(34);
-			end;
-		end;
-		OnCommand=cmd(stoptweening;diffusealpha,0);
-		StartSelectingStepsMessageCommand=function(self)
-			if not GAMESTATE:IsSideJoined(pn) then return; end;
-			(cmd(stoptweening;x,Xpos[GetActiveIndex(pn)];diffusealpha,0;zoom,1;sleep,.25;linear,.05;diffusealpha,1;queuecommand,'Loop'))(self);
-		end;
-		UpDateCursorCommand=function(self,params)
-			if params.Player ~= pn then return; end;
-			(cmd(stoptweening;diffusealpha,1;x,Xpos[GetActiveIndex(pn)];queuecommand,'Loop'))(self);
-		end;
-		LoopCommand=cmd(stoptweening;diffusealpha,1;zoom,1;linear,.4;zoom,1.1;diffusealpha,.6;linear,.4;zoom,1;diffusealpha,1;queuecommand,'Loop');
-		GoBackSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,0);
-		OffCommand=cmd(stoptweening;diffusealpha,0);
-
-	};
-	return a;
-else 
-	return nil;
-end;
-end;
-
-t[#t+1] = GetCursorFor(PLAYER_1);
-t[#t+1] = GetCursorFor(PLAYER_2);
-
-
-return t;
