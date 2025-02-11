@@ -22,18 +22,6 @@ t[#t+1] = LoadActor("_preview")..{
 	TimerOutSelectingSongCommand=cmd(playcommand,'Off');
 }
 
-t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/fulllevel_"..PLAYER_1.."_stepball") )..{
-	InitCommand=cmd(y,SCREEN_BOTTOM-93;x,SCREEN_CENTER_X-90;basezoom,.67);
-	GoBackSelectingGroupMessageCommand=cmd(stoptweening;diffusealpha,1;linear,.2;diffusealpha,0);
-	StartSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,0;linear,.2;diffusealpha,1);
-};
-
-t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/fulllevel_"..PLAYER_2.."_stepball") )..{
-	InitCommand=cmd(y,SCREEN_BOTTOM-93;x,SCREEN_CENTER_X+90;basezoom,.67);
-	GoBackSelectingGroupMessageCommand=cmd(stoptweening;diffusealpha,1;linear,.2;diffusealpha,0);
-	StartSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,0;linear,.2;diffusealpha,1);
-};
-
 if GAMESTATE:IsSideJoined( PLAYER_1 ) then
 	t[#t+1] = GetHighScoresFrame( PLAYER_1, false )..{
 		InitCommand=cmd(x,cx-270;y,SCREEN_BOTTOM-105);
@@ -135,12 +123,12 @@ t[#t+1] = LoadActor("_diff_FM.lua")..{
 }
 
 t[#t+1] = LoadActor("_diffbar_full")..{
-	InitCommand=cmd(draworder,16;x,SCREEN_CENTER_X;basezoom,.535;zoom,1);
-	OnCommand=cmd(stoptweening;diffusealpha,0;y,330;sleep,.45;linear,.3;y,305;diffusealpha,1);
-	StartSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,0;y,330;sleep,.45;linear,.3;y,305;diffusealpha,1);
-	GoBackSelectingGroupMessageCommand=cmd(stoptweening;diffusealpha,1;y,305;zoom,1;linear,.3;y,330;diffusealpha,0);
-	StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,305;zoom,1;sleep,.1;linear,.3;zoom,1.25;y,305);
-	GoBackSelectingSongMessageCommand=cmd(stoptweening;zoom,1.25;y,305;sleep,.1;linear,.3;zoom,1;y,305);
+	InitCommand=cmd(draworder,16;x,SCREEN_CENTER_X;basezoom,.80); --> Quando inicia a cena
+	OnCommand=cmd(stoptweening;diffusealpha,0;y,SCREEN_BOTTOM;sleep,.45;linear,.3;y,SCREEN_BOTTOM-50;diffusealpha,1); --> Animação inicial
+	StartSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,0;y,SCREEN_BOTTOM;sleep,.45;linear,.3;diffusealpha,1;y,SCREEN_BOTTOM-50); --> Ao voltar do GroupWheel
+	GoBackSelectingGroupMessageCommand=cmd(stoptweening;diffusealpha,1;linear,.3;y,SCREEN_BOTTOM-50;diffusealpha,0); --> Ao entrar no GroupWheel
+	StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,SCREEN_BOTTOM-50;sleep,.1;linear,.3;y,305); --> Ao selecionar a música
+	GoBackSelectingSongMessageCommand=cmd(stoptweening;y,305;sleep,.1;linear,.3;y,SCREEN_BOTTOM-50); --> Ao cancelar a seleção da música
 	OffCommand=cmd(stoptweening;diffusealpha,1;sleep,.05;linear,.3;y,320;diffusealpha,0);
 	TimerOutSelectingSongCommand=cmd(stoptweening;diffusealpha,1;sleep,.05;linear,.3;y,330;diffusealpha,0);
 }
