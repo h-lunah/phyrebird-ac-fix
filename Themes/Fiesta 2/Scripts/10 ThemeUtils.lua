@@ -921,7 +921,7 @@ function GetBallLevel( pn, show_dir_arrows )
 		children = {
 			
 
-			LoadActor( THEME:GetPathG("","ScreenSelectMusic/bigball_active.png") )..{
+			--[[LoadActor( THEME:GetPathG("","ScreenSelectMusic/bigball_active.png") )..{
 				InitCommand=cmd(diffusealpha,active_show;glowshift;pause);
 				UpdateCommand=function(self,params)
 					self:diffusealpha(active_show);
@@ -933,7 +933,7 @@ function GetBallLevel( pn, show_dir_arrows )
 					self:glowshift();
 					self:stoptweening();
 				end;
-			};
+			};--]]
 			
 			-- Glow Spin --
 			LoadActor( THEME:GetPathG("","ScreenSelectMusic/Difficulty_Bigballs glow spin.png") )..{

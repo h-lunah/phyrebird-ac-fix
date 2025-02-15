@@ -279,10 +279,10 @@ for i=1, Xqt do
 				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,0);
 				GoBackSelectingSongMessageCommand=cmd(stoptweening;y,0;sleep,.1;linear,.3;y,YY);
 			}
-			t[#t+1] = LoadActor(THEME:GetPathG("","ScreenSelectMusic/active.png") ) .. {
+			--[[t[#t+1] = LoadActor(THEME:GetPathG("","ScreenSelectMusic/active.png") ) .. {
 				InitCommand=cmd(x,Xposit;y,YY;zoom,1.5;diffusealpha,0);
 				UpDateCommand=cmd( diffusealpha,GetActiveBallLabel(i); glowshift );
-			};	
+			};--]]	
 
 			t[#t+1] = LoadFont("N_SINGLE_N") .. {
 				InitCommand=cmd(x,Xposit;y,YY-1.1;zoom,1.6);
@@ -341,10 +341,8 @@ for i=1, Xqt do
 			-- Labels --
 			t[#t+1] = LoadActor( THEME:GetPathG("","Common Resources/B_LABELS 1x12.png") ) .. {
 				InitCommand=cmd(x,Xposit;pause;y,YY-25;zoom,.55);
-				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i];linear,.3;y,21);
-				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i];linear,.3;y,22);
-				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY-25;sleep,.1;linear,.3;);
-				GoBackSelectingSongMessageCommand=cmd(stoptweening;y,0;sleep,.1;linear,.3;y,YY-25);
+				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY-25;sleep,.1;linear,.3;y,-25);
+				GoBackSelectingSongMessageCommand=cmd(stoptweening;y,-25;sleep,.1;linear,.3;y,YY-25);
 				UpDateCommand=cmd( setstate,GetSmallBallLabel(i) );
 			};
 
@@ -396,9 +394,9 @@ for i=1, Xqt do
 	-- Under Labels --
 	t[#t+1] = LoadActor( THEME:GetPathG("","Common Resources/B_UNDERLABELS 1x3") ).. {
 
-		InitCommand=cmd(x,Xposit;pause;y,YY+19;zoom,.5);
-		StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY-22;sleep,.1;linear,.3;y,0);
-		GoBackSelectingSongMessageCommand=cmd(stoptweening;y,0;sleep,.1;linear,.3;y,YY);
+		InitCommand=cmd(x,Xposit;pause;y,YY+35;zoom,.5);
+		StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY+35;sleep,.1;linear,.3;y,35);
+		GoBackSelectingSongMessageCommand=cmd(stoptweening;y,35;sleep,.1;linear,.3;y,YY+35);
 		UpDateCommand=cmd( setstate,GetUnderBallLabel(i) );
 	};
 	
