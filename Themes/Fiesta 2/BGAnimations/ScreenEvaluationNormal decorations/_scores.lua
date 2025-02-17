@@ -16,8 +16,8 @@ t[#t+1] = LoadActor(THEME:GetPathS("","Sounds/Tick.mp3"))..{
 		--SOUND:PlayOnce(THEME:GetPathS("","Sounds/Tick.WAV"));
 		self:play();
 		times = times + 1;
-		if( times < 24 ) then
-			self:sleep(.074);
+		if( times < 18 ) then
+			self:sleep(.068);
 			self:queuecommand('Play');
 		end;
 	end;

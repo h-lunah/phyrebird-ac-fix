@@ -3,7 +3,8 @@ local t = Def.ActorFrame {};
 local t_sleep = 4.2;
 local piu_grades = { "SSS+", "SSS", "SS+", "SS", "S+", "S", "AAA+", "AAA", "AA+", "AA", "A+", "A", "B", "C", "D", "F" };
 local piu_grades_old = { "SSS", "SSS", "X", "X", "G", "G", "A", "A", "A", "A", "A", "A", "B", "C", "D", "F" };
-local new_record_delays = { 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 2, 1, 1, 1};
+local new_record_delays = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2};
+local piu_grades_tier = { "PLATINUM", "PLATINUM", "GOLD", "GOLD", "GOLD", "GOLD", "SILVER", "SILVER", "BRONZE", "BRONZE", "BRONZE", "BRONZE", "B", "MUTE", "MUTE", "MUTE"  };
 
 local p1_joined = GAMESTATE:IsSideJoined(PLAYER_1);
 local p2_joined = GAMESTATE:IsSideJoined(PLAYER_2);
@@ -108,49 +109,53 @@ if not p1_joined and p2_joined then
 	BestGrade = p2_grade;
 end;
 
-local grade_sound = piu_grades[BestGrade]
+local condition = stage_break[pn] and "_B" or "_R"
+local tier = piu_grades_tier[BestGrade];
+
 t[#t+1] = Def.Sound {
 	InitCommand=function(self)
-		self:load(THEME:GetPathS('','Rank/RANK_'..piu_grades_old[BestGrade]..'.mp3'));
+		self:load(THEME:GetPathS('','Rank/RANK_'..piu_grades[BestGrade]..condition..'.mp3'));
 	end;
-	OnCommand=cmd(sleep,t_sleep+.2;queuecommand,'Play');
+	OnCommand=cmd(sleep,t_sleep;queuecommand,'Play');
 	PlayCommand=cmd(play);
 	GoNextScreenMessageCommand=cmd(pause);
 };
 
-t[#t+1] = Def.Sound {
+--[[t[#t+1] = Def.Sound {
 	InitCommand=function(self)
 		self:load(THEME:GetPathS('','Rank/RANK_'..piu_grades_old[BestGrade]..'_B.mp3'));
 	end;
 	OnCommand=cmd(sleep,t_sleep+.2;queuecommand,'Play');
 	PlayCommand=cmd(play);
 	GoNextScreenMessageCommand=cmd(pause);
-};
+};--]]
 
 t[#t+1] = Def.Sound {
 	InitCommand=function(self)
 		self:load(THEME:GetPathS('','Rank/RANK.mp3'));
 	end;
-	OnCommand=cmd(sleep,t_sleep+.2;queuecommand,'Play');
+	OnCommand=cmd(sleep,t_sleep;queuecommand,'Play');
 	PlayCommand=cmd(play);
 	GoNextScreenMessageCommand=cmd(pause);
 };
---[[
-t[#t+1] = LoadActor(THEME:GetPathS("","Rank/GLASS.mp3"))..{
-	OnCommand=cmd(sleep,t_sleep;sleep,.2;sleep,.35;sleep,1;queuecommand,'Play');
-	PlayCommand=function(self)
-		self:play();
-	end;
-	--OffCommand=cmd(stoptweening;pause);
-	GoNextScreenMessageCommand=cmd(pause);
-}]]--
+
+if (condition == "_R") and not (tier == "MUTE") then
+		t[#t+1] = Def.Sound {
+		InitCommand=function(self)
+			self:load(THEME:GetPathS('','Rank/CROWD_'..tier..'.mp3'));
+		end;
+		OnCommand=cmd(sleep,t_sleep;queuecommand,'Play');
+		PlayCommand=cmd(play);
+		GoNextScreenMessageCommand=cmd(pause);
+	};
+end;
 
 t[#t+1] = LoadActor(THEME:GetPathS("","Sounds/NEW_RECORD.mp3"))..{
 	OnCommand=function(self)
 		if SCREENMAN:GetTopScreen():PlayerHasNewRecord(PLAYER_1) or SCREENMAN:GetTopScreen():PlayerHasNewRecord(PLAYER_2) or 
 		SCREENMAN:GetTopScreen():PlayerHasNewMachineRecord(PLAYER_1) or SCREENMAN:GetTopScreen():PlayerHasNewMachineRecord(PLAYER_2)
 		then
-			(cmd(sleep,t_sleep+.2+  new_record_delays[BestGrade] + .5;queuecommand,'Play'))(self);
+			(cmd(sleep,t_sleep+.2+  new_record_delays[BestGrade];queuecommand,'Play'))(self);
 		end;
 	end;
 	PlayCommand=function(self)
