@@ -165,10 +165,10 @@ t[#t+1] = SimplePlatPiu(cx,cy+80)..{
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 --CHANNEL, CATEGORY
-t[#t+1] = LoadActor("_stages")..{
-	TimerOutSelectingSongCommand=cmd(playcommand,'Off');
-	TimerOutSelectingGroupCommand=cmd(playcommand,'Off');
-}
+-- t[#t+1] = LoadActor("_stages")..{
+-- 	TimerOutSelectingSongCommand=cmd(playcommand,'Off');
+-- 	TimerOutSelectingGroupCommand=cmd(playcommand,'Off');
+-- }
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
