@@ -149,9 +149,18 @@ end;
 
 --////////////////////////////////////////////////////////
 local function GetSmallBallLabel( i )
+	local official = IsGroupOfficial();
 	if i > numSteps then return GetLabelNumber(""); end;	--empty
 	if string.find(aSteps[i]:GetDescription(),"TITLE") then
 		return 10
+	elseif string.find(aSteps[i]:GetChartStyle(),"ACTIVE") then
+		return 12
+	elseif GetLabelNumber( aSteps[i]:GetLabel() ) == 12 then
+		if not official then
+			return 5
+		else
+			return 11
+		end;
 	else
 		return GetLabelNumber( aSteps[i]:GetLabel() );
 	end
@@ -339,10 +348,10 @@ for i=1, Xqt do
 			};
 			
 			-- Labels --
-			t[#t+1] = LoadActor( THEME:GetPathG("","Common Resources/B_LABELS 1x12.png") ) .. {
-				InitCommand=cmd(x,Xposit;pause;y,YY-25;zoom,.55);
-				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY-25;sleep,.1;linear,.3;y,-25);
-				GoBackSelectingSongMessageCommand=cmd(stoptweening;y,-25;sleep,.1;linear,.3;y,YY-25);
+			t[#t+1] = LoadActor( THEME:GetPathG("","Common Resources/B_LABELS 1x13.png") ) .. {
+				InitCommand=cmd(x,Xposit;pause;y,YY-30;zoom,.85);
+				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY-30;sleep,.1;linear,.3;y,-30);
+				GoBackSelectingSongMessageCommand=cmd(stoptweening;y,-30;sleep,.1;linear,.3;y,YY-30);
 				UpDateCommand=cmd( setstate,GetSmallBallLabel(i) );
 			};
 
@@ -361,7 +370,7 @@ for i=1, Xqt do
 	t[#t+1] = Def.Sprite {
 		Name="RankP1";
 		Texture=THEME:GetPathG("", "RecordGrades/R_F (doubleres).png");
-		InitCommand=cmd(x,Xposit;y,-50;zoom,0.65);
+		InitCommand=cmd(x,Xposit;y,YY-50;zoom,0.65);
 		StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY-50;sleep,.1;linear,.3;y,-50);
 		GoBackSelectingSongMessageCommand=cmd(stoptweening;y,-50;sleep,.1;linear,.3;y,YY-50);
 		UpDateCommand=function(self)

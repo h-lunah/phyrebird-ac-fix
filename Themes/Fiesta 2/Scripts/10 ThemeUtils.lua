@@ -765,11 +765,12 @@ local Labels = {
 	["JUMP"] = 8,
 	["OUCS"] = 9,
 	["NEW"] = 0,
-	["TITLE"] = 10
+	["TITLE"] = 10,
+	["LEGACY"] = 11
 };
 
 function GetLabelNumber( label )
-	if label == "" then return 11; end;
+	if label == "" then return 12; end;
 	
 	return Labels[label];
 end;
@@ -862,14 +863,22 @@ function Actor:SetLevelTextByDigit( cur_steps, digit )
 end;
 
 -- Obtiene la etiqueta superior para mostrar en la esfera
-local function GetBallLabel( cur_steps )
+local function GetBallLabel(cur_steps)
+	local official = IsGroupOfficial();
 	if string.find(cur_steps:GetDescription(),"TITLE") then
 		return 10
+	elseif string.find(cur_steps:GetChartStyle(),"ACTIVE") then
+		return 12
+	elseif GetLabelNumber(cur_steps:GetLabel() ) == 12 then
+		if not official then
+			return 5
+		else
+			return 11
+		end;
 	else
 		return GetLabelNumber( cur_steps:GetLabel() );
-	end;
+	end
 end;
-
 -- Obtiene la etiqueta inferior para mostrar en la esfera
 local function GetBallUnderLabel( cur_steps )
 	local style = cur_steps:GetStepsType();
@@ -994,9 +1003,9 @@ function GetBallLevel( pn, show_dir_arrows )
 			};
 			
 			-- Labels --
-			LoadActor( THEME:GetPathG("","Common Resources/B_LABELS 1x12.png") )..{
+			LoadActor( THEME:GetPathG("","Common Resources/B_LABELS 1x13.png") )..{
 				Name="Label";
-				InitCommand=cmd(y,-58;pause;setstate,9);
+				InitCommand=cmd(y,-45;pause;setstate,10;zoom,0.6);
 				--OffCommand=cmd(stoptweening;diffusealpha,1;sleep,.2;linear,.05;diffusealpha,0);
 			};
 			
@@ -1179,4 +1188,45 @@ function FormatTime(totalseconds)
 	end
 	return minutes..":"..seconds
 end
+
+--
+
+function IsGroupOfficial()
+	local current_group = GAMESTATE:GetCurrentSong():GetGroupName();
+	if current_group == "16 - PHOENIX" then
+		return true;
+	elseif current_group == "01 - 1ST~3RD" then
+		return true;
+	elseif current_group == "02 - S.E.~EXTRA" then
+		return true; 
+	elseif current_group == "03 - REBIRTH~PREX 3" then
+		return true;
+	elseif current_group == "04 - EXCEED~ZERO" then
+		return true;
+	elseif current_group == "05 - NX~NX2" then
+		return true;
+	elseif current_group == "06 - NX ABSOLUTE" then
+		return true;
+	elseif current_group == "07 - PRO~PRO2" then
+		return true;
+	elseif current_group == "08 - FIESTA" then
+		return true;
+	elseif current_group == "09 - FIESTA EX" then
+		return true;
+	elseif current_group == "10 - FIESTA 2" then
+		return true;
+	elseif current_group == "11 - INFINITY" then
+		return true;
+	elseif current_group == "12 - PRIME" then
+		return true;
+	elseif current_group == "13 - PRIME 2" then
+		return true;
+	elseif current_group == "14 - XX" then
+		return true;
+	elseif current_group == "15 - MOBILE EDITION" then
+		return true;
+	else
+		return false;
+	end
+end;
 
