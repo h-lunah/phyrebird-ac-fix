@@ -200,12 +200,21 @@ end;
 --------------------------------------------------------------------------------------------------
 --TIMER
 -- DrawOrder = 1
-t[#t+1] = LoadActor("_timer")..{
+--[[t[#t+1] = LoadActor("_timer")..{
 	OnCommand=cmd(x,cx;y,-10;decelerate,.1;y,10;decelerate,.1;y,2);
 	OffCommand=cmd(x,cx;y,0;decelerate,.1;y,10;decelerate,.1;y,-58);
 	TimerOutSelectingSongCommand=cmd(playcommand,'Off');
 	TimerOutSelectingGroupCommand=cmd(playcommand,'Off');
+};--]]
+
+t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/TIMER_MASK.png") )..{
+	OnCommand=cmd(zoom,0.05;x,cx;y,22;play;MaskSource;);
 };
+
+t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/TIMER_FRAME.mpg") )..{
+	OnCommand=cmd(zoom,0.05;x,cx;y,22;play;MaskDest;);
+};
+
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
