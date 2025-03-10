@@ -945,7 +945,7 @@ function GetBallLevel( pn, show_dir_arrows )
 			};--]]
 			
 			-- Glow Spin --
-			LoadActor( THEME:GetPathG("","ScreenSelectMusic/Difficulty_Bigballs glow spin.png") )..{
+			--[[LoadActor( THEME:GetPathG("","ScreenSelectMusic/Difficulty_Bigballs glow spin.png") )..{
 				InitCommand=cmd(blend,'BlendMode_Add';diffuse,0,1,1,1);
 				OffCommand=cmd(stoptweening;diffusealpha,0);
 				ShowUpInternalCommand=cmd(stoptweening;diffusealpha,0;sleep,.2;queuecommand,'Spin');
@@ -959,7 +959,7 @@ function GetBallLevel( pn, show_dir_arrows )
 				ShowUpInternalCommand=cmd(stoptweening;diffusealpha,0;sleep,.4;queuecommand,'Spin');
 				HideInternalCommand=cmd(stoptweening;diffusealpha,0);
 				SpinCommand=cmd(stoptweening;diffusealpha,.1;rotationz,0;linear,2;rotationz,360;queuecommand,'Spin');
-			};
+			};--]]
 			
 			-- Esfera del nivel --
 			LoadActor( THEME:GetPathG("","ScreenSelectMusic/Difficulty_Bigballs 4x2.png") )..{
@@ -980,13 +980,13 @@ function GetBallLevel( pn, show_dir_arrows )
 			};
 			
 			-- Big glow
-			LoadActor( THEME:GetPathG("","ScreenSelectMusic/Difficulty_Bigballs bigglow.png") )..{
+			--[[LoadActor( THEME:GetPathG("","ScreenSelectMusic/Difficulty_Bigballs bigglow.png") )..{
 				InitCommand=cmd(blend,'BlendMode_Add';diffusealpha,0;visible,show_dir_arrows);
 				OffCommand=cmd(stoptweening;diffusealpha,0;linear,.05;diffusealpha,.5;zoom,1;linear,.2;zoomx,1.5;diffusealpha,0);
-			};
+			};--]]
 			
 			-- Glow Side to side --
-			LoadActor( THEME:GetPathG("","ScreenSelectMusic/Difficulty_Bigballs glow sidetoside.png") )..{
+			--[[LoadActor( THEME:GetPathG("","ScreenSelectMusic/Difficulty_Bigballs glow sidetoside.png") )..{
 				InitCommand=cmd(blend,'BlendMode_Add';diffuse,0,1,1,1);
 				ShowUpInternalCommand=cmd(stoptweening;diffusealpha,0;zoom,1;horizalign,center;x,0;sleep,.2;diffusealpha,1;linear,.2;diffusealpha,0);
 				HideInternalCommand=cmd(stoptweening;diffusealpha,0);
@@ -1000,7 +1000,7 @@ function GetBallLevel( pn, show_dir_arrows )
 						(cmd(horizalign,left;diffusealpha,1;zoomx,1;x,-55;linear,.1;zoomx,0;diffusealpha,0))(self);
 					end;
 				end;
-			};
+			};--]]
 			
 			-- Labels --
 			LoadActor( THEME:GetPathG("","Common Resources/B_LABELS 1x13.png") )..{
@@ -1094,7 +1094,7 @@ function GetSimpleBallLevel( pn )
 		end;
 		children = {
 			-- Frame --
-			LoadActor( THEME:GetPathG("","ScreenSelectMusic/Difficulty_Bigballs frame.png") )..{
+			--[[LoadActor( THEME:GetPathG("","ScreenSelectMusic/Difficulty_Bigballs frame.png") )..{
 				InitCommand=cmd(pause);
 				UpdateInternalCommand=cmd(stoptweening;diffusealpha,1);
 			};
@@ -1114,7 +1114,7 @@ function GetSimpleBallLevel( pn )
 				ShowUpInternalCommand=cmd(stoptweening;diffusealpha,0;sleep,.4;queuecommand,'Spin');
 				HideInternalCommand=cmd(stoptweening;diffusealpha,0);
 				SpinCommand=cmd(stoptweening;diffusealpha,.1;rotationz,0;linear,2;rotationz,360;queuecommand,'Spin');
-			};
+			};--]]
 			
 			-- Esfera del nivel --
 			LoadActor( THEME:GetPathG("","ScreenSelectMusic/fullbar balls 7x1.png") )..{
@@ -1135,7 +1135,7 @@ function GetSimpleBallLevel( pn )
 			};
 			
 			-- Glow Side to side --
-			LoadActor( THEME:GetPathG("","ScreenSelectMusic/Difficulty_Bigballs glow sidetoside.png") )..{
+			--[[LoadActor( THEME:GetPathG("","ScreenSelectMusic/Difficulty_Bigballs glow sidetoside.png") )..{
 				InitCommand=cmd(blend,'BlendMode_Add';diffuse,0,1,1,1);
 				ShowUpInternalCommand=cmd(stoptweening;diffusealpha,0;zoom,1;horizalign,center;x,0;sleep,.2;diffusealpha,1;linear,.2;diffusealpha,0);
 				HideInternalCommand=cmd(stoptweening;diffusealpha,0);
@@ -1149,7 +1149,7 @@ function GetSimpleBallLevel( pn )
 						(cmd(horizalign,left;diffusealpha,1;zoomx,1;x,-55;linear,.1;zoomx,0;diffusealpha,0))(self);
 					end;
 				end;
-			};
+			};--]]
 		};
 	};
 
