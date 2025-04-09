@@ -252,10 +252,10 @@ end
 local Xqt = 13
 local Yposit = 250
 for i=1, Xqt do
-	local Xposit = -220-377.8+(i-1)*100
+	local Xposit = -198-377.8+(i-1)*96
 	local YY = 0
 		if i == 1 then 
-			YY = 0
+			YY = 5
 		end
 		if i == 2 then
 			YY = -5
@@ -273,24 +273,24 @@ for i=1, Xqt do
 			YY = -5
 		end
 		if i == 13 then
-			YY = 0
+			YY = 5
 		end
 			
 			t[#t+1] = LoadActor(THEME:GetPathG("", "ScreenSelectMusic/blackball")).. {
-				InitCommand=cmd(x,Xposit;y,YY;zoom,1.5);
+				InitCommand=cmd(x,Xposit;y,YY;zoom,1.38);
 				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,0);
 				GoBackSelectingSongMessageCommand=cmd(stoptweening;y,0;sleep,.1;linear,.3;y,YY);
 			};
 
 			t[#t+1] = LoadActor(THEME:GetPathG("","ScreenSelectMusic/fullbar balls 7x1.png") ) .. {
-				InitCommand=cmd(x,Xposit;y,YY;zoom,1.7;pause);
+				InitCommand=cmd(x,Xposit;y,YY;zoom,1.6;pause);
 				UpDateCommand=cmd( setstate,GetDiffNum(i);visible,GetDiffNum(i)~=4 );
 				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,0);
 				GoBackSelectingSongMessageCommand=cmd(stoptweening;y,0;sleep,.1;linear,.3;y,YY);
 			}
 
 			t[#t+1] = LoadFont("N_SINGLE_N") .. {
-				InitCommand=cmd(x,Xposit;y,YY-1.1;zoom,.65);
+				InitCommand=cmd(x,Xposit;y,YY-1.1;zoom,.55);
 				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250);
 				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250-1.1);
 				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,0);
@@ -299,7 +299,7 @@ for i=1, Xqt do
 			};
 			
 			t[#t+1] = LoadFont("N_SINGLE_P") .. {
-				InitCommand=cmd(x,Xposit;y,YY-1.1;zoom,.65);
+				InitCommand=cmd(x,Xposit;y,YY-1.1;zoom,.55);
 				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250);
 				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250-1.1);
 				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,0);
@@ -308,7 +308,7 @@ for i=1, Xqt do
 			};
 			
 			t[#t+1] = LoadFont("N_DOUBLE_N") .. {
-				InitCommand=cmd(x,Xposit;y,YY-1.1;zoom,.65);
+				InitCommand=cmd(x,Xposit;y,YY-1.1;zoom,.55);
 				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250);
 				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250-1.1);
 				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,0);
@@ -317,25 +317,16 @@ for i=1, Xqt do
 			};
 			
 			t[#t+1] = LoadFont("N_DOUBLE_P") .. {
-				InitCommand=cmd(x,Xposit;y,YY-1.1;zoom,.65);
+				InitCommand=cmd(x,Xposit;y,YY-1.1;zoom,.55);
 				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250);
 				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250-1.1);
 				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,0);
 				GoBackSelectingSongMessageCommand=cmd(stoptweening;y,0;sleep,.1;linear,.3;y,YY);
 				UpDateCommand=cmd( SetMeterValue,i,3 );
 			};
-		
-			t[#t+1] = LoadFont("N_DOUBLE_N") .. {
-				InitCommand=cmd(x,Xposit;y,YY-1.1;zoom,.65);
-				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250);
-				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250-1.1);
-				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,0);
-				GoBackSelectingSongMessageCommand=cmd(stoptweening;y,0;sleep,.1;linear,.3;y,YY);
-				UpDateCommand=cmd( SetMeterValue,i,5 );
-			};
-		
+
 			t[#t+1] = LoadFont("N_COOP") .. {
-				InitCommand=cmd(x,Xposit;y,YY-1.1;zoom,.65);
+				InitCommand=cmd(x,Xposit;y,YY-1.1;zoom,.55);
 				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250);
 				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;linear,.3;y,250-1.1);
 				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,0);
