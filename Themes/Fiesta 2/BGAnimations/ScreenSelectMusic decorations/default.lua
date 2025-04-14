@@ -35,7 +35,7 @@ if GAMESTATE:IsSideJoined( PLAYER_1 ) then
 			local stepartist = GAMESTATE:GetCurrentSteps(PLAYER_1):GetAuthorCredit();
 			local bytext = "";
 			if string.len(stepartist) >= 1 then bytext = "by" end;
-			(cmd(settext,bytext;x,cx-90;y,SCREEN_BOTTOM-42;zoom,.5;visible,true))(self);
+			(cmd(settext,bytext;x,cx-90;y,SCREEN_BOTTOM-22;zoom,.5;visible,true))(self);
 		end;
 		StartSelectingStepsMessageCommand=cmd(stoptweening;playcommand,'UpdateVisibility');
 		ChangeStepsMessageCommand=cmd(stoptweening;playcommand,'UpdateVisibility');
@@ -52,7 +52,7 @@ if GAMESTATE:IsSideJoined( PLAYER_1 ) then
 			end;
 			self:settext( stepartist );
 			self:maxwidth(216);
-			(cmd(x,cx-90;y,SCREEN_BOTTOM-32;zoom,.5;visible,true))(self);
+			(cmd(x,cx-90;y,SCREEN_BOTTOM-12;zoom,.5;visible,true))(self);
 		end;
 		ChangeStepsMessageCommand=cmd(stoptweening;playcommand,'FetchAuthor');
 		GoBackSelectingSongMessageCommand=cmd(stoptweening;visible,false);
@@ -72,7 +72,7 @@ if GAMESTATE:IsSideJoined( PLAYER_2 ) then
 			local stepartist = GAMESTATE:GetCurrentSteps(PLAYER_2):GetAuthorCredit();
 			local bytext = "";
 			if string.len(stepartist) >= 1 then bytext = "by" end;
-			(cmd(settext,bytext;x,cx+90;y,SCREEN_BOTTOM-42;zoom,.5;visible,true))(self);
+			(cmd(settext,bytext;x,cx+90;y,SCREEN_BOTTOM-22;zoom,.5;visible,true))(self);
 		end;
 		StartSelectingStepsMessageCommand=cmd(stoptweening;playcommand,'UpdateVisibility');
 		ChangeStepsMessageCommand=cmd(stoptweening;playcommand,'UpdateVisibility');
@@ -89,7 +89,7 @@ if GAMESTATE:IsSideJoined( PLAYER_2 ) then
 			end;
 			self:settext( stepartist );
 			self:maxwidth(216);
-			(cmd(x,cx+90;y,SCREEN_BOTTOM-32;zoom,.5;visible,true))(self);
+			(cmd(x,cx+90;y,SCREEN_BOTTOM-12;zoom,.5;visible,true))(self);
 		end;
 		ChangeStepsMessageCommand=cmd(stoptweening;playcommand,'FetchAuthor');
 		GoBackSelectingSongMessageCommand=cmd(stoptweening;visible,false);
