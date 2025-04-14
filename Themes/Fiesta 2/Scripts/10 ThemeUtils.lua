@@ -1066,8 +1066,8 @@ function GetSimpleBallLevel( pn )
 			(cmd(stoptweening;diffusealpha,1;setstate,GetSimpleDiffNumberBall(cur_steps);basezoom,2))( this.Bigballs );
 			
 			-- Actualizo digitos de nivel
-			(cmd(stoptweening;diffusealpha,1;SetLevelTextByDigit,cur_steps,1))( this.LevelDigit1 );
-			(cmd(stoptweening;diffusealpha,1;SetLevelTextByDigit,cur_steps,2))( this.LevelDigit2 );
+			(cmd(zoom, .75;stoptweening;diffusealpha,1;SetLevelTextByDigit,cur_steps,1))( this.LevelDigit1 );
+			(cmd(zoom, .75;stoptweening;diffusealpha,1;SetLevelTextByDigit,cur_steps,2))( this.LevelDigit2 );
 			
 		end;
 		children = {
