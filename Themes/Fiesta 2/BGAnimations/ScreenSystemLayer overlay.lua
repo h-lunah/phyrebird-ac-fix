@@ -90,10 +90,10 @@ local function PlayerName( Player )
 			Name = "Avatar";
 			Texture = THEME:GetPathG("","_avatars/"..Player);
 			InitCommand=function(self)
-				self:SetWidth(38);
-				self:SetHeight(38);
-				self:x(SCREEN_CENTER_X-650);
-				self:y(-1);
+				self:SetWidth(50);
+				self:SetHeight(50);
+				self:x(SCREEN_CENTER_X-645);
+				self:y(0);
 			end;
 		};
 
@@ -189,8 +189,8 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 			local avatar = self:GetChild("Avatar");
 			avatar:Load(THEME:GetPathG("","_avatars/PlayerNumber_P1.png"));
 			avatar:horizalign(left);
-			avatar:SetWidth(60);
-			avatar:SetHeight(60);
+			avatar:SetWidth(50);
+			avatar:SetHeight(50);
 			local SessionDataText = self:GetChild("SessionDataText");
 			if SessionDataTable[P1CurrentProfile] ~= nil then
 				local formattedtimeP1 = FormatTimeLong(SessionDataTable[P1CurrentProfile]["PlaytimeS"]+SessionDataTable[P1CurrentProfile]["PlaytimeD"]);
@@ -276,8 +276,8 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 			local avatar = self:GetChild("Avatar");
 			avatar:Load(THEME:GetPathG("","_avatars/PlayerNumber_P1.png"));
 			avatar:horizalign(left);
-			avatar:SetWidth(60);
-			avatar:SetHeight(60);
+			avatar:SetWidth(50);
+			avatar:SetHeight(50);
 			local player_level_text = self:GetChild("PlayerLevelText")
 			player_level_text:settext("0001".." (0%)");
 			local progressbar = self:GetChild("ProgressBarFill");
@@ -329,8 +329,8 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 				avatar:Load(THEME:GetPathG("","_avatars/"..ProfileID..".png"));
 			end;
 			avatar:horizalign(left);
-			avatar:SetWidth(60);
-			avatar:SetHeight(60);
+			avatar:SetWidth(55);
+			avatar:SetHeight(55);
 			
 			local profile = PROFILEMAN:GetLocalProfile(ProfileID);
 			local player_level, to_next =  CalcPlayerLevel(profile:GetVoomax());
@@ -434,8 +434,8 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 			local avatar = self:GetChild("Avatar");
 			avatar:Load(THEME:GetPathG("","_avatars/PlayerNumber_P2.png"));
 			avatar:horizalign(right);
-			avatar:SetWidth(60);
-			avatar:SetHeight(60);
+			avatar:SetWidth(50);
+			avatar:SetHeight(50);
 			avatar:zoomx(-1);
 			local backSessionData = self:GetChild("Back2");
 			backSessionData:zoomx(-1);
@@ -529,8 +529,8 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 			local avatarp2 = self:GetChild("Avatar");
 			avatarp2:Load(THEME:GetPathG("","_avatars/PlayerNumber_P2.png"));
 			avatarp2:horizalign(right);
-			avatarp2:SetWidth(60);
-			avatarp2:SetHeight(60);
+			avatarp2:SetWidth(50);
+			avatarp2:SetHeight(50);
 			local SessionDataText = self:GetChild("SessionDataText");
 			if SessionDataTable[P2CurrentProfile] ~= nil then
 				local formattedtimeP2 = FormatTimeLong(SessionDataTable[P2CurrentProfile]["PlaytimeS"]+SessionDataTable[P2CurrentProfile]["PlaytimeD"]);
@@ -582,8 +582,8 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 				avatarp2:Load(THEME:GetPathG("","_avatars/"..ProfileID..".png"));
 			end;
 			avatarp2:horizalign(right);
-			avatarp2:SetWidth(60);
-			avatarp2:SetHeight(60);
+			avatarp2:SetWidth(50);
+			avatarp2:SetHeight(50);
 			
 			local profile = PROFILEMAN:GetLocalProfile(ProfileID);
 			local player_level, to_next =  CalcPlayerLevel(profile:GetVoomax());
