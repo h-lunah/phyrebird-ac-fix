@@ -373,23 +373,4 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 
 end;
 
--- Song Title --
-
-local songtitle = GAMESTATE:GetCurrentSong():GetDisplayMainTitle();
-local cur_song = GAMESTATE:GetCurrentSong();
-local cur_steps = GAMESTATE:GetCurrentSteps(PLAYER_1);
-songtitle = string.upper(songtitle);
-
-t[#t+1] = Def.BitmapText {
-	Font="_myriad pro 20px",
-	Text="♫"..songtitle,
-	InitCommand=function(self)
-		self:y(SCREEN_BOTTOM-9);
-		self:x(SCREEN_CENTER_X);
-		self:zoom(.84);
-		self:maxwidth(440);
-		self:diffuse(color("#ccfffe"));
-	end;
-};
-
 return t;

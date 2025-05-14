@@ -1,4 +1,4 @@
-local MachineText = "Phyrebird"
+local MachineText = "Drako's House"
 
 local t = Def.ActorFrame {
 	GoNextScreenMessageCommand=cmd(playcommand,'Off');
