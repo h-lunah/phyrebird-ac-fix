@@ -63,7 +63,7 @@ t[#t+1] = LoadActor(THEME:GetPathG("","Messages/goback_"..GetLanguageText()..".p
 
 -- Pantallas en las que no se muestra el nombre de los jugadores.
 local Screens = {
-	("ScreenInit"),("ScreenLogo"),("ScreenBranch"),("ScreenTitleMenu"),("ScreenOptionsService"),("ScreenGameOver"),("ScreenNextStage"),("ScreenStageBreak"),("ScreenStageInformation"),("ScreenDelay"),("ScreenDemonstration"),("ScreenUSBProfileSave"),("ScreenWarning"),("ScreenWaiting"), ("ScreenGameplayNormal"), ("ScreenGameplay"),("ScreenPrevGameplayDelay"),("ScreenAfterGameplayDelay")
+	("ScreenInit"),("ScreenLogo"),("ScreenMproject"),("ScreenBranch"),("ScreenTitleMenu"),("ScreenOptionsService"),("ScreenGameOver"),("ScreenNextStage"),("ScreenStageBreak"),("ScreenStageInformation"),("ScreenDelay"),("ScreenDemonstration"),("ScreenUSBProfileSave"),("ScreenWarning"),("ScreenWaiting"), ("ScreenGameplayNormal"), ("ScreenGameplay"),("ScreenPrevGameplayDelay"),("ScreenAfterGameplayDelay")
 };
 
 --actor para mostrar o no el nombre del jugador

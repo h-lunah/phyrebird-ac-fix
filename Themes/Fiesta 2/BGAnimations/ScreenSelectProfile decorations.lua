@@ -12,9 +12,9 @@ t[#t+1] = LoadActor( THEME:GetPathS("","CW/S_CMD_MOVE") )..{
 ------------------------------------------------------------------------------------------------------------------
 
 --1st Player
-t[#t+1] = SimplePlatPiu(110,SCREEN_HEIGHT-160)..{ OffCommand=cmd(visible,false); };
+t[#t+1] = SimplePlatPiu(130,SCREEN_HEIGHT-160)..{ OffCommand=cmd(visible,false); };
 t[#t+1] = PlayerMessage(PLAYER_1)..{
-	OnCommand=cmd(x,-110;y,SCREEN_HEIGHT-110;linear,.4;x,110);
+	OnCommand=cmd(x,-110;y,SCREEN_HEIGHT-90;linear,.4;x,130);
 	PlayerAlreadyJoinedMessageCommand=function(self,params)
 		if params.Player == PLAYER_1 then
 			self:visible(false);
@@ -24,9 +24,9 @@ t[#t+1] = PlayerMessage(PLAYER_1)..{
 };
 
 --2nd Player
-t[#t+1] = SimplePlatPiu(SCREEN_WIDTH-110,SCREEN_HEIGHT-160)..{ OffCommand=cmd(visible,false); };
+t[#t+1] = SimplePlatPiu(SCREEN_WIDTH-130,SCREEN_HEIGHT-160)..{ OffCommand=cmd(visible,false); };
 t[#t+1] = PlayerMessage(PLAYER_2)..{
-	OnCommand=cmd(x,SCREEN_WIDTH+110;y,SCREEN_HEIGHT-110;linear,.4;x,SCREEN_WIDTH-110);
+	OnCommand=cmd(x,SCREEN_WIDTH+110;y,SCREEN_HEIGHT-90;linear,.4;x,SCREEN_WIDTH-130);
 	PlayerAlreadyJoinedMessageCommand=function(self,params)
 		if params.Player == PLAYER_2 then
 			self:visible(false);
@@ -37,13 +37,12 @@ t[#t+1] = PlayerMessage(PLAYER_2)..{
 
 ------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------
-t[#t+1] = LoadFont("_unispace 18px")..{
+t[#t+1] = LoadFont("_myriad pro 20px")..{
 	InitCommand=function(self)
-		self:xy(SCREEN_LEFT+16, SCREEN_TOP+4)
+		self:xy(SCREEN_LEFT+10, SCREEN_TOP+25)
 		self:horizalign(left)
         self:vertalign(top)
-		self:settext("SP1+_V2.0")
-		self:shadowlength(1)
+		self:settext("v2.08.0\nPIU25-PHDRK1M91 (LATAM)\nDrako's House")
 		self:zoom(0.5)
 	end;
 	OffCommand=function(self)

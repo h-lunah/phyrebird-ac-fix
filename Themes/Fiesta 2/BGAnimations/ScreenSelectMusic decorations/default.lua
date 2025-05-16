@@ -4,6 +4,9 @@ local t = Def.ActorFrame {
 
 collectgarbage();
 
+
+t[#t+1] = LoadActor("_musicwheel")..{}
+
 -------------------------------------GENERAL------------------------------------------------------
 --------------------------------------------------------------------------------------------------
 cx = SCREEN_CENTER_X;
@@ -112,25 +115,35 @@ t[#t+1] = LoadActor("_groupwheel")..{
 --------------------------------------------------------------------------------
 --FULL MODE THINGS
 
-t[#t+1] = LoadActor("_diff_FM.lua")..{
-	OnCommand=cmd(draworder,15;stoptweening;y,560);
-	StartSelectingStepsMessageCommand=cmd(stoptweening;playcommand,"ShowUp";y,SCREEN_BOTTOM+100;linear,.2;y,SCREEN_BOTTOM-93;queuecommand,'HideOffCommand'); 	
-	GoBackSelectingSongMessageCommand=cmd(stoptweening;playcommand,"Hide";y,SCREEN_BOTTOM-93;sleep,.2;linear,.1;y,SCREEN_BOTTOM+100;queuecommand,'HideOnCommand');
-	OffCommand=cmd(stoptweening;y,SCREEN_BOTTOM-93;sleep,.2;linear,.2;y,SCREEN_BOTTOM+100);
-	GoFullModeMessageCommand=cmd(stoptweening;y,SCREEN_BOTTOM+100);
+t[#t+1] = LoadActor("_diff_FM1P.lua")..{
+	OnCommand=cmd(draworder,15;stoptweening;x,cx-500;y,386);
+	StartSelectingStepsMessageCommand=cmd(stoptweening;playcommand,"ShowUp";x,cx-500;linear,.3;x,cx-124;queuecommand,'HideOffCommand'); 	
+	GoBackSelectingSongMessageCommand=cmd(stoptweening;playcommand,"Hide";x,cx-124;sleep,.2;linear,.1;x,cx-500;queuecommand,'HideOnCommand');
+	OffCommand=cmd(stoptweening;diffusealpha,0);
+	GoFullModeMessageCommand=cmd(stoptweening;x,cx-124);
+	HideOffCommand=cmd(visible,false);
+	HideOnCommand=cmd(visible,true);
+}
+
+t[#t+1] = LoadActor("_diff_FM2P.lua")..{
+	OnCommand=cmd(draworder,15;stoptweening;x,cx+500;y,386);
+	StartSelectingStepsMessageCommand=cmd(stoptweening;playcommand,"ShowUp";x,cx+500;linear,.3;x,cx+124;queuecommand,'HideOffCommand'); 	
+	GoBackSelectingSongMessageCommand=cmd(stoptweening;playcommand,"Hide";x,cx+124;sleep,.2;linear,.1;x,cx+500;queuecommand,'HideOnCommand');
+	OffCommand=cmd(stoptweening;diffusealpha,0);
+	GoFullModeMessageCommand=cmd(stoptweening;x,cx+124);
 	HideOffCommand=cmd(visible,false);
 	HideOnCommand=cmd(visible,true);
 }
 
 t[#t+1] = LoadActor("_diffbar_full")..{
-	InitCommand=cmd(draworder,16;x,SCREEN_CENTER_X;basezoom,.80); --> Quando inicia a cena
-	OnCommand=cmd(stoptweening;diffusealpha,0;y,SCREEN_BOTTOM;sleep,.45;linear,.3;y,SCREEN_BOTTOM-50;diffusealpha,1); --> Animação inicial
-	StartSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,0;y,SCREEN_BOTTOM;sleep,.45;linear,.3;diffusealpha,1;y,SCREEN_BOTTOM-50); --> Ao voltar do GroupWheel
-	GoBackSelectingGroupMessageCommand=cmd(stoptweening;diffusealpha,1;linear,.3;y,SCREEN_BOTTOM-50;diffusealpha,0); --> Ao entrar no GroupWheel
-	StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,SCREEN_BOTTOM-50;sleep,.1;linear,.3;y,305); --> Ao selecionar a música
-	GoBackSelectingSongMessageCommand=cmd(stoptweening;y,305;sleep,.1;linear,.3;y,SCREEN_BOTTOM-50); --> Ao cancelar a seleção da música
-	OffCommand=cmd(stoptweening;diffusealpha,1;sleep,.05;linear,.3;y,320;diffusealpha,0);
-	TimerOutSelectingSongCommand=cmd(stoptweening;diffusealpha,1;sleep,.05;linear,.3;y,330;diffusealpha,0);
+	InitCommand=cmd(draworder,16;x,SCREEN_CENTER_X;y,SCREEN_BOTTOM-58;zoom,.48); --> Quando inicia a cena
+	OnCommand=cmd(stoptweening;diffusealpha,0;x,cx-800;sleep,.45;linear,.15;x,cx;diffusealpha,1); --> Animação inicial
+	StartSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,0;x,cx-800;sleep,.25;linear,.15;diffusealpha,1;x,cx); --> Ao voltar do GroupWheel
+	GoBackSelectingGroupMessageCommand=cmd(stoptweening;linear,.15;x,cx-800;diffusealpha,0); --> Ao entrar no GroupWheel
+	StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,SCREEN_BOTTOM-58;sleep,.1;linear,.2;y,305;zoom,.53); --> Ao selecionar a música
+	GoBackSelectingSongMessageCommand=cmd(stoptweening;sleep,.1;linear,.2;y,SCREEN_BOTTOM-58;zoom,.48); --> Ao cancelar a seleção da música
+	OffCommand=cmd(stoptweening;diffusealpha,1;sleep,.05;linear,.15;x,cx-800;diffusealpha,0);
+	TimerOutSelectingSongCommand=cmd(stoptweening;diffusealpha,1;sleep,.05;linear,.25;y,305;diffusealpha,0);
 }
 
 --SCORE GRADES

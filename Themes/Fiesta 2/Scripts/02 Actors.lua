@@ -3,12 +3,17 @@ local plataforma = Def.ActorFrame{
 	OnCommand=cmd(x,xpos;y,ypos);
 	children = {
 LoadActor(THEME:GetPathG("","_pad/plataforma.png"))..{
-	InitCommand=cmd(stoptweening;diffusealpha,1;basezoom,.66);
+	InitCommand=cmd(stoptweening;diffusealpha,1;basezoom,.45);
 	OffCommand=cmd(stoptweening);
 };
 LoadActor(THEME:GetPathG("","_pad/start.png"))..{
-	InitCommand=cmd(stoptweening;y,-6;basezoom,.66;blend,'BlendMode_Add';queuecommand,'Loop');
+	InitCommand=cmd(stoptweening;y,-6;basezoom,.45;blend,'BlendMode_Add';queuecommand,'Loop');
 	LoopCommand=cmd(stoptweening;diffusealpha,0;zoom,1;sleep,.3;linear,.05;diffusealpha,1;zoom,1.06;linear,.25;zoom,1;diffusealpha,0;queuecommand,'Loop');
+	OffCommand=cmd(stoptweening);
+};
+LoadActor(THEME:GetPathG("","_pad/plataforma_select.png"))..{
+	InitCommand=cmd(stoptweening;basezoom,.45;queuecommand,'Loop');
+	LoopCommand=cmd(stoptweening;diffusealpha,0;sleep,.3;linear,.05;diffusealpha,1;linear,.25;diffusealpha,0;queuecommand,'Loop');
 	OffCommand=cmd(stoptweening);
 };
 LoadActor(THEME:GetPathG("","_pad/press_center_step.png"))..{
