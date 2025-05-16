@@ -1,6 +1,8 @@
 # stepp1-plus PhyreBird Theme
 Modified version of StepP1 1.0.3 (5-panel focused StepMania fork), originally developed by xMax (v. 1.0.0), with further binary modifications and theme decryption by SheepyChris and Team CrackItUp (1.0.1 to 1.0.3). This repository only covers slight lua modifications to the theme and aims to add qol features to the game intended for power users.
 
+Made some changes to include some stuff in the theme. -Drako
+
 ## Installation Instructions
 - Clone the repository (click the green "Code" button, then choose "Download ZIP"). We recommend downloading and setting up Github Desktop or similar to easily sync updates.
 - The stepp1-plus-main folder can be stored on your location of choice. It is a portable installation and will not write files to anywhere else.
