@@ -47,7 +47,7 @@ t[#t+1] = LoadFont("_myriad pro 20px")..{
 		self:xy(SCREEN_LEFT+10, SCREEN_TOP+25)
 		self:horizalign(left)
         self:vertalign(top)
-		self:settext("v2.08.0\nPIU25-PHDRK1M91 (LATAM)\nDrako's House")
+		self:settext("v2.00.0\nPIU25-ABCDEFG00 (INT)\nPhyrebird")
 		self:zoom(0.5)
 	end;
 	OffCommand=function(self)
