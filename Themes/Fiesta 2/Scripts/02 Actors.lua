@@ -28,31 +28,12 @@ function PlayerMessage( pn )
 local t = Def.ActorFrame {
 	InitCommand=cmd(basezoom,.67);
 	children = {
-		LoadActor(THEME:GetPathG("","Messages/back.png"));
+		LoadActor(THEME:GetPathG("","Messages/back.png"))..{
+		};
 		LoadActor(THEME:GetPathG("","Messages/back_glow.png"))..{
 			InitCommand=cmd(blend,"BlendMode_Add");
-			OnCommand=cmd(diffusealpha,.2;playcommand,'Loop1');
-			Loop1Command=function(self)
-				if pn==PLAYER_1 then
-					(cmd(horizalign,'HorizAlign_Right';x,120))(self);
-				else
-					(cmd(horizalign,'HorizAlign_Left';x,-120))(self);
-				end;
-				(cmd(zoomx,0;diffusealpha,0;linear,1;zoomx,1;diffusealpha,.2;queuecommand,'Loop2'))(self);
-			end;
-			Loop2Command=function(self)
-				if pn==PLAYER_1 then
-					(cmd(horizalign,'HorizAlign_Left';x,-120))(self);
-				else
-					(cmd(horizalign,'HorizAlign_Right';x,120))(self);
-				end;
-				(cmd(zoomx,1;linear,1;zoomx,0;diffusealpha,0;queuecommand,'Loop1'))(self);
-			end;
-		};
-		LoadActor(THEME:GetPathG("","Messages/back.png"))..{
-			InitCommand=cmd(blend,"BlendMode_Add");
 			OnCommand=cmd(diffusealpha,0;playcommand,'Loop');
-			LoopCommand=cmd(diffusealpha,0;linear,1;diffusealpha,1;linear,1;diffusealpha,0;queuecommand,'Loop');
+			LoopCommand=cmd(diffusealpha,0;linear,1;diffusealpha,0.8;linear,1;diffusealpha,0;queuecommand,'Loop');
 		};
 		LoadActor(THEME:GetPathG("","Messages/press_"..GetLanguageText()..".png"))..{
 			PlayerStartedSelectProfileMessageCommand=function( self, params )
