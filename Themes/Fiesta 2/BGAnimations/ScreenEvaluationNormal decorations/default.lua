@@ -241,12 +241,6 @@ end;
 --Total Score High Score Frame--
 function GetHighScoresFrameEval( pn )
 local a = Def.ActorFrame {};
-	
-a[#a+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/highscores_bg") )..{
-	InitCommand=cmd(basezoom,.66;zoomx,0;);
-	OnCommand=cmd(stoptweening;zoomx,0;linear,.2;zoomx,1);
-	OffCommand=cmd(stoptweening;zoomx,1;linear,.2;zoomx,0);
-};
 		
 local cur_song = GAMESTATE:GetCurrentSong();
 local cur_steps = GAMESTATE:GetCurrentSteps( pn );
@@ -369,12 +363,12 @@ if HSListMachine ~= nil and #HSListMachine ~= 0 then
 	
 end;
 
-a[#a+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/highscores_glow") )..{
-	InitCommand=cmd(basezoom,.66;diffuse,0,1,1,1;blend,'BlendMode_Add');
-	OnCommand=cmd(stoptweening;horizalign,center;diffusealpha,0;zoomx,0;x,0;sleep,.2;linear,.1;zoomx,1;diffusealpha,.8;linear,.1;zoomx,0;diffusealpha,0;queuecommand,'Loop');
-	LoopCommand=cmd(stoptweening;zoomx,1;diffusealpha,0;linear,1;diffusealpha,.1;linear,1;diffusealpha,0;queuecommand,'Loop');
-	OffCommand=cmd(stoptweening;zoomx,0;x,0);
-};
+-- a[#a+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/highscores_glow") )..{
+	-- InitCommand=cmd(basezoom,.66;diffuse,0,1,1,1;blend,'BlendMode_Add');
+	-- OnCommand=cmd(stoptweening;horizalign,center;diffusealpha,0;zoomx,0;x,0;sleep,.2;linear,.1;zoomx,1;diffusealpha,.8;linear,.1;zoomx,0;diffusealpha,0;queuecommand,'Loop');
+	-- LoopCommand=cmd(stoptweening;zoomx,1;diffusealpha,0;linear,1;diffusealpha,.1;linear,1;diffusealpha,0;queuecommand,'Loop');
+	-- OffCommand=cmd(stoptweening;zoomx,0;x,0);
+-- };
 
 return a;
 end;
@@ -385,11 +379,11 @@ end;
 function GetPHighScoresFrameEval( pn )
 	local a = Def.ActorFrame {};
 		
-	a[#a+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/highscores_bg") )..{
-		InitCommand=cmd(basezoom,.66;zoomx,0);
-		OnCommand=cmd(stoptweening;zoomx,0;linear,.2;zoomx,1);
-		OffCommand=cmd(stoptweening;zoomx,1;linear,.2;zoomx,0);
-	};
+	-- a[#a+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/highscores_bg") )..{
+		-- InitCommand=cmd(basezoom,.66;zoomx,0);
+		-- OnCommand=cmd(stoptweening;zoomx,0;linear,.2;zoomx,1);
+		-- OffCommand=cmd(stoptweening;zoomx,1;linear,.2;zoomx,0);
+	-- };
 	
 	local PersonalBestIndex = 1; 
 	local PersonalBestPScore = 0;
@@ -483,18 +477,18 @@ function GetPHighScoresFrameEval( pn )
 				OffCommand=cmd(stoptweening;visible,false);
 			};
 	
-			a[#a+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/hs_glow_player.png") )..{
-				InitCommand=cmd(basezoom,.66);
-				OnCommand=function(self)
-					self:visible(false);
-					if PlayerHasNewPScoreRecord == true then
-						self:sleep(.2);
-						self:queuecommand("Effect");
-					end;
-				end;
-				EffectCommand=cmd(y,-17;glowshift;effectcolor1,1,1,0,1;effectcolor2,1,1,1,1;effectperiod,1;visible,true);
-				OffCommand=cmd(finishtweening;visible,false);
-			};			
+			-- a[#a+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/hs_glow_player.png") )..{
+				-- InitCommand=cmd(basezoom,.66);
+				-- OnCommand=function(self)
+					-- self:visible(false);
+					-- if PlayerHasNewPScoreRecord == true then
+						-- self:sleep(.2);
+						-- self:queuecommand("Effect");
+					-- end;
+				-- end;
+				-- EffectCommand=cmd(y,-17;glowshift;effectcolor1,1,1,0,1;effectcolor2,1,1,1,1;effectperiod,1;visible,true);
+				-- OffCommand=cmd(finishtweening;visible,false);
+			-- };			
 			end;
 	end;
 	
@@ -576,35 +570,35 @@ function GetPHighScoresFrameEval( pn )
 			OffCommand=cmd(stoptweening;visible,false);
 		};
 
-		a[#a+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/hs_glow_machine.png") )..{
-			InitCommand=cmd(basezoom,.66);
-			OnCommand=function(self)
-				self:visible(false);
-				if PlayerHasNewPScoreMachineRecord == true then
-					self:sleep(.2);
-					self:queuecommand("Effect");
-				end;
-			end;
-			EffectCommand=cmd(y,14;glowshift;effectcolor1,1,1,0,1;effectcolor2,1,1,1,1;effectperiod,1;visible,true);
-			OffCommand=cmd(finishtweening;visible,false);
-		};
+		-- a[#a+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/hs_glow_machine.png") )..{
+			-- InitCommand=cmd(basezoom,.66);
+			-- OnCommand=function(self)
+				-- self:visible(false);
+				-- if PlayerHasNewPScoreMachineRecord == true then
+					-- self:sleep(.2);
+					-- self:queuecommand("Effect");
+				-- end;
+			-- end;
+			-- EffectCommand=cmd(y,14;glowshift;effectcolor1,1,1,0,1;effectcolor2,1,1,1,1;effectperiod,1;visible,true);
+			-- OffCommand=cmd(finishtweening;visible,false);
+		-- };
 		
 		
 	end;
 	
-	a[#a+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/highscores_glow") )..{
-		InitCommand=cmd(basezoom,.66;diffuse,0,1,1,1;blend,'BlendMode_Add');
-		OnCommand=cmd(stoptweening;horizalign,center;diffusealpha,0;zoomx,0;x,0;sleep,.2;linear,.1;zoomx,1;diffusealpha,.8;linear,.1;zoomx,0;diffusealpha,0;queuecommand,'Loop');
-		LoopCommand=cmd(stoptweening;zoomx,1;diffusealpha,0;linear,1;diffusealpha,.1;linear,1;diffusealpha,0;queuecommand,'Loop');
-		OffCommand=cmd(stoptweening;zoomx,0;x,0);
-	};
+	-- a[#a+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/highscores_glow") )..{
+		-- InitCommand=cmd(basezoom,.66;diffuse,0,1,1,1;blend,'BlendMode_Add');
+		-- OnCommand=cmd(stoptweening;horizalign,center;diffusealpha,0;zoomx,0;x,0;sleep,.2;linear,.1;zoomx,1;diffusealpha,.8;linear,.1;zoomx,0;diffusealpha,0;queuecommand,'Loop');
+		-- LoopCommand=cmd(stoptweening;zoomx,1;diffusealpha,0;linear,1;diffusealpha,.1;linear,1;diffusealpha,0;queuecommand,'Loop');
+		-- OffCommand=cmd(stoptweening;zoomx,0;x,0);
+	-- };
 
 	return a;
 	end;
 
 -- High scores, Level Ball & Autoplay text
 if GAMESTATE:IsSideJoined( PLAYER_1 ) then
-t[#t+1] = GetHighScoresFrameEval( PLAYER_1 )..{ InitCommand=cmd(x,cx-275;y,SCREEN_BOTTOM-80); };
+--t[#t+1] = GetHighScoresFrameEval( PLAYER_1 )..{ InitCommand=cmd(x,cx-275;y,SCREEN_BOTTOM-80); };
 
 --t[#t+1] = GetPHighScoresFrameEval( PLAYER_1 )..{ InitCommand=cmd(x,cx-320;y,SCREEN_BOTTOM-85); };
 
@@ -612,38 +606,38 @@ t[#t+1] = GetHighScoresFrameEval( PLAYER_1 )..{ InitCommand=cmd(x,cx-275;y,SCREE
 
 
 -- High Score Border Glow when new Record
-t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/hs_glow_player.png") )..{
-	InitCommand=cmd(basezoom,.66);
-	OnCommand=function(self)
-		self:visible(false);
-		if SCREENMAN:GetTopScreen():PlayerHasNewRecord(PLAYER_1) then
-			self:sleep(.2);
-			self:queuecommand("Effect");
-		end;
-	end;
-	EffectCommand=cmd(x,cx-275;y,SCREEN_BOTTOM-97;glowshift;effectcolor1,1,1,0,1;effectcolor2,1,1,1,1;effectperiod,1;visible,true);
-	OffCommand=cmd(finishtweening;visible,false);
-};
+-- t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/hs_glow_player.png") )..{
+	-- InitCommand=cmd(basezoom,.66);
+	-- OnCommand=function(self)
+		-- self:visible(false);
+		-- if SCREENMAN:GetTopScreen():PlayerHasNewRecord(PLAYER_1) then
+			-- self:sleep(.2);
+			-- self:queuecommand("Effect");
+		-- end;
+	-- end;
+	-- EffectCommand=cmd(x,cx-275;y,SCREEN_BOTTOM-97;glowshift;effectcolor1,1,1,0,1;effectcolor2,1,1,1,1;effectperiod,1;visible,true);
+	-- OffCommand=cmd(finishtweening;visible,false);
+-- };
 
-t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/hs_glow_machine.png") )..{
-	InitCommand=cmd(basezoom,.66);
-	OnCommand=function(self)
-		self:visible(false);
-		if SCREENMAN:GetTopScreen():PlayerHasNewMachineRecord(PLAYER_1) then
-			self:sleep(.2);
-			self:queuecommand("Effect");
-		end;
-	end;
-	EffectCommand=cmd(x,cx-275;y,SCREEN_BOTTOM-67;glowshift;effectcolor1,1,1,0,1;effectcolor2,1,1,1,1;effectperiod,1;visible,true);
-	OffCommand=cmd(finishtweening;visible,false);
-};
+-- t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/hs_glow_machine.png") )..{
+	-- InitCommand=cmd(basezoom,.66);
+	-- OnCommand=function(self)
+		-- self:visible(false);
+		-- if SCREENMAN:GetTopScreen():PlayerHasNewMachineRecord(PLAYER_1) then
+			-- self:sleep(.2);
+			-- self:queuecommand("Effect");
+		-- end;
+	-- end;
+	-- EffectCommand=cmd(x,cx-275;y,SCREEN_BOTTOM-67;glowshift;effectcolor1,1,1,0,1;effectcolor2,1,1,1,1;effectperiod,1;visible,true);
+	-- OffCommand=cmd(finishtweening;visible,false);
+-- };
 
 t[#t+1] = GetBallLevelColor( PLAYER_1, false )..{ 
 	InitCommand=cmd(basezoom,.50;x,SCREEN_CENTER_X-135;playcommand,"ShowUp";y,SCREEN_TOP+150;linear,.2;); 
 	OffCommand=cmd(stoptweening;playcommand,"Hide";y,SCREEN_BOTTOM-100;sleep,0;linear,.2;y,SCREEN_BOTTOM+100;queuecommand,'HideOnCommand')
 };
 
-t[#t+1] = GetBallLevelText( PLAYER_1, false )..{ 
+t[#t+1] = GetBallLevelTextP1( PLAYER_1, false )..{ 
 	InitCommand=cmd(basezoom,.50;x,SCREEN_CENTER_X-135;playcommand,"ShowUp";y,SCREEN_TOP+150;linear,.2;); 
 	OffCommand=cmd(stoptweening;playcommand,"Hide";y,SCREEN_BOTTOM-100;sleep,0;linear,.2;y,SCREEN_BOTTOM+100;queuecommand,'HideOnCommand') -- Quando sai da tela
 };
@@ -654,131 +648,72 @@ t[#t+1] = LoadFont("_jnr_font")..{
 	OffCommand=cmd(stoptweening;visible,false);
 };
 end;
-
-if GAMESTATE:GetCurrentSteps(PLAYER_1):GetAuthorCredit() ~= "" then
-t[#t+1] = LoadFont("SongTitle")..{
-	InitCommand=cmd(settext,"by";x,SCREEN_CENTER_X-135;y,SCREEN_TOP+183;zoom,.3);
-	OffCommand=cmd(stoptweening;visible,false);
-};
-t[#t+1] = LoadFont("SongTitle")..{
-	InitCommand=function(self)
-		local text = GAMESTATE:GetCurrentSteps(PLAYER_1):GetAuthorCredit();
-		if string.len(text) >= 38 then
-			text = string.sub(text,1,35);
-			text = text .. "...";
-		end;
-		self:settext( text );
-		self:maxwidth(216);
-	(cmd(x,SCREEN_CENTER_X-135;y,SCREEN_TOP+190;zoom,.3))(self);
-	end;
-	OffCommand=cmd(stoptweening;visible,false);
-};
-end;
 end;
 
 
 --Definição do P2 mostrar Frame Evaluation
 if GAMESTATE:IsSideJoined( PLAYER_2 ) then
-t[#t+1] = GetHighScoresFrameEval( PLAYER_2 )..{ InitCommand=cmd(x,cx+285;y,SCREEN_BOTTOM-80); };
+--t[#t+1] = GetHighScoresFrameEval( PLAYER_2 )..{ InitCommand=cmd(x,cx+285;y,SCREEN_BOTTOM-80); };
 
 --t[#t+1] = GetPHighScoresFrameEval( PLAYER_2 )..{ InitCommand=cmd(x,cx+320;y,SCREEN_BOTTOM-85); };
 
 
-t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/hs_glow_player.png") )..{
-	InitCommand=cmd(basezoom,.66);
-	OnCommand=function(self)
-		self:visible(false);
-		if SCREENMAN:GetTopScreen():PlayerHasNewRecord(PLAYER_2) then
-			self:sleep(.2);
-			self:queuecommand("Effect");
-		end;
-	end;
-	EffectCommand=cmd(x,cx+285;y,SCREEN_BOTTOM-97;glowshift;effectcolor1,1,1,0,1;effectcolor2,1,1,1,1;effectperiod,1;visible,true);
-	OffCommand=cmd(finishtweening;visible,false);
-};
-t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/hs_glow_machine.png") )..{
-	InitCommand=cmd(basezoom,.66);
-	OnCommand=function(self)
-		self:visible(false);
-		if SCREENMAN:GetTopScreen():PlayerHasNewMachineRecord(PLAYER_2) then
-			self:sleep(.2);
-			self:queuecommand("Effect");
-		end;
-	end;
-	EffectCommand=cmd(x,cx+285;y,SCREEN_BOTTOM-67;glowshift;effectcolor1,1,1,0,1;effectcolor2,1,1,1,1;effectperiod,1;visible,true);
-	OffCommand=cmd(finishtweening;visible,false);
-};
+-- t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/hs_glow_player.png") )..{
+	-- InitCommand=cmd(basezoom,.66);
+	-- OnCommand=function(self)
+		-- self:visible(false);
+		-- if SCREENMAN:GetTopScreen():PlayerHasNewRecord(PLAYER_2) then
+			-- self:sleep(.2);
+			-- self:queuecommand("Effect");
+		-- end;
+	-- end;
+	-- EffectCommand=cmd(x,cx+285;y,SCREEN_BOTTOM-97;glowshift;effectcolor1,1,1,0,1;effectcolor2,1,1,1,1;effectperiod,1;visible,true);
+	-- OffCommand=cmd(finishtweening;visible,false);
+-- };
+-- t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/hs_glow_machine.png") )..{
+	-- InitCommand=cmd(basezoom,.66);
+	-- OnCommand=function(self)
+		-- self:visible(false);
+		-- if SCREENMAN:GetTopScreen():PlayerHasNewMachineRecord(PLAYER_2) then
+			-- self:sleep(.2);
+			-- self:queuecommand("Effect");
+		-- end;
+	-- end;
+	-- EffectCommand=cmd(x,cx+285;y,SCREEN_BOTTOM-67;glowshift;effectcolor1,1,1,0,1;effectcolor2,1,1,1,1;effectperiod,1;visible,true);
+	-- OffCommand=cmd(finishtweening;visible,false);
+-- };
 
 t[#t+1] = GetBallLevelColor( PLAYER_2, false )..{ 
 	InitCommand=cmd(basezoom,.50;x,SCREEN_CENTER_X+135;playcommand,"ShowUp";y,SCREEN_TOP+150;linear,.2;zoomx,-1); 
 	OffCommand=cmd(stoptweening;playcommand,"Hide";y,SCREEN_BOTTOM-100;sleep,0;linear,.2;y,SCREEN_BOTTOM+100;queuecommand,'HideOnCommand') -- Quando sai da tela
 };
 
-t[#t+1] = GetBallLevelText( PLAYER_2, false )..{ 
+t[#t+1] = GetBallLevelTextP2( PLAYER_2, false )..{ 
 	InitCommand=cmd(basezoom,.50;x,SCREEN_CENTER_X+135;playcommand,"ShowUp";y,SCREEN_TOP+150;linear,.2;); 
 	OffCommand=cmd(stoptweening;playcommand,"Hide";y,SCREEN_BOTTOM-100;sleep,0;linear,.2;y,SCREEN_BOTTOM+100;queuecommand,'HideOnCommand') -- Quando sai da tela
 };
 
 if STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):IsDisqualified() then
 t[#t+1] = LoadFont("_jnr_font")..{
-	InitCommand=cmd(settext,"AutoPlay";x,SCREEN_CENTER_X+135;y,SCREEN_BOTTOM-142;zoom,.5);
-	OffCommand=cmd(stoptweening;visible,false);
-};
-end;
-if GAMESTATE:GetCurrentSteps(PLAYER_2):GetAuthorCredit() ~= "" then
-t[#t+1] = LoadFont("SongTitle")..{
-	InitCommand=cmd(settext,"by";x,SCREEN_CENTER_X+135;y,SCREEN_TOP+183;zoom,.3);
-	OffCommand=cmd(stoptweening;visible,false);
-};
-t[#t+1] = LoadFont("SongTitle")..{
-	InitCommand=function(self)
-		local text = GAMESTATE:GetCurrentSteps(PLAYER_2):GetAuthorCredit();
-		if string.len(text) >= 38 then
-			text = string.sub(text,1,35);
-			text = text .. "...";
-		end;
-		self:settext( text );
-		self:maxwidth(216);
-	(cmd(x,SCREEN_CENTER_X+135;y,SCREEN_TOP+190;zoom,.3))(self);
-	end;
+	InitCommand=cmd(settext,"AutoPlay";x,SCREEN_CENTER_X+270;y,SCREEN_BOTTOM-142;zoom,.5);
 	OffCommand=cmd(stoptweening;visible,false);
 };
 end;
 end;
 
-t[#t+1] = LoadActor( "_recordgrades.lua" )..{
-	GoNextScreenMessageCommand=cmd(visible,false);
-	OffCommand=cmd(stoptweening;visible,false);
-};
+-- t[#t+1] = LoadActor( "_recordgrades.lua" )..{
+	-- GoNextScreenMessageCommand=cmd(visible,false);
+	-- OffCommand=cmd(stoptweening;visible,false);
+-- };
 
-t[#t+1] = LoadActor( "_recordplates.lua" )..{
-	GoNextScreenMessageCommand=cmd(visible,false);
-	OffCommand=cmd(stoptweening;visible,false);
-};
+-- t[#t+1] = LoadActor( "_recordplates.lua" )..{
+	-- GoNextScreenMessageCommand=cmd(visible,false);
+	-- OffCommand=cmd(stoptweening;visible,false);
+-- };
 
 
 
 -- Timer
-t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/TIMER_MASK.png") )..{
-	OnCommand=cmd(zoom,0.05;x,cx;y,22;play;MaskSource;);
-};
-
-t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/TIMER_FRAME.mpg") )..{
-	OnCommand=cmd(zoom,0.05;x,cx;y,22;play;MaskDest;);
-};
-
---loading twice to speed up the animation (exploiting an ffmpeg bug)
-t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/TIMER_FRAME.mpg") )..{
-	OnCommand=cmd(zoom,0.05;x,cx;y,22;play;MaskDest;);
-};
-
-t[#t+1] = Def.ActorProxy {
-	BeginCommand=function(self) 
-		local Timer = SCREENMAN:GetTopScreen():GetChild('Timer'); 
-		self:SetTarget(Timer); 
-		end;
-	OnCommand=cmd(x,SCREEN_CENTER_X;y,20;basezoom,.66;zoom,0;sleep,.2;linear,.05;zoom,1);
-	OffCommand=cmd(finishtweening;zoom,1;linear,.2;zoom,0);
-}
+t[#t+1] = LoadActor("_timer")..{}
 
 return t;

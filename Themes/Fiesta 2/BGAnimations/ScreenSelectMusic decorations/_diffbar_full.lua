@@ -7,11 +7,6 @@ local iChartsToShow = 13;
 local bIsExtensiveList = false;
 local zoom_factor = 0.66;
 
---[[
-if PREFSMAN:GetPreference("ExtendedStepsList") then
-	iChartsToShow = 14;
-end;]]--
-
 local curLimInferior = 1;
 local curLimSuperior = iChartsToShow;
 
@@ -207,16 +202,6 @@ local function GetActiveIndex(pn)
 	return index;
 end;
 
---[[
-function IsNewStepByGroupCondition()
-	local cur_song = GAMESTATE:GetCurrentSong();
-	if not getenv("IsNewFor"..cur_song:GetGroupName().."Group") then
-		return false;
-	end;
-	return true;
-end;
-]]--
-
 local function GetPersonalGrade(pn, i)
 	if GAMESTATE:IsSideJoined(pn) and GAMESTATE:HasProfile(pn) and aSteps[i] then
 		local HighScores = PROFILEMAN:GetProfile(pn):GetHighScoreList(GAMESTATE:GetCurrentSong(), aSteps[i]):GetHighScores()
@@ -240,8 +225,6 @@ local function GetPersonalGrade(pn, i)
 	end
 end
 
---//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
---//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 -- Posicionamento das Bolinhas de Level --
 
 local Xqt = 13
@@ -391,7 +374,6 @@ for i=1, Xqt do
 	
 end
 
-------------------------------------------------
 -- Cursor Function --
 local Xpos = {}
 for i=1,iChartsToShow do
@@ -470,3 +452,4 @@ end;
 	
 	
 return t;
+

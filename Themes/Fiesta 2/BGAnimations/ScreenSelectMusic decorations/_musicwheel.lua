@@ -7,7 +7,7 @@ local firstPreviousActivation = true -- PreviousActivation tem estar em true ao 
 local firstNextActivation = false -- NextActivation tem q estar em false ao iniciar
 local previousPositionItem -- Varíavel a ser utilizada nas funções
 local isPrevious = false -- Verificador se a tecla de PreviousSong foi pressionada, inicia em false.
-local yPositionBase = 345 -- Posição inicial da MusicWheel
+local yPositionBase = 332 -- Posição inicial da MusicWheel
  
 
 -- A partir daqui foi um teste para tentar aproximar mais os banners pois eles ficam bem afastados...
@@ -109,7 +109,7 @@ local function AdjustBanners()
             local banner = value:GetChild("Banner")
             if banner then
                 banner:stoptweening()
-                banner:zoomto(115, 82) -- Tamanho correto (Phoenix)
+                banner:zoomto(104, 78) -- Tamanho correto (Phoenix)
                 banner:rotationy(0) -- Resetar rotação para não ocorrer rotação de banner errado
                 banner:y(0)
             end
@@ -173,7 +173,7 @@ local function ExitBanners() -- Função para saída dos Banners da tela
                 if banner then
                     banner:finishtweening()
                     banner:y(25)  -- Força a posição antes da animação
-                    banner:zoomto(115, 82)
+                    banner:zoomto(104, 78)
                     banner:linear(0.3)
                     banner:zoomto(0, 0)
                 end
@@ -194,7 +194,7 @@ local function ExitBanners() -- Função para saída dos Banners da tela
                 if banner then
                     banner:finishtweening()
                     banner:y(25) -- Reseta para posição correta
-                    banner:zoomto(115, 82)
+                    banner:zoomto(104, 78)
                     banner:linear(0.3)
                     banner:zoomto(0, 0)
                 end
@@ -216,11 +216,11 @@ local function EnterBanners() -- Função para entrada dos Banners
                     -- Bloco necessário se não a o efeito de retorno não funciona.      
                     musicWheel:stoptweening()
                     musicWheel:zoom(0)
-                    musicWheel:y(345)
+                    musicWheel:y(332)
                     musicWheel:decelerate(.2)
-                    musicWheel:y(345)
+                    musicWheel:y(332)
                     musicWheel:decelerate(.1)
-                    musicWheel:y(345)
+                    musicWheel:y(332)
 
                     musicWheel:zoom(1.1)
                     -- Retorna o Banner pra posição, y(25) garante que o banner não desloque para baixo.
@@ -229,7 +229,7 @@ local function EnterBanners() -- Função para entrada dos Banners
                     banner:decelerate(.2)
                     banner:zoomto(57.5, 41)
                     banner:decelerate(.1)
-                    banner:zoomto(115, 82)
+                    banner:zoomto(104, 78)
                     banner:y(25)
             end
             
@@ -239,11 +239,11 @@ local function EnterBanners() -- Função para entrada dos Banners
                 -- Bloco necessário se não a o efeito de retorno não funciona.
                 musicWheel:stoptweening()
                 musicWheel:zoom(0)
-                musicWheel:y(345)
+                musicWheel:y(332)
                 musicWheel:decelerate(.2)
-                musicWheel:y(345)
+                musicWheel:y(332)
                 musicWheel:decelerate(.1)
-                musicWheel:y(345)
+                musicWheel:y(332)
 
                 musicWheel:zoom(1.1)
                 -- Retorna o Banner pra posição, y(25) garante que o banner não desloque para baixo.
@@ -251,7 +251,7 @@ local function EnterBanners() -- Função para entrada dos Banners
                 banner:decelerate(.2)
                 banner:zoomto(57.5, 41)
                 banner:decelerate(.1)
-                banner:zoomto(115, 82)
+                banner:zoomto(104, 78)
             end
         end
     end

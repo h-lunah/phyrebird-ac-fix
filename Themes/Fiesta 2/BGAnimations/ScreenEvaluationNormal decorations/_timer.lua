@@ -1,6 +1,6 @@
-local t = Def.ActorFrame {
-	OnCommand=cmd(playcommand,'StartSelectingSong');
-}
+local t = Def.ActorFrame {}
+
+
 
 t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/TIMER_MASK.png") )..{
 	OnCommand=function(self)
@@ -11,8 +11,6 @@ t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/TIMER_MASK.png") )..{
 		self:MaskSource()
 	end
 }
-
-
 
 t[#t+1] = Def.Sprite {
     Texture = THEME:GetPathG("", "Common Resources/TIMER_FRAME 5x8.jpg"),
@@ -26,6 +24,19 @@ t[#t+1] = Def.Sprite {
         self:y(22)
         self:MaskDest()
     end
+}
+
+
+t[#t+1] = Def.ActorProxy {
+	BeginCommand=function(self) 
+		local Timer = SCREENMAN:GetTopScreen():GetChild('Timer'); 
+		self:SetTarget(Timer); 
+	end,
+	OnCommand=function(self)
+		self:x(SCREEN_CENTER_X)
+		self:y(20)
+		self:basezoom(.66)
+	end,
 }
 
 return t;

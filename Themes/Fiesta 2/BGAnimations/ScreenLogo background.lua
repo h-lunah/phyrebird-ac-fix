@@ -18,4 +18,8 @@ t[#t+1] = LoadActor( THEME:GetPathG("","ScreenLogo/M") )..{
 	OnCommand=cmd(diffusealpha,0;linear,2;diffusealpha,1;sleep,1;linear,.8;zoom,0.265;x,SCREEN_CENTER_X+34)
 }
 
+t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/FREE_PLAY.png") )..{
+	InitCommand=cmd(zoom,0.45;x,SCREEN_CENTER_X;y,SCREEN_BOTTOM-12);
+};
+
 return t;

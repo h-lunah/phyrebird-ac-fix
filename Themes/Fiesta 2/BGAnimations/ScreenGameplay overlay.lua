@@ -16,24 +16,15 @@ local function GetStageNumberActor()
 			InitCommand=cmd(FromTop,28);
 		};
 		LoadActor( THEME:GetPathG("","ScreenGameplay/N_FM") ).. {
-			InitCommand=cmd(zoom, .5;x,-12;FromTop,34;pause;setstate,first_digit);
+			InitCommand=cmd(zoomx,0.45;zoomy,0.5;x,-12;FromTop,34;pause;setstate,first_digit);
 		};
 		LoadActor( THEME:GetPathG("","ScreenGameplay/N_FM") ).. {
-			InitCommand=cmd(zoom, .5;x,12;FromTop,34;pause;setstate,second_digit);
+			InitCommand=cmd(zoomx,0.45;zoomy,0.5;x,12;FromTop,34;pause;setstate,second_digit);
 		};
 	};
 end;
 
-local function DurationCursor()
-	local MeterWidth = 235;
-	local style = GAMESTATE:GetCurrentStyle():GetStyleType();
-	if( (style=='StyleType_OnePlayerTwoSides') or (style=='StyleType_TwoPlayersSharedSides') ) then MeterWidth = 470 end;
-	return 	Def.SongMeterDisplay {
-		StreamWidth=MeterWidth;
-		Stream=Def.Quad { InitCommand=cmd(diffusealpha,0); };
-		Tip=LoadActor( THEME:GetPathG("","ScreenGameplay/_time_ball") );
-	};
-end;
+
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -106,76 +97,6 @@ if( GAMESTATE:IsSideJoined(PLAYER_1) or GAMESTATE:IsDemonstration() ) then
 		self:x(xpos);
 	end;
 	}
-
-	--P1 Timeline--
-	t[#t+1] = Def.ActorFrame {
-		children = {
-			LoadActor( THEME:GetPathG("","ScreenGameplay/_time_line") ).. {
-				InitCommand=cmd(SetWidth,MeterWidth;x,P1PosX;y,SCREEN_CENTER_Y-204;diffusecolor,color("0,0.8,1,1"));
-				Name="Timeline";		
-			};
-
-			--P1 Cursor--
-			DurationCursor()..{
-				InitCommand=cmd(x,P1PosX;y,SCREEN_CENTER_Y-204);
-				Name="Cursor";
-			};
-
-			--P1 Glass Shatter Sound--
-			LoadActor(THEME:GetPathS("","Rank/GLASS_P1.ogg"))..{
-				Name="ShatterSound";
-			};
-
-			--P1 Glass Shatter Animation--
-			LoadActor(THEME:GetPathG("","ScreenGameplay/broken.png"))..{
-				InitCommand=cmd(x,((style=='StyleType_OnePlayerTwoSides') or (style=='StyleType_TwoPlayersSharedSides')) and SCREEN_CENTER_X-245 or P1PosX-125;y,SCREEN_CENTER_Y-220;diffusealpha,0;zoom,0.1);
-				Name="ShatterAnimation";
-			};
-		};
-		JudgmentMessageCommand=function(self,param)
-			self:sleep(0.1);
-			self:queuecommand('PostLifeChange');
-		end;
-
-		PostLifeChangeMessageCommand=function(self)
-			if StageBreak ~= true then
-				local timeline = self:GetChild("Timeline");
-				local shattersound = self:GetChild("ShatterSound");
-				local shatteranimation = self:GetChild("ShatterAnimation");
-				local cur_stats = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1);
-				StageBreak = cur_stats:GetReachedLifeZero();
-				if StageBreak then
-					timeline:diffusecolor(color("1,0.3,0.3,1"));
-					shattersound:play();
-					shatteranimation:diffusealpha(0.9);
-					shatteranimation:accelerate(0.2);
-					shatteranimation:zoom(1);
-					shatteranimation:diffusealpha(0);
-				elseif HasMiss == 0 then
-					HasMiss = cur_stats:GetTapNoteScores('TapNoteScore_Miss') + cur_stats:GetTapNoteScores('TapNoteScore_CheckpointMiss');
-					if HasMiss > 0 then
-						timeline:diffusecolor(color("0.95,0.95,0.95,1"));
-					elseif HasBad == 0 then
-						HasBad = cur_stats:GetTapNoteScores('TapNoteScore_W5');
-						if HasBad > 0 then
-							timeline:diffusecolor(color("1,0.55,1,1"));
-						elseif HasGood == 0 then
-							HasGood = cur_stats:GetTapNoteScores('TapNoteScore_W4');
-							if HasGood > 0 then
-								timeline:diffusecolor(color("1,1,0,1"));
-							elseif HasGreat == 0 then
-								HasGreat = cur_stats:GetTapNoteScores('TapNoteScore_W3');
-								if HasGreat > 0 then
-									timeline:diffusecolor(color("0,1,0.55,1"));
-								end;
-							end;
-						end;
-					end;
-				end;
-			end;
-		end;						
-	};
-
 end;
 
 if( GAMESTATE:IsSideJoined(PLAYER_2) or GAMESTATE:IsDemonstration() ) then
@@ -210,77 +131,10 @@ if( GAMESTATE:IsSideJoined(PLAYER_2) or GAMESTATE:IsDemonstration() ) then
 		self:x(xpos);
 	end;
 	}
-
-	--P2 Timeline--
-	t[#t+1] = Def.ActorFrame {
-		children = {
-			LoadActor( THEME:GetPathG("","ScreenGameplay/_time_line") ).. {
-				InitCommand=cmd(SetWidth,MeterWidth;x,P2PosX;y,SCREEN_CENTER_Y-204;diffusecolor,color("0,0.8,1,1"));
-				Name="Timeline";		
-			};
-
-			--P2 Cursor--
-			DurationCursor()..{
-				InitCommand=cmd(x,P2PosX;y,SCREEN_CENTER_Y-204);
-				Name="Cursor";
-			};
-
-			--P2 Glass Shatter Sound--
-			LoadActor(THEME:GetPathS("","Rank/GLASS_P2.ogg"))..{
-				Name="ShatterSound";
-			};
-
-			--P2 Glass Shatter Animation--
-			LoadActor(THEME:GetPathG("","ScreenGameplay/broken.png"))..{
-				InitCommand=cmd(x,((style=='StyleType_OnePlayerTwoSides') or (style=='StyleType_TwoPlayersSharedSides')) and SCREEN_CENTER_X-245 or P2PosX+125;y,SCREEN_CENTER_Y-220;diffusealpha,0;zoom,0.1);
-				Name="ShatterAnimation";
-			};
-		};
-		JudgmentMessageCommand=function(self,param)
-			self:sleep(0.1);
-			self:queuecommand('PostLifeChange');
-		end;
-
-		PostLifeChangeMessageCommand=function(self)
-			if StageBreak ~= true then
-				local timeline = self:GetChild("Timeline");
-				local shattersound = self:GetChild("ShatterSound");
-				local shatteranimation = self:GetChild("ShatterAnimation");
-				local cur_stats = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2);
-				StageBreak = cur_stats:GetReachedLifeZero();
-				if StageBreak then
-					timeline:diffusecolor(color("1,0.3,0.3,1"));
-					shattersound:play();
-					shatteranimation:diffusealpha(0.9);
-					shatteranimation:accelerate(0.2);
-					shatteranimation:zoom(1);
-					shatteranimation:diffusealpha(0);
-				elseif HasMiss == 0 then
-					HasMiss = cur_stats:GetTapNoteScores('TapNoteScore_Miss') + cur_stats:GetTapNoteScores('TapNoteScore_CheckpointMiss');
-					if HasMiss > 0 then
-						timeline:diffusecolor(color("0.95,0.95,0.95,1"));
-					elseif HasBad == 0 then
-						HasBad = cur_stats:GetTapNoteScores('TapNoteScore_W5');
-						if HasBad > 0 then
-							timeline:diffusecolor(color("1,0.55,1,1"));
-						elseif HasGood == 0 then
-							HasGood = cur_stats:GetTapNoteScores('TapNoteScore_W4');
-							if HasGood > 0 then
-								timeline:diffusecolor(color("1,1,0,1"));
-							elseif HasGreat == 0 then
-								HasGreat = cur_stats:GetTapNoteScores('TapNoteScore_W3');
-								if HasGreat > 0 then
-									timeline:diffusecolor(color("0,1,0.55,1"));
-								end;
-							end;
-						end;
-					end;
-				end;
-			end;
-		end;						
-	};	
-
 end;
 
+t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/FREE_PLAY.png") )..{
+	InitCommand=cmd(zoom,0.45;x,SCREEN_CENTER_X;y,SCREEN_BOTTOM-12);
+};
 
 return t;

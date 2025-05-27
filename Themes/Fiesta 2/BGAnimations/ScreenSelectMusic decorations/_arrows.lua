@@ -1,14 +1,4 @@
-local t = Def.ActorFrame {	
-	ChangeStepsMessageCommand=function(self, params)
-		if params.Direction == 1 then	--der
-			--MESSAGEMAN:Broadcast("NextStep");
-			self:playcommand("NextStep");
-		elseif params.Direction == -1 then	--izq
-			--MESSAGEMAN:Broadcast("PreviousStep");
-			self:playcommand("PreviousStep");
-		end;
-	end;
-}
+local t = Def.ActorFrame {}
 
 local goback = cmd(stoptweening;diffusealpha,1;linear,.2;diffusealpha,0);
 local start  = cmd(stoptweening;diffusealpha,0;sleep,.1;linear,.1;diffusealpha,1);
@@ -23,62 +13,71 @@ local zoom_factor = 0.66;
 --UpLeft--
 
 local UL_ARROW = Def.ActorFrame {
-	InitCommand=cmd(x,35+135;y,35+135;zoom,zoom_factor);
-	OnCommand=cmd(stoptweening;sleep,.1;linear,.1;x,35;y,35);
-	OffCommand=cmd(stoptweening;x,35;y,35;sleep,.2;linear,.1;x,35+135;y,35+135;diffusealpha,.2;sleep,0;x,35;y,35;diffusealpha,1);
+	InitCommand=cmd(x,45-145;y,45-145;zoom,0.67);
+	OnCommand=cmd(stoptweening;sleep,.1;linear,.1;x,45;y,45);
+	OffCommand=cmd(stoptweening;x,45;y,45;sleep,.2;linear,.1;x,45-145;y,45-145;diffusealpha,.2;sleep,0;x,45;y,45;diffusealpha,1);
 	children = {
-		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/left_black.png") )..{
+		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/left_black") )..{
+			InitCommand=cmd(diffusealpha,0;y,-6);
+			GoBackSelectingGroupMessageCommand=cmd(stoptweening;diffusealpha,0;linear,.2;diffusealpha,0.8);
+			StartSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,1;linear,.2;diffusealpha,0);
 		};
-		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/left_pink.png") )..{
-			GoBackSelectingGroupMessageCommand=cmd(stoptweening;diffusealpha,1;linear,.3;diffusealpha,0);
-			StartSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,0;sleep,.3;diffusealpha,.8);
+		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/left_pink") )..{
+			InitCommand=cmd(blend,'BlendMode_Add';y,-6;diffusealpha,1);
+			GoBackSelectingGroupMessageCommand=cmd(stoptweening;diffusealpha,1;linear,.2;diffusealpha,0);
+			StartSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,0;linear,.2;diffusealpha,1);
 		};
-		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/left_pink.png") )..{
-			OnCommand=cmd(zoom,1.08;blend,'BlendMode_Add';diffuseshift;effectcolor1,1,1,1,.25;effectcolor2,1,1,1,0;effectperiod,2)
+		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/UpLeft 4x2.png") )..{
+			OnCommand=cmd(zoom,0.67);
+			GoBackSelectingGroupMessageCommand=cmd(stoptweening;diffusealpha,1;linear,.2;diffusealpha,0);
+			StartSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,0;linear,.2;diffusealpha,1);
 		};
 	};
 }
 
 local UR_ARROW = Def.ActorFrame {
-	InitCommand=cmd(x,SCREEN_WIDTH-35-135;y,35+135;zoom,zoom_factor);
-	OnCommand=cmd(stoptweening;sleep,.1;linear,.1;x,SCREEN_WIDTH-35;y,35);
-	OffCommand=cmd(stoptweening;x,SCREEN_WIDTH-35;y,35;sleep,.2;linear,.1;x,SCREEN_WIDTH-35-135;y,35+135;diffusealpha,.2;sleep,0;x,SCREEN_WIDTH-35;y,35;diffusealpha,1);
+	InitCommand=cmd(x,SCREEN_WIDTH-45+145;y,45-145;zoom,0.67);
+	OnCommand=cmd(stoptweening;sleep,.1;linear,.1;x,SCREEN_WIDTH-45;y,45);
+	OffCommand=cmd(stoptweening;x,SCREEN_WIDTH-45;y,45;sleep,.2;linear,.1;x,SCREEN_WIDTH-45+145;y,45-145;diffusealpha,.2;sleep,0;x,SCREEN_WIDTH-45;y,45;diffusealpha,1);
 	children = {
-		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/right_black.png") )..{
+		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/right_black") )..{
+			InitCommand=cmd(diffusealpha,0;y,-6);
+			GoBackSelectingGroupMessageCommand=cmd(stoptweening;diffusealpha,0;linear,.2;diffusealpha,0.8);
+			StartSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,1;linear,.2;diffusealpha,0);
 		};
-		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/right_pink.png") )..{
-			GoBackSelectingGroupMessageCommand=cmd(stoptweening;diffusealpha,1;linear,.3;diffusealpha,0);
-			StartSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,0;sleep,.3;diffusealpha,.8);
+		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/right_pink") )..{
+			InitCommand=cmd(blend,'BlendMode_Add';y,-6;diffusealpha,1);
+			GoBackSelectingGroupMessageCommand=cmd(stoptweening;diffusealpha,1;linear,.2;diffusealpha,0);
+			StartSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,0;linear,.2;diffusealpha,1);
 		};
-		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/right_pink.png") )..{
-			OnCommand=cmd(zoom,1.08;blend,'BlendMode_Add';diffuseshift;effectcolor1,1,1,1,.25;effectcolor2,1,1,1,0;effectperiod,2)
+		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/UpLeft 4x2.png") )..{
+			OnCommand=cmd(zoom,0.67;rotationy,180);
+			GoBackSelectingGroupMessageCommand=cmd(stoptweening;diffusealpha,1;linear,.2;diffusealpha,0);
+			StartSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,0;linear,.2;diffusealpha,1);
 		};
 	};
 }
 
-local blue_arrows_shine_shift = cmd(stoptweening;diffusealpha,0;zoomy,1;zoomx,1;sleep,.1;linear,.1;diffusealpha,.6;linear,.2;zoomy,.5;zoomx,1.5;diffusealpha,0);
+local blue_arrows_shine_shift = cmd(stoptweening;diffusealpha,0;zoom,1;linear,.1;diffusealpha,.8;linear,.2;zoom,1.2;diffusealpha,0);
 local blue_arrows_graph_shift = cmd(stoptweening;stopeffect;diffusealpha,.1;zoom,1.08;linear,.2;diffusealpha,.5;zoom,1.1;linear,.2;diffusealpha,0;zoom,1.08;queuecommand,'ContinueEffect');
 
 local DR_ARROW = Def.ActorFrame {
-	InitCommand=cmd(x,SCREEN_WIDTH-35-135;y,SCREEN_HEIGHT-35-135;zoom,zoom_factor);
-	OnCommand=cmd(stoptweening;sleep,.1;linear,.1;x,SCREEN_WIDTH-35;y,SCREEN_HEIGHT-36);
-	OffCommand=cmd(stoptweening;x,SCREEN_WIDTH-35;y,SCREEN_HEIGHT-36;sleep,.2;linear,.1;x,SCREEN_WIDTH-35-135;y,SCREEN_HEIGHT-35-135;diffusealpha,.2;sleep,0;x,SCREEN_WIDTH-35;y,SCREEN_HEIGHT-36;diffusealpha,1);
+	InitCommand=cmd(x,SCREEN_WIDTH-45+145;y,SCREEN_HEIGHT-45+145;zoom,0.67);
+	OnCommand=cmd(stoptweening;sleep,.1;linear,.1;x,SCREEN_WIDTH-45;y,SCREEN_HEIGHT-45);
+	OffCommand=cmd(stoptweening;x,SCREEN_WIDTH-45;y,SCREEN_HEIGHT-45;sleep,.2;linear,.1;x,SCREEN_WIDTH-45+145;y,SCREEN_HEIGHT-45+145;diffusealpha,.2;sleep,0;x,SCREEN_WIDTH-45;y,SCREEN_HEIGHT-45;diffusealpha,1);
 	children = {
-		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/right_blue.png") )..{
+		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/right_blue") )..{
+			InitCommand=cmd(blend,'BlendMode_Add';y,6;diffusealpha,1);
 		};
-		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/right_blue.png") )..{
-			OnCommand=cmd(zoom,1.08;blend,'BlendMode_Add';diffuseshift;effectcolor1,1,1,1,.25;effectcolor2,1,1,1,0;effectperiod,2);
-			NextSongMessageCommand=blue_arrows_graph_shift;
-			NextGroupMessageCommand=blue_arrows_graph_shift;
-			ContinueEffectCommand=cmd(stoptweening;diffusealpha,1;diffuseshift;effectcolor1,1,1,1,.25;effectcolor2,1,1,1,0;effectperiod,2);
-			OffCommand=cmd(visible,false);
+		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/DownLeft 4x2.png") )..{
+			InitCommand=cmd(zoom,0.67;rotationy,180);
 		};
 		Def.ActorFrame {
-			BeginCommand=cmd(rotationz,-45);
+			BeginCommand=cmd(y,6);
 			OffCommand=cmd(visible,false);
 			children = {
-				LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/SHINE.png") )..{
-					OnCommand=cmd(zoom,1;blend,'BlendMode_Add';diffusealpha,0);
+				LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/right_blue") )..{
+					OnCommand=cmd(blend,'BlendMode_Add';diffusealpha,0);
 					NextSongMessageCommand=blue_arrows_shine_shift;
 					NextGroupMessageCommand=blue_arrows_shine_shift;
 				};
@@ -88,25 +87,22 @@ local DR_ARROW = Def.ActorFrame {
 }
 
 local DL_ARROW = Def.ActorFrame {
-	InitCommand=cmd(x,35+135;y,SCREEN_HEIGHT-35-135;zoom,zoom_factor);
-	OnCommand=cmd(stoptweening;sleep,.1;linear,.1;x,35;y,SCREEN_HEIGHT-35);
-	OffCommand=cmd(stoptweening;x,35;y,SCREEN_HEIGHT-35;sleep,.2;linear,.1;x,35+135;y,SCREEN_HEIGHT-35-135;diffusealpha,.2;sleep,0;x,35;y,SCREEN_HEIGHT-35;diffusealpha,1);
+	InitCommand=cmd(x,45-145;y,SCREEN_HEIGHT-45+145;zoom,0.67);
+	OnCommand=cmd(stoptweening;sleep,.1;linear,.1;x,45;y,SCREEN_HEIGHT-45);
+	OffCommand=cmd(stoptweening;x,45;y,SCREEN_HEIGHT-45;sleep,.2;linear,.1;x,45-145;y,SCREEN_HEIGHT-45+145;diffusealpha,.2;sleep,0;x,45;y,SCREEN_HEIGHT-45;diffusealpha,1);
 	children = {
-		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/left_blue.png") )..{
+		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/left_blue") )..{
+			InitCommand=cmd(blend,'BlendMode_Add';y,6;diffusealpha,1);
 		};
-		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/left_blue.png") )..{
-			OnCommand=cmd(zoom,1.08;blend,'BlendMode_Add';diffuseshift;effectcolor1,1,1,1,.25;effectcolor2,1,1,1,0;effectperiod,2);
-			PreviousSongMessageCommand=blue_arrows_graph_shift;
-			PrevGroupMessageCommand=blue_arrows_graph_shift;
-			OffCommand=cmd(visible,false);
-			ContinueEffectCommand=cmd(stoptweening;diffusealpha,1;diffuseshift;effectcolor1,1,1,1,.25;effectcolor2,1,1,1,0;effectperiod,2);
+		LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/DownLeft 4x2.png") )..{
+			InitCommand=cmd(zoom,0.67);
 		};
 		Def.ActorFrame {
-			BeginCommand=cmd(rotationz,45);
+			BeginCommand=cmd(y,6);
 			OffCommand=cmd(visible,false);
 			children = {
-				LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/SHINE.png") )..{
-					OnCommand=cmd(zoom,1;blend,'BlendMode_Add';diffusealpha,0);
+				LoadActor( THEME:GetPathG("","ScreenSelectMusic/_Arrows/left_blue") )..{
+					OnCommand=cmd(blend,'BlendMode_Add';diffusealpha,0);
 					PreviousSongMessageCommand=blue_arrows_shine_shift;
 					PrevGroupMessageCommand=blue_arrows_shine_shift;
 				};

@@ -14,7 +14,7 @@ t[#t+1] = LoadActor( THEME:GetPathS("","CW/S_CMD_MOVE") )..{
 --1st Player
 t[#t+1] = SimplePlatPiu(130,SCREEN_HEIGHT-160)..{ OffCommand=cmd(visible,false); };
 t[#t+1] = PlayerMessage(PLAYER_1)..{
-	OnCommand=cmd(x,-110;y,SCREEN_HEIGHT-90;linear,.4;x,130);
+	OnCommand=cmd(zoom,0.66;x,-110;y,SCREEN_HEIGHT-90;linear,.4;x,130);
 	PlayerAlreadyJoinedMessageCommand=function(self,params)
 		if params.Player == PLAYER_1 then
 			self:visible(false);
@@ -26,13 +26,18 @@ t[#t+1] = PlayerMessage(PLAYER_1)..{
 --2nd Player
 t[#t+1] = SimplePlatPiu(SCREEN_WIDTH-130,SCREEN_HEIGHT-160)..{ OffCommand=cmd(visible,false); };
 t[#t+1] = PlayerMessage(PLAYER_2)..{
-	OnCommand=cmd(x,SCREEN_WIDTH+110;y,SCREEN_HEIGHT-90;linear,.4;x,SCREEN_WIDTH-130);
+	OnCommand=cmd(zoom,0.66;x,SCREEN_WIDTH+110;y,SCREEN_HEIGHT-90;linear,.4;x,SCREEN_WIDTH-130);
 	PlayerAlreadyJoinedMessageCommand=function(self,params)
 		if params.Player == PLAYER_2 then
 			self:visible(false);
 		end;
 	end;
 	OffCommand=cmd(visible,false); 
+};
+------------------------------------------------------------------------------------------------------------------
+
+t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/FREE_PLAY.png") )..{
+	InitCommand=cmd(zoom,0.45;x,SCREEN_CENTER_X;y,SCREEN_BOTTOM-12);
 };
 
 ------------------------------------------------------------------------------------------------------------------
