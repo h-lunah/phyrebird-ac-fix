@@ -158,11 +158,11 @@ local t = Def.ActorFrame {
 	Def.Sprite {
 		Name="PersonalP1",
 		InitCommand=function(self)
-			self:xy(SCREEN_CENTER_X - 235, SCREEN_CENTER_Y + 123)
-			self:zoom(0.37)
+			self:xy(SCREEN_CENTER_X - 286, SCREEN_CENTER_Y + 172)
+			self:zoom(0.95)
 		end
 	},
-
+--[[
 	Def.Sprite {
 		Name="PersonalP1Mods",
 		InitCommand=function(self)
@@ -186,14 +186,16 @@ local t = Def.ActorFrame {
 			self:zoom(0.37)
 		end
 	},
-	
+--]]
 	Def.Sprite {
 		Name="PersonalP2",
 		InitCommand=function(self)
-			self:xy(SCREEN_CENTER_X + 305, SCREEN_CENTER_Y + 123)
-			self:zoom(0.37)
+			self:xy(SCREEN_CENTER_X + 286, SCREEN_CENTER_Y + 172)
+			self:zoom(0.95)
 		end
+--[[
 	},
+
 
 	Def.Sprite {
 		Name="PersonalP2Mods",
@@ -217,6 +219,7 @@ local t = Def.ActorFrame {
 			self:xy(SCREEN_CENTER_X + 335, SCREEN_CENTER_Y + 148)
 			self:zoom(0.37)
 		end
+--]]
 	}
 }
 

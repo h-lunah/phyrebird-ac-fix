@@ -77,7 +77,7 @@ local t = Def.ActorFrame {
 		else
 			self:GetChild("PersonalP2"):Load(nil)
 		end
-		
+
 		local MachineP2 = GetMachinePlate(PLAYER_2)
 		if MachineP2 ~= nil then
 			self:GetChild("MachineP2"):Load(THEME:GetPathG("", "RecordGrades/" .. MachineP2 .. " (doubleres).png"))
@@ -92,11 +92,11 @@ local t = Def.ActorFrame {
 	Def.Sprite {
 		Name="PersonalP1",
 		InitCommand=function(self)
-			self:xy(SCREEN_CENTER_X - 235, SCREEN_CENTER_Y + 113)
-			self:zoom(0.37)
+			self:xy(SCREEN_CENTER_X - 216, SCREEN_CENTER_Y + 172)
+			self:zoom(1.25)
 		end
 	},
-	
+--[[
 	Def.Sprite {
 		Name="MachineP1",
 		InitCommand=function(self)
@@ -104,22 +104,25 @@ local t = Def.ActorFrame {
 			self:zoom(0.37)
 		end
 	},
-	
+--]]
+
 	Def.Sprite {
 		Name="PersonalP2",
 		InitCommand=function(self)
-			self:xy(SCREEN_CENTER_X + 305, SCREEN_CENTER_Y + 113)
-			self:zoom(0.37)
+			self:xy(SCREEN_CENTER_X + 216, SCREEN_CENTER_Y + 172)
+			self:zoom(1.25)
 		end
 	},
 	
-	Def.Sprite {
+--[[
+		Def.Sprite {
 		Name="MachineP2",
 		InitCommand=function(self)
 			self:xy(SCREEN_CENTER_X + 305, SCREEN_CENTER_Y + 148)
 			self:zoom(0.37)
 		end
 	}
+--]]	
 }
 
 return t

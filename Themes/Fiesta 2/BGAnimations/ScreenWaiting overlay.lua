@@ -1,13 +1,8 @@
 local t = Def.ActorFrame {};
 
-t[#t+1] = LoadActor( BGDirB.."/Teaser" )..{
-	InitCommand=cmd(FullScreen);
+t[#t+1] = LoadActor( BGDirB.."/TITLE.mpg" )..{
+	InitCommand=cmd(Center;show_background_properly);	
 	OnCommand=cmd(play);
-	OffCommand=cmd(stoptweening;pause);
-};
-
-t[#t+1] = LoadActor( THEME:GetPathG("","_resources/mainLogo.png") )..{
-	InitCommand=cmd(basezoom,.50;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;pulse;effectmagnitude,1,0.75,0.5;effectperiod,3);
 };
 
 --[[
@@ -37,9 +32,13 @@ t[#t+1] = LoadActor( THEME:GetPathG("","ScreenWaiting/COIN_TEXT") )..{
 ]]--
 
 --1st Player
-t[#t+1] = SimplePlatPiu(110,SCREEN_HEIGHT-160)..{ OffCommand=cmd(visible,false); };
+t[#t+1] = SimplePlatPiu(130,SCREEN_HEIGHT-160)..{ OffCommand=cmd(visible,false); };
 
 --2nd Player
-t[#t+1] = SimplePlatPiu(SCREEN_WIDTH-110,SCREEN_HEIGHT-160)..{ OffCommand=cmd(visible,false); };
+t[#t+1] = SimplePlatPiu(SCREEN_WIDTH-130,SCREEN_HEIGHT-160)..{ OffCommand=cmd(visible,false); };
+
+t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/FREE_PLAY.png") )..{
+	InitCommand=cmd(zoom,0.45;x,SCREEN_CENTER_X;y,SCREEN_BOTTOM-12);
+};
 
 return t;

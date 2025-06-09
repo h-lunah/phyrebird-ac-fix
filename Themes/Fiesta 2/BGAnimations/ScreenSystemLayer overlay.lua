@@ -63,7 +63,7 @@ t[#t+1] = LoadActor(THEME:GetPathG("","Messages/goback_"..GetLanguageText()..".p
 
 -- Pantallas en las que no se muestra el nombre de los jugadores.
 local Screens = {
-	("ScreenInit"),("ScreenLogo"),("ScreenBranch"),("ScreenTitleMenu"),("ScreenOptionsService"),("ScreenGameOver"),("ScreenNextStage"),("ScreenStageBreak"),("ScreenStageInformation"),("ScreenDelay"),("ScreenDemonstration"),("ScreenUSBProfileSave"),("ScreenWarning"),("ScreenWaiting"), ("ScreenGameplayNormal"), ("ScreenGameplay"),("ScreenPrevGameplayDelay"),("ScreenAfterGameplayDelay")
+	("ScreenInit"),("ScreenLogo"),("ScreenMproject"),("ScreenBranch"),("ScreenTitleMenu"),("ScreenOptionsService"),("ScreenGameOver"),("ScreenNextStage"),("ScreenStageBreak"),("ScreenStageInformation"),("ScreenDelay"),("ScreenDemonstration"),("ScreenUSBProfileSave"),("ScreenWarning"),("ScreenWaiting"), ("ScreenGameplayNormal"), ("ScreenGameplay"),("ScreenPrevGameplayDelay"),("ScreenAfterGameplayDelay")
 };
 
 --actor para mostrar o no el nombre del jugador
@@ -329,8 +329,8 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 				avatar:Load(THEME:GetPathG("","_avatars/"..ProfileID..".png"));
 			end;
 			avatar:horizalign(left);
-			avatar:SetWidth(55);
-			avatar:SetHeight(55);
+			avatar:SetWidth(50);
+			avatar:SetHeight(50);
 			
 			local profile = PROFILEMAN:GetLocalProfile(ProfileID);
 			local player_level, to_next =  CalcPlayerLevel(profile:GetVoomax());

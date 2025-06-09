@@ -7,11 +7,6 @@ local iChartsToShow = 13;
 local bIsExtensiveList = false;
 local zoom_factor = 0.66;
 
---[[
-if PREFSMAN:GetPreference("ExtendedStepsList") then
-	iChartsToShow = 14;
-end;]]--
-
 local curLimInferior = 1;
 local curLimSuperior = iChartsToShow;
 
@@ -207,16 +202,6 @@ local function GetActiveIndex(pn)
 	return index;
 end;
 
---[[
-function IsNewStepByGroupCondition()
-	local cur_song = GAMESTATE:GetCurrentSong();
-	if not getenv("IsNewFor"..cur_song:GetGroupName().."Group") then
-		return false;
-	end;
-	return true;
-end;
-]]--
-
 local function GetPersonalGrade(pn, i)
 	if GAMESTATE:IsSideJoined(pn) and GAMESTATE:HasProfile(pn) and aSteps[i] then
 		local HighScores = PROFILEMAN:GetProfile(pn):GetHighScoreList(GAMESTATE:GetCurrentSong(), aSteps[i]):GetHighScores()
@@ -240,8 +225,6 @@ local function GetPersonalGrade(pn, i)
 	end
 end
 
---//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
---//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 -- Posicionamento das Bolinhas de Level --
 
 local Xqt = 13
@@ -254,19 +237,19 @@ for i=1, Xqt do
 			YY = yBase-0
 		end
 		if i == 2 then
-			YY = yBase-5
+			YY = yBase-10
 		end
 		if i == 3 then 
-			YY = yBase-10
+			YY = yBase-20
 		end
 		if i > 3 and i < 11 then
-			YY = yBase-15
+			YY = yBase-25
 		end
 		if i == 11 then
-			YY = yBase-10
+			YY = yBase-20
 		end
 		if i == 12 then
-			YY = yBase-5
+			YY = yBase-10
 		end
 		if i == 13 then
 			YY = yBase-0
@@ -286,7 +269,7 @@ for i=1, Xqt do
 			}
 
 			t[#t+1] = LoadFont("N_SINGLE_N") .. {
-				InitCommand=cmd(horizalign,center;x,Xposit;y,YY-1.1;zoom,.70);
+				InitCommand=cmd(horizalign,center;x,Xposit;y,YY-1.1;zoom,.6);
 				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;y,YY;linear,.3;y,yBase-200);
 				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;y,YY;linear,.3;y,200-1.1);
 				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,yBase);
@@ -295,7 +278,7 @@ for i=1, Xqt do
 			};
 			
 			t[#t+1] = LoadFont("N_SINGLE_P") .. {
-				InitCommand=cmd(horizalign,center;x,Xposit;y,YY-1.1;zoom,.70);
+				InitCommand=cmd(horizalign,center;x,Xposit;y,YY-1.1;zoom,.6);
 				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;y,YY;linear,.3;y,yBase-200);
 				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;y,YY;linear,.3;y,200-1.1);
 				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,yBase);
@@ -304,7 +287,7 @@ for i=1, Xqt do
 			};
 			
 			t[#t+1] = LoadFont("N_DOUBLE_N") .. {
-				InitCommand=cmd(horizalign,center;x,Xposit;y,YY-1.1;zoom,.70);
+				InitCommand=cmd(horizalign,center;x,Xposit;y,YY-1.1;zoom,.6);
 				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;y,YY;linear,.3;y,yBase-200);
 				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;y,YY;linear,.3;y,200-1.1);
 				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,yBase);
@@ -313,7 +296,7 @@ for i=1, Xqt do
 			};
 			
 			t[#t+1] = LoadFont("N_DOUBLE_P") .. {
-				InitCommand=cmd(horizalign,center;x,Xposit;y,YY-1.1;zoom,.70);
+				InitCommand=cmd(horizalign,center;x,Xposit;y,YY-1.1;zoom,.6);
 				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;y,YY;linear,.3;y,yBase-200);
 				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;y,YY;linear,.3;y,200-1.1);
 				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,yBase);
@@ -322,7 +305,7 @@ for i=1, Xqt do
 			};
 		
 			t[#t+1] = LoadFont("N_DOUBLE_N") .. {
-				InitCommand=cmd(horizalign,center;x,Xposit;y,YY-1.1;zoom,.70);
+				InitCommand=cmd(horizalign,center;x,Xposit;y,YY-1.1;zoom,.6);
 				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;y,YY;linear,.3;y,yBase-200);
 				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;y,YY;linear,.3;y,200-1.1);
 				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,yBase);
@@ -331,7 +314,7 @@ for i=1, Xqt do
 			};
 		
 			t[#t+1] = LoadFont("N_COOP") .. {
-				InitCommand=cmd(horizalign,center;x,Xposit;y,YY-1.1;zoom,.70);
+				InitCommand=cmd(horizalign,center;x,Xposit;y,YY-1.1;zoom,.6);
 				StartSelectingStepsMessageCommand=cmd(x,-191+Xpos[i]+1;y,YY;linear,.3;y,yBase-200);
 				GoBackSelectingSongMessageCommand=cmd(x,-191+Xpos[i]+1;y,YY;linear,.3;y,200-1.1);
 				StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY;sleep,.1;linear,.3;y,yBase);
@@ -391,7 +374,6 @@ for i=1, Xqt do
 	
 end
 
-------------------------------------------------
 -- Cursor Function --
 local Xpos = {}
 for i=1,iChartsToShow do
@@ -470,3 +452,4 @@ end;
 	
 	
 return t;
+

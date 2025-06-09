@@ -3,12 +3,17 @@ local plataforma = Def.ActorFrame{
 	OnCommand=cmd(x,xpos;y,ypos);
 	children = {
 LoadActor(THEME:GetPathG("","_pad/plataforma.png"))..{
-	InitCommand=cmd(stoptweening;diffusealpha,1;basezoom,.66);
+	InitCommand=cmd(stoptweening;diffusealpha,1;basezoom,.45);
 	OffCommand=cmd(stoptweening);
 };
 LoadActor(THEME:GetPathG("","_pad/start.png"))..{
-	InitCommand=cmd(stoptweening;y,-6;basezoom,.66;blend,'BlendMode_Add';queuecommand,'Loop');
+	InitCommand=cmd(stoptweening;y,-6;basezoom,.45;blend,'BlendMode_Add';queuecommand,'Loop');
 	LoopCommand=cmd(stoptweening;diffusealpha,0;zoom,1;sleep,.3;linear,.05;diffusealpha,1;zoom,1.06;linear,.25;zoom,1;diffusealpha,0;queuecommand,'Loop');
+	OffCommand=cmd(stoptweening);
+};
+LoadActor(THEME:GetPathG("","_pad/plataforma_select.png"))..{
+	InitCommand=cmd(stoptweening;basezoom,.45;queuecommand,'Loop');
+	LoopCommand=cmd(stoptweening;diffusealpha,0;sleep,.3;linear,.05;diffusealpha,1;linear,.25;diffusealpha,0;queuecommand,'Loop');
 	OffCommand=cmd(stoptweening);
 };
 LoadActor(THEME:GetPathG("","_pad/press_center_step.png"))..{
@@ -23,31 +28,12 @@ function PlayerMessage( pn )
 local t = Def.ActorFrame {
 	InitCommand=cmd(basezoom,.67);
 	children = {
-		LoadActor(THEME:GetPathG("","Messages/back.png"));
+		LoadActor(THEME:GetPathG("","Messages/back.png"))..{
+		};
 		LoadActor(THEME:GetPathG("","Messages/back_glow.png"))..{
 			InitCommand=cmd(blend,"BlendMode_Add");
-			OnCommand=cmd(diffusealpha,.2;playcommand,'Loop1');
-			Loop1Command=function(self)
-				if pn==PLAYER_1 then
-					(cmd(horizalign,'HorizAlign_Right';x,120))(self);
-				else
-					(cmd(horizalign,'HorizAlign_Left';x,-120))(self);
-				end;
-				(cmd(zoomx,0;diffusealpha,0;linear,1;zoomx,1;diffusealpha,.2;queuecommand,'Loop2'))(self);
-			end;
-			Loop2Command=function(self)
-				if pn==PLAYER_1 then
-					(cmd(horizalign,'HorizAlign_Left';x,-120))(self);
-				else
-					(cmd(horizalign,'HorizAlign_Right';x,120))(self);
-				end;
-				(cmd(zoomx,1;linear,1;zoomx,0;diffusealpha,0;queuecommand,'Loop1'))(self);
-			end;
-		};
-		LoadActor(THEME:GetPathG("","Messages/back.png"))..{
-			InitCommand=cmd(blend,"BlendMode_Add");
 			OnCommand=cmd(diffusealpha,0;playcommand,'Loop');
-			LoopCommand=cmd(diffusealpha,0;linear,1;diffusealpha,1;linear,1;diffusealpha,0;queuecommand,'Loop');
+			LoopCommand=cmd(diffusealpha,0;linear,1;diffusealpha,0.8;linear,1;diffusealpha,0;queuecommand,'Loop');
 		};
 		LoadActor(THEME:GetPathG("","Messages/press_"..GetLanguageText()..".png"))..{
 			PlayerStartedSelectProfileMessageCommand=function( self, params )

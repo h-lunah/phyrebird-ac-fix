@@ -124,8 +124,8 @@ if GAMESTATE:IsSideJoined(PLAYER_1) then
 			self:horizalign(left);
 			self:x(SCREEN_LEFT+4);
 			self:y(SCREEN_BOTTOM-18);
-			self:SetWidth(21);
-			self:SetHeight(21);
+			self:SetWidth(19.5);
+			self:SetHeight(19.5);
 		end;
 	};
 
@@ -209,14 +209,14 @@ if GAMESTATE:IsSideJoined(PLAYER_1) then
 		end;
 	};
 
-	t[#t+1] = LoadFont("","_myriad pro 20px") .. {
-		InitCommand=cmd(settext,P1mods;horizalign,left;zoom,.32;x,SCREEN_LEFT+28;y,SCREEN_BOTTOM-15;diffuse,color("#00FFFF"));
-	};	
+	 t[#t+1] = LoadFont("","_myriad pro 20px") .. {
+		 InitCommand=cmd(settext,P1mods;horizalign,left;zoom,.32;x,SCREEN_LEFT+28;y,SCREEN_BOTTOM-15;diffuse,color("#00FFFF"));
+	 };	
 
-	--P1 Difficulty Ball--
-	t[#t+1] = GetSimpleBallLevel( PLAYER_1 )..{ 
-		InitCommand=cmd(horizalign,right;basezoom,.18;x,SCREEN_LEFT+145;playcommand,"ShowUp";y,SCREEN_BOTTOM-18);
-	};
+	 --P1 Difficulty Ball--
+	 t[#t+1] = GetSimpleBallLevel( PLAYER_1 )..{ 
+		 InitCommand=cmd(horizalign,right;basezoom,.18;x,SCREEN_LEFT+145;playcommand,"ShowUp";y,SCREEN_BOTTOM-18);
+	 };
 
 end;
 
@@ -342,8 +342,7 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 			end;
 			self:settext(formatted_pscoreP2);
 		end;
-	};
-
+		};
 	t[#t+1] = LoadFont("","_myriad pro 20px") .. {
 		InitCommand=cmd(settext,P2mods;horizalign,left;zoom,.32;x,SCREEN_RIGHT-105;y,SCREEN_BOTTOM-15;diffuse,color("#00FFFF"));
 		};
@@ -364,7 +363,9 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 			end;
 		};	
 
-
+	t[#t+1] = LoadFont("","_myriad pro 20px") .. {
+		InitCommand=cmd(settext,P2mods;horizalign,left;zoom,.32;x,SCREEN_RIGHT-105;y,SCREEN_BOTTOM-15;diffuse,color("#00FFFF"));
+	};
 	-- P2 Difficulty Ball --
 
 	t[#t+1] = GetSimpleBallLevel( PLAYER_2 )..{ 
@@ -374,7 +375,7 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 end;
 
 -- Song Title --
-
+--[[
 local songtitle = GAMESTATE:GetCurrentSong():GetDisplayMainTitle();
 local cur_song = GAMESTATE:GetCurrentSong();
 local cur_steps = GAMESTATE:GetCurrentSteps(PLAYER_1);
@@ -391,5 +392,6 @@ t[#t+1] = Def.BitmapText {
 		self:diffuse(color("#ccfffe"));
 	end;
 };
+--]]
 
 return t;

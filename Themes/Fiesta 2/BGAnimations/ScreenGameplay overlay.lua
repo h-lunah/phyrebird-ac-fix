@@ -16,10 +16,10 @@ local function GetStageNumberActor()
 			InitCommand=cmd(FromTop,28);
 		};
 		LoadActor( THEME:GetPathG("","ScreenGameplay/N_FM") ).. {
-			InitCommand=cmd(zoom, .5;x,-12;FromTop,34;pause;setstate,first_digit);
+			InitCommand=cmd(zoomx,0.45;zoomy,0.5;x,-12;FromTop,34;pause;setstate,first_digit);
 		};
 		LoadActor( THEME:GetPathG("","ScreenGameplay/N_FM") ).. {
-			InitCommand=cmd(zoom, .5;x,12;FromTop,34;pause;setstate,second_digit);
+			InitCommand=cmd(zoomx,0.45;zoomy,0.5;x,12;FromTop,34;pause;setstate,second_digit);
 		};
 	};
 end;
@@ -107,8 +107,8 @@ if( GAMESTATE:IsSideJoined(PLAYER_1) or GAMESTATE:IsDemonstration() ) then
 	end;
 	}
 
-	--P1 Timeline--
-	t[#t+1] = Def.ActorFrame {
+		--P1 Timeline--
+		t[#t+1] = Def.ActorFrame {
 		children = {
 			LoadActor( THEME:GetPathG("","ScreenGameplay/_time_line") ).. {
 				InitCommand=cmd(SetWidth,MeterWidth;x,P1PosX;y,SCREEN_CENTER_Y-204;diffusecolor,color("0,0.8,1,1"));
@@ -277,8 +277,12 @@ if( GAMESTATE:IsSideJoined(PLAYER_2) or GAMESTATE:IsDemonstration() ) then
 					end;
 				end;
 			end;
-		end;						
+		end;
 	};	
+
+t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/FREE_PLAY.png") )..{
+	InitCommand=cmd(zoom,0.45;x,SCREEN_CENTER_X;y,SCREEN_BOTTOM-12);
+};
 
 end;
 

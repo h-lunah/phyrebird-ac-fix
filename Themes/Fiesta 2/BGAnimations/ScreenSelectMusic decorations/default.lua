@@ -1,8 +1,72 @@
 local t = Def.ActorFrame {
 	OnCommand=cmd(stoptweening;SetDrawByZPosition,true;vanishpoint,SCREEN_CENTER_X,174;fov,60);
-}
+};
 
-collectgarbage();
+
+
+
+t[#t+1] = LoadActor( BGDirB.."/SSM_BG" )..{
+	InitCommand=cmd(blend,"BlendMode_Add";Center;show_background_properly;loop,true;diffusealpha,0.5);
+	OnCommand=cmd(play)
+};
+
+t[#t+1] = LoadActor("_nextprev")..{
+InitCommand=cmd(draworder,5);
+
+};
+
+t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/BGA_SH") )..{
+	InitCommand=cmd(diffusealpha,1;draworder,4;zoom,0.67;x,cx;y,cy);
+};
+
+t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSelectMusic/mw_bg") )..{
+	InitCommand=cmd(diffusealpha,1;draworder,4;zoom,0.67;x,cx;y,360);
+	OnCommand=cmd(diffusealpha,0;sleep,.25;linear,.25;diffusealpha,.7);
+	StartSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,0;sleep,.25;linear,.25;diffusealpha,.7);
+	GoBackSelectingGroupMessageCommand=cmd(stoptweening;diffusealpha,.7;linear,.1;diffusealpha,0);
+
+};
+
+t[#t+1] = LoadActor("_songcounter")..{
+	InitCommand=cmd(diffusealpha,0;x,cx;y,SCREEN_BOTTOM-112;draworder,7);
+	OnCommand=cmd(sleep,0.1;linear,0.1;diffusealpha,1);
+	NextSongMessageCommand=cmd(stoptweening;diffusealpha,1;linear,0.15;diffusealpha,0;linear,0.15;diffusealpha,1);
+	PreviousSongMessageCommand=cmd(stoptweening;diffusealpha,1;linear,0.15;diffusealpha,0;linear,0.15;diffusealpha,1);
+	StartSelectingStepsMessageCommand=cmd(finishtweening;diffusealpha,1;linear,0.1;diffusealpha,0);
+	GoBackSelectingSongMessageCommand=cmd(finishtweening;diffusealpha,0;sleep,0.1;linear,0.1;diffusealpha,1);
+	GoBackSelectingGroupMessageCommand=cmd(finishtweening;diffusealpha,1;sleep,0.1;linear,0.1;diffusealpha,0);
+	StartSelectingSongMessageCommand=cmd(finishtweening;diffusealpha,0;sleep,0.1;linear,0.1;diffusealpha,1);
+};
+
+t[#t+1] = LoadActor("_banner_arrows")..{
+	InitCommand=cmd(diffusealpha,1;x,cx;y,332;draworder,7);
+	
+};
+
+t[#t+1] = LoadActor(THEME:GetPathG("","ScreenSelectMusic/Hex_Left"))..{
+		InitCommand=cmd(blend,"BlendMode_Add";zoom,.67;draworder,5;x,SCREEN_CENTER_X-390;y,SCREEN_CENTER_Y;diffusealpha,0.8);
+		StartSelectingSongMessageCommand=cmd(visible,true);
+		GoBackSelectingGroupMessageCommand=cmd(visible,false);
+		NextSongMessageCommand=cmd(finishtweening;diffusealpha,0;sleep,0.8;linear,1;diffusealpha,1;);
+		PreviousSongMessageCommand=cmd(finishtweening;diffusealpha,0;sleep,0.8;linear,1;diffusealpha,1;);
+	};
+	
+t[#t+1] = LoadActor(THEME:GetPathG("","ScreenSelectMusic/Hex_Right"))..{
+		InitCommand=cmd(blend,"BlendMode_Add";zoom,.67;draworder,5;x,SCREEN_CENTER_X+390;y,SCREEN_CENTER_Y+24;diffusealpha,0.8);
+		StartSelectingSongMessageCommand=cmd(visible,true);
+		GoBackSelectingGroupMessageCommand=cmd(visible,false);
+		NextSongMessageCommand=cmd(finishtweening;diffusealpha,0;sleep,0.8;linear,1;diffusealpha,1;);
+		PreviousSongMessageCommand=cmd(finishtweening;diffusealpha,0;sleep,0.8;linear,1;diffusealpha,1;);
+	};
+
+t[#t+1] = LoadActor("_fire")..{
+InitCommand=cmd(draworder,5;zoom,.67;x,141;y,65);
+};
+
+t[#t+1] = LoadActor("_musicwheel")..{
+InitCommand=cmd(draworder,6);
+};
+
 
 -------------------------------------GENERAL------------------------------------------------------
 --------------------------------------------------------------------------------------------------
@@ -20,16 +84,14 @@ t[#t+1] = LoadActor("_preview")..{
 	GoBackSelectingGroupMessageCommand=cmd(stoptweening;y,175;diffusealpha,1;sleep,.2;linear,.1;y,145;diffusealpha,0);
 	OffCommand=cmd(stoptweening;y,175;diffusealpha,1;sleep,.2;linear,.1;y,145;diffusealpha,0);
 	TimerOutSelectingSongCommand=cmd(playcommand,'Off');
-}
+};
 
 if GAMESTATE:IsSideJoined( PLAYER_1 ) then
-	t[#t+1] = GetHighScoresFrame( PLAYER_1, false )..{
-		InitCommand=cmd(x,cx-270;y,SCREEN_BOTTOM-105);
+	t[#t+1] = GetHighScoresFrameP1( PLAYER_1, false )..{
+		InitCommand=cmd(draworder,14;x,cx-232;y,SCREEN_BOTTOM+100;diffusealpha,0);
+		StartSelectingStepsMessageCommand=cmd(stoptweening;linear,0.2;y,SCREEN_BOTTOM-78;diffusealpha,1);
+		GoBackSelectingSongMessageCommand=cmd(stoptweening;linear,0.2;y,SCREEN_BOTTOM+100;);
 	}
---	t[#t+1] = GetPHighScoresFrame( PLAYER_1, false )..{
---		InitCommand=cmd(x,cx-320;y,SCREEN_BOTTOM-85);
---	}
-
 	t[#t+1] = LoadFont("SongTitle")..{
 		UpdateVisibilityCommand=function(self)
 			local stepartist = GAMESTATE:GetCurrentSteps(PLAYER_1):GetAuthorCredit();
@@ -61,12 +123,11 @@ if GAMESTATE:IsSideJoined( PLAYER_1 ) then
 end;
 
 if GAMESTATE:IsSideJoined( PLAYER_2 ) then
-	t[#t+1] = GetHighScoresFrame( PLAYER_2, false )..{
-		InitCommand=cmd(x,cx+270;y,SCREEN_BOTTOM-105);
+	t[#t+1] = GetHighScoresFrameP2( PLAYER_2, false )..{
+		InitCommand=cmd(draworder,14;x,cx+232;y,SCREEN_BOTTOM-78;diffusealpha,0);
+		StartSelectingStepsMessageCommand=cmd(stoptweening;linear,0.2;y,SCREEN_BOTTOM-78;diffusealpha,1);
+		GoBackSelectingSongMessageCommand=cmd(stoptweening;linear,0.2;y,SCREEN_BOTTOM+100;);
 	}
---	t[#t+1] = GetPHighScoresFrame( PLAYER_2, false )..{
---		InitCommand=cmd(x,cx+320;y,SCREEN_BOTTOM-85);
---	}
 	t[#t+1] = LoadFont("SongTitle")..{
 		UpdateVisibilityCommand=function(self)
 			local stepartist = GAMESTATE:GetCurrentSteps(PLAYER_2):GetAuthorCredit();
@@ -106,38 +167,52 @@ t[#t+1] = LoadActor("_groupwheel")..{
 	HideCommand=cmd(visible,false);
 	TimerOutSelectingSongCommand=cmd(visible,false);
 	TimerOutSelectingGroupCommand=cmd(playcommand,'StartSelectingSong');
-}
+};
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 --FULL MODE THINGS
 
-t[#t+1] = LoadActor("_diff_FM.lua")..{
-	OnCommand=cmd(draworder,15;stoptweening;y,560);
-	StartSelectingStepsMessageCommand=cmd(stoptweening;playcommand,"ShowUp";y,SCREEN_BOTTOM+100;linear,.2;y,SCREEN_BOTTOM-93;queuecommand,'HideOffCommand'); 	
-	GoBackSelectingSongMessageCommand=cmd(stoptweening;playcommand,"Hide";y,SCREEN_BOTTOM-93;sleep,.2;linear,.1;y,SCREEN_BOTTOM+100;queuecommand,'HideOnCommand');
-	OffCommand=cmd(stoptweening;y,SCREEN_BOTTOM-93;sleep,.2;linear,.2;y,SCREEN_BOTTOM+100);
-	GoFullModeMessageCommand=cmd(stoptweening;y,SCREEN_BOTTOM+100);
+t[#t+1] = LoadActor("_diff_FM1P.lua")..{
+	OnCommand=cmd(draworder,15;stoptweening;x,cx-500;y,386);
+	StartSelectingStepsMessageCommand=cmd(stoptweening;playcommand,"ShowUp";x,cx-500;linear,.25;x,cx-124;queuecommand,'HideOffCommand'); 	
+	GoBackSelectingSongMessageCommand=cmd(stoptweening;playcommand,"Hide";x,cx-124;sleep,.1;linear,.25;x,cx-500;queuecommand,'HideOnCommand');
+	OffCommand=cmd(stoptweening;playcommand,"Hide";x,cx-124;sleep,.1;linear,.25;x,cx-500);
+	GoFullModeMessageCommand=cmd(stoptweening;x,cx-124);
 	HideOffCommand=cmd(visible,false);
 	HideOnCommand=cmd(visible,true);
-}
+};
+
+t[#t+1] = LoadActor("_diff_FM2P.lua")..{
+	OnCommand=cmd(draworder,15;stoptweening;x,cx+500;y,386);
+	StartSelectingStepsMessageCommand=cmd(stoptweening;playcommand,"ShowUp";x,cx+500;linear,.25;x,cx+124;queuecommand,'HideOffCommand'); 	
+	GoBackSelectingSongMessageCommand=cmd(stoptweening;playcommand,"Hide";x,cx+124;sleep,.1;linear,.25;x,cx+500;queuecommand,'HideOnCommand');
+	OffCommand=cmd(stoptweening;playcommand,"Hide";x,cx+124;sleep,.1;linear,.25;x,cx+500);
+	GoFullModeMessageCommand=cmd(stoptweening;x,cx+124);
+	HideOffCommand=cmd(visible,false);
+	HideOnCommand=cmd(visible,true);
+};
 
 t[#t+1] = LoadActor("_diffbar_full")..{
-	InitCommand=cmd(draworder,16;x,SCREEN_CENTER_X;basezoom,.80); --> Quando inicia a cena
-	OnCommand=cmd(stoptweening;diffusealpha,0;y,SCREEN_BOTTOM;sleep,.45;linear,.3;y,SCREEN_BOTTOM-50;diffusealpha,1); --> Animação inicial
-	StartSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,0;y,SCREEN_BOTTOM;sleep,.45;linear,.3;diffusealpha,1;y,SCREEN_BOTTOM-50); --> Ao voltar do GroupWheel
-	GoBackSelectingGroupMessageCommand=cmd(stoptweening;diffusealpha,1;linear,.3;y,SCREEN_BOTTOM-50;diffusealpha,0); --> Ao entrar no GroupWheel
-	StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,SCREEN_BOTTOM-50;sleep,.1;linear,.3;y,305); --> Ao selecionar a música
-	GoBackSelectingSongMessageCommand=cmd(stoptweening;y,305;sleep,.1;linear,.3;y,SCREEN_BOTTOM-50); --> Ao cancelar a seleção da música
-	OffCommand=cmd(stoptweening;diffusealpha,1;sleep,.05;linear,.3;y,320;diffusealpha,0);
-	TimerOutSelectingSongCommand=cmd(stoptweening;diffusealpha,1;sleep,.05;linear,.3;y,330;diffusealpha,0);
-}
+	InitCommand=cmd(draworder,16;x,SCREEN_CENTER_X;y,SCREEN_BOTTOM-58;zoom,.48); --> Quando inicia a cena
+	OnCommand=cmd(stoptweening;diffusealpha,0;x,cx-800;linear,.15;x,cx;diffusealpha,1); --> Animação inicial
+	StartSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,0;x,cx-800;linear,.15;diffusealpha,1;x,cx); --> Ao voltar do GroupWheel
+	GoBackSelectingGroupMessageCommand=cmd(stoptweening;linear,.15;x,cx-800;diffusealpha,0); --> Ao entrar no GroupWheel
+	StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,SCREEN_BOTTOM-58;linear,.2;y,305;zoom,.53); --> Ao selecionar a música
+	GoBackSelectingSongMessageCommand=cmd(stoptweening;linear,.2;y,SCREEN_BOTTOM-58;zoom,.48); --> Ao cancelar a seleção da música
+	OffCommand=cmd(stoptweening;diffusealpha,1;linear,.5;x,cx-800;diffusealpha,0);
+	TimerOutSelectingSongCommand=cmd(stoptweening;diffusealpha,1;sleep,.05;linear,.25;y,305;diffusealpha,0);
+};
 
 --SCORE GRADES
-t[#t+1] = LoadActor("_grades") .. {}
+t[#t+1] = LoadActor("_grades") .. {
+	InitCommand=cmd(draworder,14);
+};
 
 --SCORE PLATES
-t[#t+1] = LoadActor("_plates") .. {}
+t[#t+1] = LoadActor("_plates") .. {
+	InitCommand=cmd(draworder,14);
+};
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -160,64 +235,23 @@ t[#t+1] = SimplePlatPiu(cx,cy+80)..{
 	StepsPreselectedCancelledMessageCommand=cmd(stoptweening;visible,false);
 	GoBackSelectingSongMessageCommand=cmd(stoptweening;visible,false);
 	OffCommand=cmd(stoptweening;visible,false);
-}
+};
 
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
---CHANNEL, CATEGORY
--- t[#t+1] = LoadActor("_stages")..{
--- 	TimerOutSelectingSongCommand=cmd(playcommand,'Off');
--- 	TimerOutSelectingGroupCommand=cmd(playcommand,'Off');
--- }
-
---------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 --ARROWS
 t[#t+1] = LoadActor("_arrows")..{
+	InitCommand=cmd(draworder,17);
 	TimerOutSelectingSongCommand=cmd(playcommand,'Off');
 	TimerOutSelectingGroupCommand=cmd(playcommand,'Off');
-}
+};
 
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
---JOIN MESSAGES
---[[
-if not GAMESTATE:IsSideJoined(PLAYER_1) then
-t[#t+1] = LoadActor( THEME:GetPathG("","Messages/"..GetLanguageText().."_join.png") )..{
-	InitCommand=cmd(draworder,20;x,SCREEN_LEFT+100;y,SCREEN_BOTTOM-120;diffusealpha,0;decelerate,.2;x,SCREEN_LEFT+160;diffusealpha,1;sleep,6;decelerate,.2;x,SCREEN_LEFT-50;diffusealpha,0);
-	TimerOutSelectingSongCommand=cmd(playcommand,'Off');
-}
-end;
-
-if not GAMESTATE:IsSideJoined(PLAYER_2) then
-t[#t+1] = LoadActor( THEME:GetPathG("","Messages/"..GetLanguageText().."_join.png") )..{
-	InitCommand=cmd(draworder,20;x,SCREEN_RIGHT-100;y,SCREEN_BOTTOM-120;diffusealpha,0;decelerate,.2;x,SCREEN_RIGHT-160;diffusealpha,1;sleep,6;decelerate,.2;x,SCREEN_RIGHT+50;diffusealpha,0);
-	TimerOutSelectingSongCommand=cmd(playcommand,'Off');
-}
-end;
-]]
---------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------
 --TIMER
--- DrawOrder = 1
---[[t[#t+1] = LoadActor("_timer")..{
-	OnCommand=cmd(x,cx;y,-10;decelerate,.1;y,10;decelerate,.1;y,2);
-	OffCommand=cmd(x,cx;y,0;decelerate,.1;y,10;decelerate,.1;y,-58);
-	TimerOutSelectingSongCommand=cmd(playcommand,'Off');
-	TimerOutSelectingGroupCommand=cmd(playcommand,'Off');
-};--]]
 
-t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/TIMER_MASK.png") )..{
-	OnCommand=cmd(zoom,0.05;x,cx;y,22;play;MaskSource);
-};
-
-t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/TIMER_FRAME.mpg") )..{
-	OnCommand=cmd(zoom,0.05;x,cx;y,22;play;MaskDest);
-};
-
---loading twice to speed up the animation (exploiting an ffmpeg bug)
-t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/TIMER_FRAME.mpg") )..{
-	OnCommand=cmd(zoom,0.05;x,cx;y,22;play;MaskDest);
+t[#t+1] = LoadActor("_timer")..{
+	InitCommand=cmd(draworder,20;y,-40);
+	OnCommand=cmd(sleep,.1;linear,.25;y,0);
+	OffCommand=cmd(sleep,.1;linear,.25;y,-40);
 };
 
 
@@ -225,20 +259,20 @@ t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/TIMER_FRAME.mpg") )..{
 --------------------------------------------------------------------------------
 
 t[#t+1] = Def.ActorFrame {
-	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_TOP+90;diffusealpha,0;zoom,.7);
+	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_TOP+65;diffusealpha,0;zoom,0.35);
 	GoBackSelectingGroupMessageCommand=cmd(stoptweening;diffusealpha,0;sleep,.3;linear,.2;diffusealpha,1;sleep,2;linear,.2;diffusealpha,0);
 	StartSelectingSongMessageCommand=cmd(stoptweening;linear,.2;diffusealpha,0);
 	children = {
 		LoadActor(THEME:GetPathG("","Messages/back.png"));
 		LoadActor(THEME:GetPathG("","Messages/back_glow.png"))..{
 			InitCommand=cmd(blend,"BlendMode_Add");
-			OnCommand=cmd(diffusealpha,.2);
+			OnCommand=cmd(diffusealpha,.8);
 		};
 		LoadActor(THEME:GetPathG("","Messages/goback_"..GetLanguageText()..".png"))..{
-			OnCommand=cmd(zoom,.47);
+			OnCommand=cmd(zoom,1);
 		};
 	};
-};
+}
 
 t[#t+1] = LoadActor( THEME:GetPathS("","Sounds/ST_BGM (loop)") )..{
 	OnCommand=cmd(stop);
