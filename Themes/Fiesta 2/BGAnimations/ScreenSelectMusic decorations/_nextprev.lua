@@ -8,7 +8,9 @@ local t = Def.ActorFrame {
 	Def.Sprite {
 		OnCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;scaletoclipped,1280 ,720);
 		CurrentSongChangedMessageCommand=function(self)
-			self:stoptweening():diffusealpha(0.9):sleep(0.5);
+			self:stoptweening();
+			self:diffusealpha(0.9);
+			self:sleep(0.5);
 			self:queuecommand("ModifySongBackground");
 		end;
 		ModifySongBackgroundCommand=function(self)
