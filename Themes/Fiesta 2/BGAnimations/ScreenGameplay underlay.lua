@@ -124,9 +124,8 @@ if GAMESTATE:IsSideJoined(PLAYER_1) then
 			self:horizalign(left);
 			self:x(SCREEN_LEFT+4);
 			self:y(SCREEN_BOTTOM-18);
-			self:SetWidth(21);
-			self:SetHeight(21);
-			self:visible(false);
+			self:SetWidth(19.5);
+			self:SetHeight(19.5);
 		end;
 	};
 
@@ -145,17 +144,17 @@ if GAMESTATE:IsSideJoined(PLAYER_1) then
 	end;
 	
 	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSystemLayer/PlayerName background empty") )..{
-		InitCommand=cmd(visible,false;horizalign,left;x,SCREEN_LEFT;y,SCREEN_BOTTOM-18;basezoom,.54);
+		InitCommand=cmd(horizalign,left;x,SCREEN_LEFT;y,SCREEN_BOTTOM-18;basezoom,.54);
 	};
 
 	t[#t+1] = LoadFont("","_myriad pro 20px") .. {
-		InitCommand=cmd(visible,false;settext,string.upper(string.sub(profilename,1,8));horizalign,left;zoom,.51;maxwidth,82;x,SCREEN_LEFT+28;y,SCREEN_BOTTOM-23);
+		InitCommand=cmd(settext,string.upper(string.sub(profilename,1,8));horizalign,left;zoom,.51;maxwidth,82;x,SCREEN_LEFT+28;y,SCREEN_BOTTOM-23);
 	};
 	
 	local maxcomboP1 = 0; 
 	local pscoreP1 = 0;
 	t[#t+1] = LoadFont("_karnivore lite white") .. {
-		InitCommand=cmd(visible,false;settext,"00.00%";horizalign,right;zoom,.62;x,SCREEN_LEFT+128;y,SCREEN_BOTTOM-16,maxwidth,85);
+		InitCommand=cmd(settext,"00.00%";horizalign,right;zoom,.62;x,SCREEN_LEFT+128;y,SCREEN_BOTTOM-16,maxwidth,85);
 		JudgmentMessageCommand=function(self,param)
 			self:sleep(0.1);
 			self:queuecommand('PostLifeChange');
@@ -202,7 +201,7 @@ if GAMESTATE:IsSideJoined(PLAYER_1) then
 			PostLifeChangeMessageCommand=function(self)
 				if pscoreP1 >= 1000000 then self:x(SCREEN_LEFT+80) else self:x(SCREEN_LEFT+85) end;
 				if pscoreP1 > PersonalBest then
-					self:visible(false)
+					self:visible(true)
 					self:glowshift()
 				else
 					self:visible(false)
@@ -210,14 +209,14 @@ if GAMESTATE:IsSideJoined(PLAYER_1) then
 		end;
 	};
 
-	-- t[#t+1] = LoadFont("","_myriad pro 20px") .. {
-		-- InitCommand=cmd(settext,P1mods;horizalign,left;zoom,.32;x,SCREEN_LEFT+28;y,SCREEN_BOTTOM-15;diffuse,color("#00FFFF"));
-	-- };	
+	 t[#t+1] = LoadFont("","_myriad pro 20px") .. {
+		 InitCommand=cmd(settext,P1mods;horizalign,left;zoom,.32;x,SCREEN_LEFT+28;y,SCREEN_BOTTOM-15;diffuse,color("#00FFFF"));
+	 };	
 
-	-- --P1 Difficulty Ball--
-	-- t[#t+1] = GetSimpleBallLevel( PLAYER_1 )..{ 
-		-- InitCommand=cmd(horizalign,right;basezoom,.18;x,SCREEN_LEFT+145;playcommand,"ShowUp";y,SCREEN_BOTTOM-18);
-	-- };
+	 --P1 Difficulty Ball--
+	 t[#t+1] = GetSimpleBallLevel( PLAYER_1 )..{ 
+		 InitCommand=cmd(horizalign,right;basezoom,.18;x,SCREEN_LEFT+145;playcommand,"ShowUp";y,SCREEN_BOTTOM-18);
+	 };
 
 end;
 
@@ -277,7 +276,6 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 			self:SetHeight(38);
 			self:x(SCREEN_RIGHT-108);
 			self:y(SCREEN_BOTTOM-18);
-			self:visible(false);
 		end;
 	};
 
@@ -295,11 +293,11 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 		end;
 	end;
 	t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSystemLayer/PlayerName background empty") )..{
-		InitCommand=cmd(visible,false;horizalign,right;x,SCREEN_RIGHT;y,SCREEN_BOTTOM-18;basezoom,.54);
+		InitCommand=cmd(horizalign,right;x,SCREEN_RIGHT;y,SCREEN_BOTTOM-18;basezoom,.54);
 	};
 
 	t[#t+1] = LoadFont("","_myriad pro 20px") .. {
-		InitCommand=cmd(visible,false;settext,string.upper(string.sub(profilename,1,8));horizalign,left;zoom,.51;x,SCREEN_RIGHT-105;y,SCREEN_BOTTOM-23);
+		InitCommand=cmd(settext,string.upper(string.sub(profilename,1,8));horizalign,left;zoom,.51;x,SCREEN_RIGHT-105;y,SCREEN_BOTTOM-23);
 	};
 
 	--P2 Real Time Score--
@@ -307,7 +305,7 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 	local maxcomboP2 = 0;
 	local pscoreP2 = 0;
 	t[#t+1] = LoadFont("_karnivore lite white") .. {
-		InitCommand=cmd(visible,false;settext,"00.00%";horizalign,right;zoom,.62;x,SCREEN_RIGHT-5;y,SCREEN_BOTTOM-16;maxwidth,85);
+		InitCommand=cmd(settext,"00.00%";horizalign,right;zoom,.62;x,SCREEN_RIGHT-5;y,SCREEN_BOTTOM-16;maxwidth,85);
 		JudgmentMessageCommand=function(self,param)
 			self:sleep(0.1);
 			self:queuecommand('PostLifeChange');
@@ -345,6 +343,9 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 			self:settext(formatted_pscoreP2);
 		end;
 		};
+	t[#t+1] = LoadFont("","_myriad pro 20px") .. {
+		InitCommand=cmd(settext,P2mods;horizalign,left;zoom,.32;x,SCREEN_RIGHT-105;y,SCREEN_BOTTOM-15;diffuse,color("#00FFFF"));
+		};
 		t[#t+1] = LoadActor( THEME:GetPathG("","ScreenGameplay/new_record") )..{
 			InitCommand=cmd(horizalign,right;zoom,.22;x,SCREEN_RIGHT-53;y,SCREEN_BOTTOM-15,maxwidth,85;visible,false);
 			JudgmentMessageCommand=function(self,param)
@@ -354,7 +355,7 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 			PostLifeChangeMessageCommand=function(self)
 				if pscoreP2 >= 1000000 then self:x(SCREEN_RIGHT-53) else self:x(SCREEN_RIGHT-48) end;
 				if pscoreP2 > PersonalBest then
-					self:visible(false)
+					self:visible(true)
 					self:glowshift()
 				else
 					self:visible(false)
@@ -362,15 +363,35 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 			end;
 		};	
 
-	-- t[#t+1] = LoadFont("","_myriad pro 20px") .. {
-		-- InitCommand=cmd(settext,P2mods;horizalign,left;zoom,.32;x,SCREEN_RIGHT-105;y,SCREEN_BOTTOM-15;diffuse,color("#00FFFF"));
-	-- };
-	-- -- P2 Difficulty Ball --
+	t[#t+1] = LoadFont("","_myriad pro 20px") .. {
+		InitCommand=cmd(settext,P2mods;horizalign,left;zoom,.32;x,SCREEN_RIGHT-105;y,SCREEN_BOTTOM-15;diffuse,color("#00FFFF"));
+	};
+	-- P2 Difficulty Ball --
 
-	-- t[#t+1] = GetSimpleBallLevel( PLAYER_2 )..{ 
-		-- InitCommand=cmd(horizalign,right;basezoom,.18;x,SCREEN_RIGHT-144;playcommand,"ShowUp";y,SCREEN_BOTTOM-18);
-	-- };
+	t[#t+1] = GetSimpleBallLevel( PLAYER_2 )..{ 
+		InitCommand=cmd(horizalign,right;basezoom,.18;x,SCREEN_RIGHT-144;playcommand,"ShowUp";y,SCREEN_BOTTOM-18);
+	};
 
 end;
+
+-- Song Title --
+--[[
+local songtitle = GAMESTATE:GetCurrentSong():GetDisplayMainTitle();
+local cur_song = GAMESTATE:GetCurrentSong();
+local cur_steps = GAMESTATE:GetCurrentSteps(PLAYER_1);
+songtitle = string.upper(songtitle);
+
+t[#t+1] = Def.BitmapText {
+	Font="_myriad pro 20px",
+	Text="♫"..songtitle,
+	InitCommand=function(self)
+		self:y(SCREEN_BOTTOM-9);
+		self:x(SCREEN_CENTER_X);
+		self:zoom(.84);
+		self:maxwidth(440);
+		self:diffuse(color("#ccfffe"));
+	end;
+};
+--]]
 
 return t;

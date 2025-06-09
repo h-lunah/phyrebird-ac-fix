@@ -395,6 +395,79 @@ local t = Def.ActorFrame {
 			GoBackSelectingSongMessageCommand=cmd(finishtweening;settext,"");
 			OffCommand=cmd(stoptweening;visible,false);
 		};
+		
+		--machine best name
+		--[[
+		LoadFont("","_myriad pro 20px") .. {
+			InitCommand=cmd(settext,"";horizalign,left;zoom,.62;x,-40;y,12);
+			RefreshTextCommand=function(self)
+				local cur_song = GAMESTATE:GetCurrentSong();
+				local cur_steps = GAMESTATE:GetCurrentSteps( pn );
+				local HSList = PROFILEMAN:GetMachineProfile():GetHighScoreList(cur_song,cur_steps):GetHighScores();
+				if #HSList ~= 0 then
+					self:settext( string.upper( HSList[1]:GetName() ));
+				else
+					self:settext("");
+					end;
+			end;
+			ChangeStepsMessageCommand=function(self,params)
+				if params.Player ~= pn then return; end;
+				(cmd(stoptweening;playcommand,'RefreshText'))(self);
+			end;
+			StartSelectingStepsMessageCommand=cmd(stoptweening;settext,"";sleep,.2;queuecommand,'RefreshText');
+			GoBackSelectingSongMessageCommand=cmd(stoptweening;settext,"");
+			OffCommand=cmd(stoptweening;visible,false);
+		};
+		--]]
+		--machine best hs
+		--[[
+		LoadFont("_karnivore lite white")..{
+			InitCommand=cmd(settext,"";horizalign,left;zoom,.62;x,-40;y,21;maxwidth,85);
+			RefreshTextCommand=function(self)
+				local cur_song = GAMESTATE:GetCurrentSong();
+				local cur_steps = GAMESTATE:GetCurrentSteps(pn);
+				local HSList = PROFILEMAN:GetMachineProfile():GetHighScoreList(cur_song,cur_steps):GetHighScores();
+				if (#HSList ~= 0) then
+					local score = math.floor(HSList[1]:GetScore()/100);
+					if score > 2000000 then 
+						score = 0;
+						self:settext("");
+					elseif score > 1000000 then 
+						score = score - 1000000;
+						self:settext( AddDots(score) );
+					else
+						self:settext( AddDots(score) );
+					end;
+				else
+					self:settext("")
+				end;
+			end;
+			ChangeStepsMessageCommand=function(self,params)
+				if params.Player ~= pn then return; end;
+				(cmd(stoptweening;playcommand,'RefreshText'))(self);
+			end;
+			StartSelectingStepsMessageCommand=cmd(stoptweening;settext,"";sleep,.2;queuecommand,'RefreshText');
+			GoBackSelectingSongMessageCommand=cmd(stoptweening;settext,"");
+			OffCommand=cmd(stoptweening;visible,false);
+		};
+		LoadActor( THEME:GetPathG("","ScreenSelectMusic/highscores_glow") )..{
+			InitCommand=cmd(basezoom,.66;diffuse,0,1,1,1;blend,'BlendMode_Add');
+			OnCommand=cmd(zoomx,0);
+			StartSelectingStepsMessageCommand=cmd(stoptweening;horizalign,center;diffusealpha,0;zoomx,0;x,0;sleep,.2;linear,.1;zoomx,1;diffusealpha,.8;linear,.1;zoomx,0;diffusealpha,0;queuecommand,'Loop');
+			LoopCommand=cmd(stoptweening;x,0;horizalign,center;zoomx,1;diffusealpha,0;linear,1;diffusealpha,.1;linear,1;diffusealpha,0;queuecommand,'Loop');
+			ChangeStepsMessageCommand=function(self,params)
+				if params.Player ~= pn then return; end;
+				if params.Direction == -1 then
+					(cmd(stoptweening;horizalign,left;diffusealpha,0;zoomx,0;x,-44;linear,.1;zoomx,1;diffusealpha,.8))(self);
+					(cmd(horizalign,right;diffusealpha,.8;zoomx,1;x,44;linear,.1;zoomx,0;diffusealpha,0;queuecommand,'Loop'))(self);
+				else
+					(cmd(stoptweening;horizalign,right;diffusealpha,0;zoomx,0;x,44;linear,.1;zoomx,1;diffusealpha,.8))(self);
+					(cmd(horizalign,left;diffusealpha,.8;zoomx,1;x,-44;linear,.1;zoomx,0;diffusealpha,0;queuecommand,'Loop'))(self);
+				end;
+			end;
+			GoBackSelectingSongMessageCommand=cmd(stoptweening;zoomx,0;x,0);
+			OffCommand=cmd(stoptweening;zoomx,0;x,0);
+		--]]
 		LoadActor( THEME:GetPathG("","ScreenSelectMusic/my_best_glow_P1") )..{
 			InitCommand=cmd(basezoom,.66);
 			OnCommand=cmd(diffusealpha,0);

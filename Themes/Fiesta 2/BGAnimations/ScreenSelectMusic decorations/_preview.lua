@@ -207,7 +207,8 @@ t[#t+1] = Def.ActorFrame {
 	end;
 	children = {
 		LoadFont("_myriad pro 20px")..{
-			InitCommand=cmd(stoptweening;y,96;zoom,.7;shadowlength,0;settext,"/";diffuse,1,1,1,1);
+			Name="duration";
+			InitCommand=cmd(stoptweening;y,110;zoom,.4;shadowlength,0;settext,"/";diffuse,1,1,1,1);
 			NextSongMessageCommand=cmd(stoptweening;diffusealpha,0;sleep,0.8;linear,0.15;diffusealpha,1);
 			PreviousSongMessageCommand=cmd(stoptweening;diffusealpha,0;sleep,0.8;linear,0.15;diffusealpha,1);
 		};

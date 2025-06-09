@@ -33,6 +33,12 @@ if GAMESTATE:IsSideJoined(PLAYER_1) then
 		end
 	}
 
+	t[#t+1] = GetBallLevelColor( PLAYER_1, false )..{ 
+		InitCommand=cmd(basezoom,.57;x,cx-275;playcommand,"ShowUp";y,SCREEN_BOTTOM-40;pause;); 
+	};
+	t[#t+1] = GetBallLevelTextP1( PLAYER_1, false )..{ 
+		InitCommand=cmd(basezoom,.57;x,cx-275;playcommand,"ShowUp";y,SCREEN_BOTTOM-40;pause;); 
+	};
 
 end
 
@@ -65,7 +71,12 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 		end
 	}
 	
-	
+	t[#t+1] = GetBallLevelColor( PLAYER_2, false )..{ 
+	InitCommand=cmd(basezoom,.57;zoomx,-1;x,cx+275;playcommand,"ShowUp";y,SCREEN_BOTTOM-40;pause;); 
+	};
+	t[#t+1] = GetBallLevelTextP2( PLAYER_2, false )..{ 
+		InitCommand=cmd(basezoom,.57;x,cx+275;playcommand,"ShowUp";y,SCREEN_BOTTOM-40;pause;); 
+	};
 end
 
 return t

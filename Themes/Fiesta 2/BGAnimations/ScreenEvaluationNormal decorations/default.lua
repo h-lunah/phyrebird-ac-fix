@@ -648,6 +648,25 @@ t[#t+1] = LoadFont("_jnr_font")..{
 	OffCommand=cmd(stoptweening;visible,false);
 };
 end;
+if GAMESTATE:GetCurrentSteps(PLAYER_1):GetAuthorCredit() ~= "" then
+t[#t+1] = LoadFont("SongTitle")..{
+	InitCommand=cmd(settext,"by";x,SCREEN_CENTER_X-135;y,SCREEN_TOP+183;zoom,.3);
+	OffCommand=cmd(stoptweening;visible,false);
+};
+t[#t+1] = LoadFont("SongTitle")..{
+	InitCommand=function(self)
+		local text = GAMESTATE:GetCurrentSteps(PLAYER_1):GetAuthorCredit();
+		if string.len(text) >= 38 then
+			text = string.sub(text,1,35);
+			text = text .. "...";
+		end;
+		self:settext( text );
+		self:maxwidth(216);
+	(cmd(x,SCREEN_CENTER_X-135;y,SCREEN_TOP+190;zoom,.3))(self);
+	end;
+	OffCommand=cmd(stoptweening;visible,false);
+};
+end;
 end;
 
 
@@ -715,5 +734,46 @@ end;
 
 -- Timer
 t[#t+1] = LoadActor("_timer")..{}
+-- QR Code shenanigans
+--[[local QRView = { PLAYER_1 = false, PLAYER_2 = false }
+
+t[#t+1] = LoadFont("_century gothic 20px")..{
+	InitCommand=function(self) 
+        self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y + 110)
+        self:zoom(0.66)
+        self:settext(ScreenString("QRInstructions"))
+    end,
+    OffCommand=cmd(finishtweening;linear,.25;rotationx,90)
+};
+
+local Players = GAMESTATE:GetHumanPlayers()
+for player in ivalues(Players) do
+    t[#t+1] = Def.ActorFrame {
+        InitCommand=function(self)
+            self:xy(SCREEN_CENTER_X + (player == PLAYER_1 and -105 or 105), SCREEN_CENTER_Y + 175)
+            self:zoomx(0)
+        end,
+        CodeMessageCommand=function(self, params)
+            if params.PlayerNumber == player then
+                if params.Name == "UpLeft" or params.Name == "UpRight" then
+                    QRView[player] = not QRView[player]
+                    if QRView[player] then
+                        self:finishtweening()
+                        self:linear(0.2)
+                        self:zoomx(1)
+                    else
+                        self:finishtweening()
+                        self:linear(0.2)
+                        self:zoomx(0)
+                    end
+                end
+            end
+        end,
+        OffCommand=cmd(stoptweening;linear,.2;y,SCREEN_BOTTOM+100),
+            
+        LoadActor("QR/default.lua", player) .. {}
+    }
+end
+--]]
 
 return t;
