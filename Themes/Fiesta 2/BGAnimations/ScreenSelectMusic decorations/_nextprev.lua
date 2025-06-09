@@ -8,17 +8,10 @@ local t = Def.ActorFrame {
 	Def.Sprite {
 		OnCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;scaletoclipped,1280 ,720);
 		CurrentSongChangedMessageCommand=function(self)
-			self:stoptweening():diffusealpha(0.9):sleep(0.5);
-			self:queuecommand("ModifySongBackground");
+			self:stoptweening();
+			self:diffusealpha(0.9);
+			self:sleep(0.5);
 		end;
-		ModifySongBackgroundCommand=function(self)
-			if SCREENMAN:GetTopScreen():GetSelectionState() ~= 'SelectingChannel' then
-				self:LoadVideoPreview( song );
-				self:diffusealpha(1);
-			end;
-		end;
-		ChannelChosenMessageCommand=cmd(finishtweening;linear,0.125;Center);
-		FinalizedMessageCommand=cmd(sleep,0.125;linear,0.25;diffusealpha,0)
 	};
 	
 	Def.Sprite {
