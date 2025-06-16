@@ -268,6 +268,7 @@ if GAMESTATE:HasProfile( pn ) then
 			end;
 		end;
 		--personal hs
+		--[[
 		a[#a+1] = DrawRollingNumberSmall(-40,-14,OldHS,NewHS,left,.6)..{
 			InitCommand=cmd(zoom,.62;maxwidth,85;diffusealpha,0;sleep,.5;diffusealpha,1);
 			OnCommand=function(self)
@@ -277,7 +278,7 @@ if GAMESTATE:HasProfile( pn ) then
 			end;
 			OffCommand=cmd(stoptweening;visible,false);
 		};
-
+		--]]
 		a[#a+1] = NewScore(85,SCREEN_TOP-202,NewHS-OldHS,right,4)..{
 			InitCommand=cmd(zoom,.62;maxwidth,85;diffusealpha,0;sleep,3.3;diffusealpha,1);
 			OnCommand=function(self)
@@ -291,7 +292,7 @@ if GAMESTATE:HasProfile( pn ) then
 			end;
 			OffCommand=cmd(stoptweening;visible,false);
 		};
-
+		--[[
 		a[#a+1] = DrawRollingNumberSmall(-40,-14,NewHS,NewHS,left,4)..{
 			InitCommand=cmd(zoom,.62;maxwidth,85;diffusealpha,0;sleep,.5;diffusealpha,1);
 			OnCommand=function(self)
@@ -310,9 +311,11 @@ if GAMESTATE:HasProfile( pn ) then
 			end;
 			OffCommand=cmd(stoptweening;visible,false);
 		};
+		--]]
 	end;
 end;
 
+--[[
 local HSListMachine = PROFILEMAN:GetMachineProfile():GetHighScoreList(cur_song,cur_steps):GetHighScores();
 if HSListMachine ~= nil and #HSListMachine ~= 0 then
 	--machine best name
@@ -369,6 +372,8 @@ end;
 	-- LoopCommand=cmd(stoptweening;zoomx,1;diffusealpha,0;linear,1;diffusealpha,.1;linear,1;diffusealpha,0;queuecommand,'Loop');
 	-- OffCommand=cmd(stoptweening;zoomx,0;x,0);
 -- };
+
+--]]
 
 return a;
 end;
@@ -598,7 +603,7 @@ function GetPHighScoresFrameEval( pn )
 
 -- High scores, Level Ball & Autoplay text
 if GAMESTATE:IsSideJoined( PLAYER_1 ) then
---t[#t+1] = GetHighScoresFrameEval( PLAYER_1 )..{ InitCommand=cmd(x,cx-275;y,SCREEN_BOTTOM-80); };
+t[#t+1] = GetHighScoresFrameEval( PLAYER_1 )..{ InitCommand=cmd(x,cx-275;y,SCREEN_BOTTOM-80); };
 
 --t[#t+1] = GetPHighScoresFrameEval( PLAYER_1 )..{ InitCommand=cmd(x,cx-320;y,SCREEN_BOTTOM-85); };
 
@@ -672,7 +677,7 @@ end;
 
 --Definição do P2 mostrar Frame Evaluation
 if GAMESTATE:IsSideJoined( PLAYER_2 ) then
---t[#t+1] = GetHighScoresFrameEval( PLAYER_2 )..{ InitCommand=cmd(x,cx+285;y,SCREEN_BOTTOM-80); };
+t[#t+1] = GetHighScoresFrameEval( PLAYER_2 )..{ InitCommand=cmd(x,cx+285;y,SCREEN_BOTTOM-80); };
 
 --t[#t+1] = GetPHighScoresFrameEval( PLAYER_2 )..{ InitCommand=cmd(x,cx+320;y,SCREEN_BOTTOM-85); };
 

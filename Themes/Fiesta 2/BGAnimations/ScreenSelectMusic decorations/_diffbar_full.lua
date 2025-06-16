@@ -366,7 +366,7 @@ for i=1, Xqt do
 	
 	-- Under Labels --
 	t[#t+1] = LoadActor( THEME:GetPathG("","Common Resources/B_UNDERLABELS 1x3") ).. {
-		InitCommand=cmd(x,Xposit;pause;y,yBase+35;zoom,.5;);
+		InitCommand=cmd(x,Xposit;pause;y,YY+35;zoom,.5;);
 		StartSelectingStepsMessageCommand=cmd(stoptweening;diffusealpha,1;y,YY+35;sleep,.1;linear,.3;y,yBase+35);
 		GoBackSelectingSongMessageCommand=cmd(stoptweening;y,yBase+35;sleep,.1;linear,.3;y,YY+35);
 		UpDateCommand=cmd( setstate,GetUnderBallLabel(i) );
