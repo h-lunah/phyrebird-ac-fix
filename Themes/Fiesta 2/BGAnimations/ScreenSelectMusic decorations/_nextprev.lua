@@ -11,16 +11,11 @@ local t = Def.ActorFrame {
 			self:stoptweening();
 			self:diffusealpha(0.9);
 			self:sleep(0.5);
+<<<<<<< HEAD
+=======
 			self:queuecommand("ModifySongBackground");
+>>>>>>> origin/main
 		end;
-		ModifySongBackgroundCommand=function(self)
-			if SCREENMAN:GetTopScreen():GetSelectionState() ~= 'SelectingChannel' then
-				self:LoadVideoPreview( song );
-				self:diffusealpha(1);
-			end;
-		end;
-		ChannelChosenMessageCommand=cmd(finishtweening;linear,0.125;Center);
-		FinalizedMessageCommand=cmd(sleep,0.125;linear,0.25;diffusealpha,0)
 	};
 	
 	Def.Sprite {
