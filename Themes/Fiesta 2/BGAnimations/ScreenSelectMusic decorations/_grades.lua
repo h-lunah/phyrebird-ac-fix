@@ -162,12 +162,13 @@ local t = Def.ActorFrame {
 			self:zoom(0.95)
 		end
 	},
---[[
+
 	Def.Sprite {
 		Name="PersonalP1Mods",
 		InitCommand=function(self)
 			self:xy(SCREEN_CENTER_X - 205, SCREEN_CENTER_Y + 118)
 			self:zoom(0.37)
+			self:visible(false)
 		end
 	},
 	
@@ -176,6 +177,7 @@ local t = Def.ActorFrame {
 		InitCommand=function(self)
 			self:xy(SCREEN_CENTER_X - 235, SCREEN_CENTER_Y + 158)
 			self:zoom(0.37)
+			self:visible(false)
 		end
 	},
 
@@ -184,16 +186,17 @@ local t = Def.ActorFrame {
 		InitCommand=function(self)
 			self:xy(SCREEN_CENTER_X - 205, SCREEN_CENTER_Y + 148)
 			self:zoom(0.37)
+			self:visible(false)
 		end
 	},
---]]
+
 	Def.Sprite {
 		Name="PersonalP2",
 		InitCommand=function(self)
 			self:xy(SCREEN_CENTER_X + 286, SCREEN_CENTER_Y + 172)
 			self:zoom(0.95)
 		end
---[[
+
 	},
 
 
@@ -202,6 +205,7 @@ local t = Def.ActorFrame {
 		InitCommand=function(self)
 			self:xy(SCREEN_CENTER_X + 335, SCREEN_CENTER_Y + 118)
 			self:zoom(0.37)
+			self:visible(false)
 		end
 	},
 	
@@ -210,6 +214,7 @@ local t = Def.ActorFrame {
 		InitCommand=function(self)
 			self:xy(SCREEN_CENTER_X + 305, SCREEN_CENTER_Y + 158)
 			self:zoom(0.37)
+			self:visible(false)
 		end
 	},
 
@@ -218,8 +223,8 @@ local t = Def.ActorFrame {
 		InitCommand=function(self)
 			self:xy(SCREEN_CENTER_X + 335, SCREEN_CENTER_Y + 148)
 			self:zoom(0.37)
+			self:visible(false)
 		end
---]]
 	}
 }
 

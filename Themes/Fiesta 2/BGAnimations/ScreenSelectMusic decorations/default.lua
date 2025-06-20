@@ -142,7 +142,7 @@ end;
 
 if GAMESTATE:IsSideJoined( PLAYER_2 ) then
 	t[#t+1] = GetHighScoresFrameP2( PLAYER_2, false )..{
-		InitCommand=cmd(draworder,14;x,cx+232;y,SCREEN_BOTTOM-78;diffusealpha,0);
+		InitCommand=cmd(draworder,14;x,cx+232;y,SCREEN_BOTTOM+100;diffusealpha,0);
 		StartSelectingStepsMessageCommand=cmd(stoptweening;linear,0.2;y,SCREEN_BOTTOM-78;diffusealpha,1);
 		GoBackSelectingSongMessageCommand=cmd(stoptweening;linear,0.2;y,SCREEN_BOTTOM+100;);
 	}
