@@ -126,8 +126,8 @@ t[#t+1] = Def.ActorFrame {
 	StartSelectingSongMessageCommand=cmd(stoptweening;diffusealpha,0;sleep,.4;linear,.1;diffusealpha,1);
 	OnCommand=cmd(playcommand,'CurrentSongChanged');
 	OffCommand=cmd(stoptweening;visible,false);
-	CurrentSongChangedMessageCommand=function(self)
-		local cur_song = GAMESTATE:GetCurrentSong();
+	PlayableStepsChangedMessageCommand=function(self)
+	local cur_song = GAMESTATE:GetCurrentSong();
 		if not cur_song then
 			self:visible(false);
 			return;
@@ -137,28 +137,30 @@ t[#t+1] = Def.ActorFrame {
 		
 		local bpm1;
 		local bpm2;
-		local bpm_size;
-		local bpm_number = self:GetChild("bpm_number");
-		local bpm_text = self:GetChild("bpm_text");
-		local artist = self:GetChild("artist");
+		--local bpm_size;
+		local artist_bpm_duration = self:GetChild("artist_bpm_duration");
+		--local bpm_text = self:GetChild("bpm_text");
+		--local artist = self:GetChild("artist");
 		local title = self:GetChild("title");
+		local artist = cur_song:GetDisplayArtist();
+		local bpm = "";
 		
 		if( cur_song:IsDisplayBpmSecret() ) then
-			bpm_number:settext("???");
+			bpm = "BPM ???";
 		else
 			bpm1 = cur_song:GetDisplayBpmsText()[1];
 			bpm2 = cur_song:GetDisplayBpmsText()[2];
 			if( bpm1 ~= bpm2 ) then
-				bpm_number:settext(bpm1.."-"..bpm2);
+				bpm = "BPM "..bpm1.."-"..bpm2;
 			else
-				bpm_number:settext(bpm1);
+				bpm = "BPM "..bpm1;
 			end;
 		end;
-		bpmW = math.floor(bpm_number:GetZoomedWidth());
+		--bpmW = math.floor(artist_bpm_duration:GetZoomedWidth());
 --		bpm_text:;
 		
 		--artist:maxwidth( (296-bpmW-30)*(1/.6) );
-		artist:settext( cur_song:GetDisplayArtist() );
+		--artist:settext( cur_song:GetDisplayArtist() );
 		
 		local group = SCREENMAN:GetTopScreen():GetCurrentGroup();
 
@@ -167,16 +169,8 @@ t[#t+1] = Def.ActorFrame {
 		else
 			title:settext( cur_song:GetDisplayMainTitle() );
 		end;
-	end;
-	PlayableStepsChangedMessageCommand=function(self)
-		local cur_song = GAMESTATE:GetCurrentSong();
-		if not cur_song then
-			self:visible(false);
-			return;
-		end;
-		
 		self:visible(true);
-		local duration = self:GetChild("duration");
+		local duration = "";
 		local currentsurvivalseconds = 0;
 		local highestsurvivalseconds = 0;
 		local formattedtime = "";
@@ -197,38 +191,48 @@ t[#t+1] = Def.ActorFrame {
 				end;
 			end;
 		end;
-		if highestsurvivalseconds > 0 then formattedtime = FormatTime(highestsurvivalseconds) end;
+		if highestsurvivalseconds > 0 then formattedtime = " / "..FormatTime(highestsurvivalseconds) end;
 		local group = SCREENMAN:GetTopScreen():GetCurrentGroup();
 		if( group == "SO_RANDOM" ) then
-			duration:settext( "??:??" );
+			duration = " / ??:??";
 		else
-			duration:settext( formattedtime );
+			duration = formattedtime;
 		end;
+		local artist_len = string.len(artist);
+		local bpm_len = string.len(bpm);
+		local duration_len = string.len(duration);
+		artist_bpm_duration:settext(artist.." / "..bpm..duration );
+		artist_bpm_duration:AddAttribute(0, { Diffuse = color("1,1,0,1"), Length = artist_len })
+		artist_bpm_duration:AddAttribute(artist_len+3, { Diffuse = color("1,0,0,1"), Length = bpm_len })
 	end;
 	children = {
-		LoadFont("_myriad pro 20px")..{
-			Name="duration";
-			InitCommand=cmd(stoptweening;y,110;zoom,.4;shadowlength,0;settext,"/";diffuse,1,1,1,1);
-			NextSongMessageCommand=cmd(stoptweening;diffusealpha,0;sleep,0.8;linear,0.15;diffusealpha,1);
-			PreviousSongMessageCommand=cmd(stoptweening;diffusealpha,0;sleep,0.8;linear,0.15;diffusealpha,1);
-		};
-		LoadFont("_myriad pro 20px")..{
-			Name="bpm_text";
-			InitCommand=cmd(stoptweening;y,96;x,18;zoom,.6;shadowlength,0;settext,"BPM";diffuse,1,0,0,1);
-			NextSongMessageCommand=cmd(stoptweening;diffusealpha,0;sleep,0.8;linear,0.15;diffusealpha,1);
-			PreviousSongMessageCommand=cmd(stoptweening;diffusealpha,0;sleep,0.8;linear,0.15;diffusealpha,1);
-		};
-		LoadFont("_myriad pro 20px")..{
-			Name="bpm_number";
-			InitCommand=cmd(stoptweening;horizalign,left;y,96;x,32;zoom,.6;shadowlength,0;settext,"";diffuse,1,0,0,1;maxwidth,180);
-			NextSongMessageCommand=cmd(stoptweening;diffusealpha,0;sleep,0.8;linear,0.15;diffusealpha,1);
-			PreviousSongMessageCommand=cmd(stoptweening;diffusealpha,0;sleep,0.8;linear,0.15;diffusealpha,1);
-		};
-		LoadFont("_myriad pro 20px")..{
-			Name="artist";
-			InitCommand=cmd(stoptweening;horizalign,right;y,96;x,-6;zoom,.6;shadowlength,0;diffuse,1,1,0,1;maxwidth,403);
-			NextSongMessageCommand=cmd(stoptweening;diffusealpha,0;sleep,0.8;linear,0.15;diffusealpha,1);
-			PreviousSongMessageCommand=cmd(stoptweening;diffusealpha,0;sleep,0.8;linear,0.15;diffusealpha,1);
+		Def.BitmapText {
+		Name="artist_bpm_duration",
+		Font="_myriad pro 20px",
+		Text="",
+		InitCommand=function(self)
+			self:stoptweening()
+			self:horizalign(center)
+			self:y(96)
+			self:zoom(0.6)
+			self:shadowlength(0)
+			self:diffuse(1,1,1,1)
+			self:maxwidth(583)
+		end,
+		NextSongMessageCommand=function(self)
+			self:stoptweening()
+			self:diffusealpha(0)
+			self:sleep(0.8)
+			self:linear(0.15)
+			self:diffusealpha(1)
+		end,
+		PreviousSongMessageCommand=function(self)
+			self:stoptweening()
+			self:diffusealpha(0)
+			self:sleep(0.8)
+			self:linear(0.15)
+			self:diffusealpha(1)
+		end
 		};
 		LoadFont("_myriad pro 20px")..{
 			Name="title";

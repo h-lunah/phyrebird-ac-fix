@@ -1001,7 +1001,7 @@ function GetBallLevelTextP1( pn, show_dir_arrows )
 		children = {						
 			LoadActor( THEME:GetPathG("","ScreenSelectMusic/Difficulty_BigBalls_Titles 4x2.png") )..{
 				Name="Bigballstitle";
-				InitCommand=cmd(pause;zoom,.75);
+				InitCommand=cmd(draworder,2;pause;zoom,.75);
 			};
 			
 			-- Level (numeros) Digit 1 --
@@ -1042,29 +1042,29 @@ function GetBallLevelTextP1( pn, show_dir_arrows )
 			-- Labels --
 			LoadActor( THEME:GetPathG("","Common Resources/B_LABELS 1x13.png") )..{
 				Name="Label";
-				InitCommand=cmd(y,-45;pause;setstate,10; zoom, 0.6);
+				InitCommand=cmd(draworder,2;y,-45;pause;setstate,10; zoom, 0.6);
 				--OffCommand=cmd(stoptweening;diffusealpha,1;sleep,.2;linear,.05;diffusealpha,0);
 			};
 			
 			-- Under labels --
 			LoadActor( THEME:GetPathG("","Common Resources/B_UNDERLABELS 1x3.png") )..{
 				Name="Underlabel";
-				InitCommand=cmd(y,40;pause;setstate,2);
+				InitCommand=cmd(draworder,2;y,40;pause;setstate,2);
 				--OffCommand=cmd(stoptweening;diffusealpha,1;sleep,.2;linear,.05;diffusealpha,0);
 			};
 			
 			-- READY? --
 			LoadActor( THEME:GetPathG("","ScreenSelectMusic/READY_P1.png") )..{
 				InitCommand=cmd(draworder,1;y,-1;basezoom,0.75;diffusealpha,0);
-				StepsChosenInternalCommand=cmd(stoptweening;diffusealpha,1);
+				StepsChosenInternalCommand=cmd(draworder,1;stoptweening;diffusealpha,1);
 				UpdateInternalCommand=cmd(stoptweening;diffusealpha,0);
 				ShowUpInternalCommand=cmd(stoptweening;diffusealpha,0);
 				HideInternalCommand=cmd(stoptweening;diffusealpha,0);
 				OffCommand=cmd(stoptweening;diffusealpha,0);		
 			};
 			LoadActor( THEME:GetPathG("","ScreenSelectMusic/READY_P1.png") )..{
-				InitCommand=cmd(draworder,1;y,-1;basezoom,0.75;blend,'BlendMode_Add';diffusealpha,0);
-				StepsChosenInternalCommand=cmd(stoptweening;diffusealpha,1;diffuseshift;effectcolor2,color("1,1,1,.3");effectcolor1,color("1,1,1,0");effectperiod,.2);
+				InitCommand=cmd(draworder,2;y,-1;basezoom,0.75;blend,'BlendMode_Add';diffusealpha,0);
+				StepsChosenInternalCommand=cmd(draworder,1;stoptweening;diffusealpha,1;diffuseshift;effectcolor2,color("1,1,1,.3");effectcolor1,color("1,1,1,0");effectperiod,.2);
 				UpdateInternalCommand=cmd(stoptweening;diffusealpha,0);
 				ShowUpInternalCommand=cmd(stoptweening;diffusealpha,0);
 				HideInternalCommand=cmd(stoptweening;diffusealpha,0);
@@ -1113,7 +1113,7 @@ function GetBallLevelTextP2( pn, show_dir_arrows )
 		children = {						
 			LoadActor( THEME:GetPathG("","ScreenSelectMusic/Difficulty_BigBalls_Titles 4x2.png") )..{
 				Name="Bigballstitle";
-				InitCommand=cmd(pause;zoom,.75);
+				InitCommand=cmd(draworder,2;pause;zoom,.75);
 			};
 			
 			-- Level (numeros) Digit 1 --
@@ -1154,14 +1154,14 @@ function GetBallLevelTextP2( pn, show_dir_arrows )
 			-- Labels --
 			LoadActor( THEME:GetPathG("","Common Resources/B_LABELS 1x13.png") )..{
 				Name="Label";
-				InitCommand=cmd(y,-45;pause;setstate,10; zoom, 0.6);
+				InitCommand=cmd(draworder,2;y,-45;pause;setstate,10; zoom, 0.6);
 				--OffCommand=cmd(stoptweening;diffusealpha,1;sleep,.2;linear,.05;diffusealpha,0);
 			};
 			
 			-- Under labels --
 			LoadActor( THEME:GetPathG("","Common Resources/B_UNDERLABELS 1x3.png") )..{
 				Name="Underlabel";
-				InitCommand=cmd(y,40;pause;setstate,2);
+				InitCommand=cmd(draworder,2;y,40;pause;setstate,2);
 				--OffCommand=cmd(stoptweening;diffusealpha,1;sleep,.2;linear,.05;diffusealpha,0);
 			};
 			

@@ -93,18 +93,26 @@ if GAMESTATE:IsSideJoined( PLAYER_1 ) then
 		GoBackSelectingSongMessageCommand=cmd(stoptweening;linear,0.2;y,SCREEN_BOTTOM+100;);
 	}
 	t[#t+1] = LoadFont("SongTitle")..{
+		InitCommand=cmd(draworder,16);
+		InitiateVisibilityCommand=function(self)
+			local stepartist = GAMESTATE:GetCurrentSteps(PLAYER_1):GetAuthorCredit();
+			local bytext = "";
+			if string.len(stepartist) >= 1 then bytext = "by" end;
+			(cmd(draworder,16;settext,bytext;y,SCREEN_BOTTOM-22;zoom,.5;visible,true;x,cx-500;linear,.25;x,cx-124))(self);
+		end;
 		UpdateVisibilityCommand=function(self)
 			local stepartist = GAMESTATE:GetCurrentSteps(PLAYER_1):GetAuthorCredit();
 			local bytext = "";
 			if string.len(stepartist) >= 1 then bytext = "by" end;
-			(cmd(settext,bytext;x,cx-90;y,SCREEN_BOTTOM-22;zoom,.5;visible,true))(self);
+			(cmd(draworder,16;settext,bytext;y,SCREEN_BOTTOM-22;zoom,.5;visible,true;x,cx-124))(self);
 		end;
-		StartSelectingStepsMessageCommand=cmd(stoptweening;playcommand,'UpdateVisibility');
+		StartSelectingStepsMessageCommand=cmd(stoptweening;playcommand,'InitiateVisibility');
 		ChangeStepsMessageCommand=cmd(stoptweening;playcommand,'UpdateVisibility');
 		GoBackSelectingSongMessageCommand=cmd(stoptweening;visible,false);
 		OffCommand=cmd(stoptweening;visible,false);
 	};
 	t[#t+1] = LoadFont("SongTitle")..{
+		InitCommand=cmd(draworder,16);
 		StartSelectingStepsMessageCommand=cmd(stoptweening;playcommand,'FetchAuthor');
 		FetchAuthorCommand=function(self)
 			local stepartist = GAMESTATE:GetCurrentSteps(PLAYER_1):GetAuthorCredit();
@@ -114,9 +122,19 @@ if GAMESTATE:IsSideJoined( PLAYER_1 ) then
 			end;
 			self:settext( stepartist );
 			self:maxwidth(216);
-			(cmd(x,cx-90;y,SCREEN_BOTTOM-12;zoom,.5;visible,true))(self);
+			(cmd(draworder,16;y,SCREEN_BOTTOM-12;zoom,.5;visible,true;x,cx-500;linear,.25;x,cx-124))(self);
 		end;
-		ChangeStepsMessageCommand=cmd(stoptweening;playcommand,'FetchAuthor');
+		UpdateAuthorCommand=function(self)
+			local stepartist = GAMESTATE:GetCurrentSteps(PLAYER_1):GetAuthorCredit();
+			if string.len(stepartist) >= 38 then
+				stepartist = string.sub(text,1,35);
+				stepartist = sterpartist .. "...";
+			end;
+			self:settext( stepartist );
+			self:maxwidth(216);
+			(cmd(draworder,16;y,SCREEN_BOTTOM-12;zoom,.5;visible,true;x,cx-124))(self);
+		end;
+		ChangeStepsMessageCommand=cmd(stoptweening;playcommand,'UpdateAuthor');
 		GoBackSelectingSongMessageCommand=cmd(stoptweening;visible,false);
 		OffCommand=cmd(stoptweening;visible,false);
 	};
@@ -124,23 +142,31 @@ end;
 
 if GAMESTATE:IsSideJoined( PLAYER_2 ) then
 	t[#t+1] = GetHighScoresFrameP2( PLAYER_2, false )..{
-		InitCommand=cmd(draworder,14;x,cx+232;y,SCREEN_BOTTOM-78;diffusealpha,0);
+		InitCommand=cmd(draworder,14;x,cx+232;y,SCREEN_BOTTOM+100;diffusealpha,0);
 		StartSelectingStepsMessageCommand=cmd(stoptweening;linear,0.2;y,SCREEN_BOTTOM-78;diffusealpha,1);
 		GoBackSelectingSongMessageCommand=cmd(stoptweening;linear,0.2;y,SCREEN_BOTTOM+100;);
 	}
 	t[#t+1] = LoadFont("SongTitle")..{
+		InitCommand=cmd(draworder,16);
+		InitiateVisibilityCommand=function(self)
+			local stepartist = GAMESTATE:GetCurrentSteps(PLAYER_2):GetAuthorCredit();
+			local bytext = "";
+			if string.len(stepartist) >= 1 then bytext = "by" end;
+			(cmd(draworder,16;settext,bytext;y,SCREEN_BOTTOM-22;zoom,.5;visible,true;x,cx+500;linear,.25;x,cx+124))(self);
+		end;
 		UpdateVisibilityCommand=function(self)
 			local stepartist = GAMESTATE:GetCurrentSteps(PLAYER_2):GetAuthorCredit();
 			local bytext = "";
 			if string.len(stepartist) >= 1 then bytext = "by" end;
-			(cmd(settext,bytext;x,cx+90;y,SCREEN_BOTTOM-22;zoom,.5;visible,true))(self);
+			(cmd(draworder,16;settext,bytext;y,SCREEN_BOTTOM-22;zoom,.5;visible,true;x,cx+124))(self);
 		end;
-		StartSelectingStepsMessageCommand=cmd(stoptweening;playcommand,'UpdateVisibility');
+		StartSelectingStepsMessageCommand=cmd(stoptweening;playcommand,'InitiateVisibility');
 		ChangeStepsMessageCommand=cmd(stoptweening;playcommand,'UpdateVisibility');
 		GoBackSelectingSongMessageCommand=cmd(stoptweening;visible,false);
 		OffCommand=cmd(stoptweening;visible,false);
 	};
 	t[#t+1] = LoadFont("SongTitle")..{
+		InitCommand=cmd(draworder,16);
 		StartSelectingStepsMessageCommand=cmd(stoptweening;playcommand,'FetchAuthor');
 		FetchAuthorCommand=function(self)
 			local stepartist = GAMESTATE:GetCurrentSteps(PLAYER_2):GetAuthorCredit();
@@ -150,9 +176,19 @@ if GAMESTATE:IsSideJoined( PLAYER_2 ) then
 			end;
 			self:settext( stepartist );
 			self:maxwidth(216);
-			(cmd(x,cx+90;y,SCREEN_BOTTOM-12;zoom,.5;visible,true))(self);
+			(cmd(draworder,16;y,SCREEN_BOTTOM-12;zoom,.5;visible,true;x,cx+500;linear,.25;x,cx+124))(self);
 		end;
-		ChangeStepsMessageCommand=cmd(stoptweening;playcommand,'FetchAuthor');
+		UpdateAuthorCommand=function(self)
+			local stepartist = GAMESTATE:GetCurrentSteps(PLAYER_2):GetAuthorCredit();
+			if string.len(stepartist) >= 38 then
+				stepartist = string.sub(text,1,35);
+				stepartist = sterpartist .. "...";
+			end;
+			self:settext( stepartist );
+			self:maxwidth(216);
+			(cmd(draworder,16;y,SCREEN_BOTTOM-12;zoom,.5;visible,true;x,cx+124))(self);
+		end;
+		ChangeStepsMessageCommand=cmd(stoptweening;playcommand,'UpdateAuthor');
 		GoBackSelectingSongMessageCommand=cmd(stoptweening;visible,false);
 		OffCommand=cmd(stoptweening;visible,false);
 	};

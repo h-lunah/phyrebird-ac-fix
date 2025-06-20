@@ -11,6 +11,10 @@ local t = Def.ActorFrame {
 			self:stoptweening();
 			self:diffusealpha(0.9);
 			self:sleep(0.5);
+<<<<<<< HEAD
+=======
+			self:queuecommand("ModifySongBackground");
+>>>>>>> origin/main
 		end;
 	};
 	
