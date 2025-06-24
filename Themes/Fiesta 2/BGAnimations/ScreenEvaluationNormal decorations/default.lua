@@ -267,37 +267,13 @@ if GAMESTATE:HasProfile( pn ) then
 				OldHS = OldHS - 1000000;
 			end;
 		end;
-		--personal hs
-		--[[
-		a[#a+1] = DrawRollingNumberSmall(-40,-14,OldHS,NewHS,left,.6)..{
-			InitCommand=cmd(zoom,.62;maxwidth,85;diffusealpha,0;sleep,.5;diffusealpha,1);
-			OnCommand=function(self)
-				if not SCREENMAN:GetTopScreen():PlayerHasNewRecord(pn) then
-					self:visible(false);
-				end;
-			end;
-			OffCommand=cmd(stoptweening;visible,false);
-		};
-		--]]
 		a[#a+1] = NewScore(85,SCREEN_TOP-202,NewHS-OldHS,right,4)..{
 			InitCommand=cmd(zoom,.62;maxwidth,85;diffusealpha,0;sleep,3.3;diffusealpha,1);
 			OnCommand=function(self)
 				self:settext("+ " .. AddCommas(NewHS-OldHS) )
 				if not SCREENMAN:GetTopScreen():PlayerHasNewRecord(pn) then
 					self:visible(false);
-				end;
-				if (NewHS-OldHS) < 1 then
-					self:visible(false);
-				end;
-			end;
-			OffCommand=cmd(stoptweening;visible,false);
-		};
-		--[[
-		a[#a+1] = DrawRollingNumberSmall(-40,-14,NewHS,NewHS,left,4)..{
-			InitCommand=cmd(zoom,.62;maxwidth,85;diffusealpha,0;sleep,.5;diffusealpha,1);
-			OnCommand=function(self)
-				if SCREENMAN:GetTopScreen():PlayerHasNewRecord(pn) then
-					self:visible(false);
+				else
 					local processed_meter = GAMESTATE:GetCurrentSteps(pn):GetMeter();
 					if processed_meter == 99 and string.find(cur_steps:GetDescription(),"DP COOP") then processed_meter = 29 elseif processed_meter == 99 then processed_meter = 15 elseif processed_meter > 28 then processed_meter = 28 elseif processed_meter < 1 then processed_meter = 1 end;
 					local exp_divisor = 1;
@@ -308,10 +284,12 @@ if GAMESTATE:HasProfile( pn ) then
 					PROFILEMAN:GetProfile( pn ):SetVoomax(Total_EXP);
 					PROFILEMAN:SaveProfile(pn);
 				end;
+				if (NewHS-OldHS) < 1 then
+					self:visible(false);
+				end;
 			end;
 			OffCommand=cmd(stoptweening;visible,false);
 		};
-		--]]
 	end;
 end;
 

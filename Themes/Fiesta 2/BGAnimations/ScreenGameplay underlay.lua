@@ -151,10 +151,10 @@ if GAMESTATE:IsSideJoined(PLAYER_1) then
 		InitCommand=cmd(settext,string.upper(string.sub(profilename,1,8));horizalign,left;zoom,.51;maxwidth,82;x,SCREEN_LEFT+28;y,SCREEN_BOTTOM-23);
 	};
 	
-	local maxcomboP1 = 0; 
 	local pscoreP1 = 0;
 	t[#t+1] = LoadFont("_karnivore lite white") .. {
 		InitCommand=cmd(settext,"00.00%";horizalign,right;zoom,.62;x,SCREEN_LEFT+128;y,SCREEN_BOTTOM-16,maxwidth,85);
+
 		JudgmentMessageCommand=function(self,param)
 			self:sleep(0.1);
 			self:queuecommand('PostLifeChange');
@@ -166,8 +166,7 @@ if GAMESTATE:IsSideJoined(PLAYER_1) then
 			local goods = curstats:GetTapNoteScores('TapNoteScore_W4');
 			local bads = curstats:GetTapNoteScores('TapNoteScore_W5');
 			local misses = curstats:GetTapNoteScores('TapNoteScore_Miss') + curstats:GetTapNoteScores('TapNoteScore_CheckpointMiss');
-			local currentcombo = curstats:GetCurrentCombo();
-			if currentcombo > maxcomboP1 then maxcomboP1 = currentcombo end;
+			local maxcomboP1 = curstats:MaxCombo();
 			local stagebreak = curstats:GetReachedLifeZero();
 			pscoreP1 = CalcPScore(perfects, greats, goods, bads, misses, maxcomboP1);
 			local grade_bonus = 300000;
@@ -190,7 +189,7 @@ if GAMESTATE:IsSideJoined(PLAYER_1) then
 				self:diffusecolor(1,1,1,1)
 			end;
 			self:settext(formatted_pscoreP1);
-		end;
+				end;
 		};
 		t[#t+1] = LoadActor( THEME:GetPathG("","ScreenGameplay/new_record") )..{
 			InitCommand=cmd(horizalign,right;zoom,.22;x,SCREEN_LEFT+80;y,SCREEN_BOTTOM-15,maxwidth,85;visible,false);
@@ -302,7 +301,6 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 
 	--P2 Real Time Score--
 	
-	local maxcomboP2 = 0;
 	local pscoreP2 = 0;
 	t[#t+1] = LoadFont("_karnivore lite white") .. {
 		InitCommand=cmd(settext,"00.00%";horizalign,right;zoom,.62;x,SCREEN_RIGHT-5;y,SCREEN_BOTTOM-16;maxwidth,85);
@@ -317,8 +315,7 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 			local goods = curstats:GetTapNoteScores('TapNoteScore_W4');
 			local bads = curstats:GetTapNoteScores('TapNoteScore_W5');
 			local misses = curstats:GetTapNoteScores('TapNoteScore_Miss') + curstats:GetTapNoteScores('TapNoteScore_CheckpointMiss');
-			local currentcombo = curstats:GetCurrentCombo();
-			if currentcombo > maxcomboP2 then maxcomboP2 = currentcombo end;
+			local maxcomboP2 = curstats:MaxCombo();
 			local stagebreak = curstats:GetReachedLifeZero();
 			pscoreP2 = CalcPScore(perfects,greats,goods,bads,misses,maxcomboP2);
 			local grade_bonus = 300000;

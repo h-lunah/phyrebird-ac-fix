@@ -1,5 +1,3 @@
-local t = Def.ActorFrame {};
-
 local t = Def.ActorFrame {
 	CurrentSongChangedMessageCommand=function(self)
 		song = GAMESTATE:GetCurrentSong();
