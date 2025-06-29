@@ -152,7 +152,7 @@ if GAMESTATE:IsSideJoined(PLAYER_1) then
 	};
 	
 	local pscoreP1 = 0;
-	t[#t+1] = LoadFont("_karnivore lite white") .. {
+	t[#t+1] = LoadFont("","_myriad pro 20px") .. {
 		InitCommand=cmd(settext,"00.00%";horizalign,right;zoom,.62;x,SCREEN_LEFT+128;y,SCREEN_BOTTOM-16,maxwidth,85);
 
 		JudgmentMessageCommand=function(self,param)
@@ -302,7 +302,7 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 	--P2 Real Time Score--
 	
 	local pscoreP2 = 0;
-	t[#t+1] = LoadFont("_karnivore lite white") .. {
+	t[#t+1] = LoadFont("","_myriad pro 20px") .. {
 		InitCommand=cmd(settext,"00.00%";horizalign,right;zoom,.62;x,SCREEN_RIGHT-5;y,SCREEN_BOTTOM-16;maxwidth,85);
 		JudgmentMessageCommand=function(self,param)
 			self:sleep(0.1);

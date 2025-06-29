@@ -2,7 +2,7 @@ local t = Def.ActorFrame {}
 
 --1st Player
 t[#t+1] = PlayerMessage(PLAYER_1)..{
-	OnCommand=cmd(x,-110;y,SCREEN_HEIGHT-110;sleep,.6;linear,.4;x,110);
+	OnCommand=cmd(zoom,0.66;x,-110;y,SCREEN_HEIGHT-90;linear,.4;x,130);
 	PlayerAlreadyJoinedMessageCommand=function(self,params)
 		if params.Player == PLAYER_1 then
 			self:visible(false);
@@ -13,7 +13,7 @@ t[#t+1] = PlayerMessage(PLAYER_1)..{
 
 --2nd Player
 t[#t+1] = PlayerMessage(PLAYER_2)..{
-	OnCommand=cmd(x,SCREEN_WIDTH+110;y,SCREEN_HEIGHT-110;sleep,.6;linear,.4;x,SCREEN_WIDTH-110);
+	OnCommand=cmd(zoom,0.66;x,SCREEN_WIDTH+110;y,SCREEN_HEIGHT-90;linear,.4;x,SCREEN_WIDTH-130);
 	PlayerAlreadyJoinedMessageCommand=function(self,params)
 		if params.Player == PLAYER_2 then
 			self:visible(false);

@@ -15,7 +15,7 @@ t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/TIMER_MASK.png") )..{
 
 
 t[#t+1] = Def.Sprite {
-    Texture = THEME:GetPathG("", "Common Resources/TIMER_FRAME 5x8.jpg"),
+    Texture = THEME:GetPathG("", "Common Resources/TIMER_FRAME 5x8.png"),
     OnCommand = function(self)
         self:SetAllStateDelays(0.02)
         self:setstate(0)

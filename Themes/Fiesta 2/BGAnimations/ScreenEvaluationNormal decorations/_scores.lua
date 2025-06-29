@@ -49,9 +49,9 @@ if GAMESTATE:IsSideJoined(PLAYER_1) then
 	local pgradecolor = (stagebreak and "0.596,0.596,0.592,1") or ColorPGrade(pgrade);
 	if not stagebreak and (pscore < 750000) then pgradecolor = "#03CC83"; end;
 	local plate = (stagebreak and "") or CalcPlate(greats,goods,bads,misses);
-	local platecolor = ColorPlate(plate);
-	local displayscore = math.floor(curstats:GetScore()/100);
-	if displayscore > 1000000 then displayscore = displayscore - 1000000 end;
+	--local platecolor = ColorPlate(plate);
+	--local displayscore = math.floor(curstats:GetScore()/100);
+	--if displayscore > 1000000 then displayscore = displayscore - 1000000 end;
 	local chartstyle = GAMESTATE:GetCurrentSteps(PLAYER_1):GetChartStyle();
 	local processed_meter = GAMESTATE:GetCurrentSteps(PLAYER_1):GetMeter();
 	if processed_meter == 99 then processed_meter = 15 elseif processed_meter > 28 then processed_meter = 28 elseif processed_meter < 1 then processed_meter = 1 end;
@@ -77,7 +77,7 @@ if GAMESTATE:IsSideJoined(PLAYER_1) then
 	t[#t+1] = LoadFont("_myriad pro 20px")..{ InitCommand=cmd(settext,".";y,spacing*6+init_pos+delta*9;x,WideScale(101, 290);zoom,zoom_number;diffusealpha,0;sleep,2.56;diffusealpha,1); };
 	
 	--totalScore
-	t[#t+1] = DrawRollingNumberP2( SCREEN_CENTER_X-189, init_pos+delta*1.4, displayscore, "HorizAlign_Right",3.5 )..{InitCommand=cmd(zoom,2);};
+	t[#t+1] = DrawRollingNumberP2( SCREEN_CENTER_X-189, init_pos+delta*1.4, pscore, "HorizAlign_Right",3.5 )..{InitCommand=cmd(zoom,2);};
 
 	--plate
 	if plate ~= "" then
@@ -111,9 +111,9 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 	local pgradecolor = (stagebreak and "0.596,0.596,0.592,1") or ColorPGrade(pgrade);
 	if not stagebreak and (pscore < 750000) then pgradecolor = "#03CC83"; end;
 	local plate = (stagebreak and "") or CalcPlate(greats,goods,bads,misses);
-	local platecolor = ColorPlate(plate);
-	local displayscore = math.floor(curstats:GetScore()/100);
-	if displayscore > 1000000 then displayscore = displayscore - 1000000 end;
+	--local platecolor = ColorPlate(plate);
+	--local displayscore = math.floor(curstats:GetScore()/100);
+	--if displayscore > 1000000 then displayscore = displayscore - 1000000 end;
 	local processed_meter = GAMESTATE:GetCurrentSteps(PLAYER_2):GetMeter();
 	local chartstyle = GAMESTATE:GetCurrentSteps(PLAYER_2):GetChartStyle();
 	if processed_meter == 99 then processed_meter = 15 elseif processed_meter > 28 then processed_meter = 28 elseif processed_meter < 1 then processed_meter = 1 end;
@@ -139,7 +139,7 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 	t[#t+1] = LoadFont("_myriad pro 20px")..{ InitCommand=cmd(settext,".";y,spacing*6+init_pos+delta*9;x,SCREEN_RIGHT-WideScale(101, 290);zoom,zoom_number;diffusealpha,0;sleep,2.56;diffusealpha,1); };
 
 	--totalScore
-	t[#t+1] = DrawRollingNumberP2( SCREEN_CENTER_X+372, init_pos+delta*1.4, displayscore, "HorizAlign_Right", 3.5 )..{InitCommand=cmd(zoom,2);};
+	t[#t+1] = DrawRollingNumberP2( SCREEN_CENTER_X+372, init_pos+delta*1.4, pscore, "HorizAlign_Right", 3.5 )..{InitCommand=cmd(zoom,2);};
 
 	--plate
 	if plate ~= "" then

@@ -4,12 +4,8 @@ t[#t+1] = LoadActor(THEME:GetPathG("","ScreenSelectPlayModeBranch/BG.png"))..{
 	OnCommand=cmd(show_background_properly);
 }
 
-t[#t+1] = LoadActor(THEME:GetPathG("","ScreenSelectPlayModeBranch/boy.png"))..{
-	OnCommand=cmd(basezoom,.67;y,SCREEN_CENTER_Y;x,-200;linear,.3;x,SCREEN_CENTER_X-314;linear,.1;x,SCREEN_CENTER_X-324);
-}
-
 t[#t+1] = LoadActor(THEME:GetPathG("","ScreenSelectPlayModeBranch/girl.png"))..{
-	OnCommand=cmd(basezoom,.67;y,SCREEN_CENTER_Y;x,SCREEN_WIDTH+200;linear,.3;x,SCREEN_CENTER_X+296;linear,.1;x,SCREEN_CENTER_X+306);
+	OnCommand=cmd(zoom,.33;y,SCREEN_CENTER_Y+60;x,SCREEN_WIDTH+200;linear,.3;x,SCREEN_CENTER_X+296;linear,.1;x,SCREEN_CENTER_X+206);
 }
 
 -- center
@@ -45,5 +41,7 @@ t[#t+1] = LoadActor(THEME:GetPathG("","ScreenSelectPlayModeBranch/text.png"))..{
 	InitCommand=cmd(blend,'BlendMode_Add');
 	OnCommand=cmd(basezoom,.67;y,SCREEN_CENTER_Y;x,SCREEN_WIDTH+300;linear,.3;x,SCREEN_CENTER_X;linear,.1;diffusealpha,0);
 }
+
+t[#t+1] = LoadActor("_timer")..{}
 
 return t;

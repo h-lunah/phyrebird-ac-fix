@@ -157,8 +157,8 @@ end;
 
 t[#t+1] = LoadActor(THEME:GetPathS("","Sounds/NEW_RECORD.mp3"))..{
 	OnCommand=function(self)
-		if SCREENMAN:GetTopScreen():PlayerHasNewRecord(PLAYER_1) or SCREENMAN:GetTopScreen():PlayerHasNewRecord(PLAYER_2) or 
-		SCREENMAN:GetTopScreen():PlayerHasNewMachineRecord(PLAYER_1) or SCREENMAN:GetTopScreen():PlayerHasNewMachineRecord(PLAYER_2)
+		if SCREENMAN:GetTopScreen():PlayerHasNewRecord(PLAYER_1) or SCREENMAN:GetTopScreen():PlayerHasNewRecord(PLAYER_2) --or 
+		--SCREENMAN:GetTopScreen():PlayerHasNewMachineRecord(PLAYER_1) or SCREENMAN:GetTopScreen():PlayerHasNewMachineRecord(PLAYER_2)
 		then
 			(cmd(sleep,t_sleep+.2+  new_record_delays[BestGrade];queuecommand,'Play'))(self);
 		end;

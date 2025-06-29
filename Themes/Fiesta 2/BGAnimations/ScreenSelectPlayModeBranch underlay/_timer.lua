@@ -26,17 +26,4 @@ t[#t+1] = Def.Sprite {
     end
 }
 
-
-t[#t+1] = Def.ActorProxy {
-	BeginCommand=function(self) 
-		local Timer = SCREENMAN:GetTopScreen():GetChild('Timer'); 
-		self:SetTarget(Timer); 
-	end,
-	OnCommand=function(self)
-		self:x(SCREEN_CENTER_X)
-		self:y(20)
-		self:basezoom(.66)
-	end,
-}
-
 return t;
