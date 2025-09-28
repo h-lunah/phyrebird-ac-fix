@@ -103,10 +103,6 @@ local function PlayerName( Player )
 			InitCommand=cmd(basezoom,.45;z,50);
 			-- reduzir o zoom e ir testando
 		};
-		t[#t+1] = LoadActor( THEME:GetPathG("","ScreenSystemLayer/SessionInfo") )..{
-			Name = "Back2";
-			InitCommand=cmd(basezoom,.95;x,20;y,55);
-		};
 		t[#t+1] = Def.Quad{
 			Name = "ProgressBarFrame";
 			InitCommand=cmd(horizalign,left;x,-165;y,24;diffuse,0.5,0.5,0.5,0.9;zoomto,250,4);
@@ -115,13 +111,9 @@ local function PlayerName( Player )
 			Name = "ProgressBarFill";
 			InitCommand=cmd(horizalign,left;x,-165;y,24;diffuse,0,1,1,1;zoomto,0,0);
 		};
-		t[#t+1] = LoadFont("","_myriad pro 20px") .. {
+		t[#t+1] = LoadFont("","_myriad pro bold 20px") .. {
 			Name = "Name";
 			InitCommand=cmd(horizalign,center;y,15;x,-80;zoom,.85);
-		};
-		t[#t+1] = LoadFont("","_myriad pro 20px") .. {
-			Name = "SessionDataText";
-			InitCommand=cmd(y,67;x,16;zoom,.60);
 		};
 		t[#t+1] = LoadFont("","ProfileNum") .. {
 			Name = "TextLv";
@@ -191,7 +183,7 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 			avatar:horizalign(left);
 			avatar:SetWidth(50);
 			avatar:SetHeight(50);
-			local SessionDataText = self:GetChild("SessionDataText");
+			--local SessionDataText = self:GetChild("SessionDataText");
 			if SessionDataTable[P1CurrentProfile] ~= nil then
 				local formattedtimeP1 = FormatTimeLong(SessionDataTable[P1CurrentProfile]["PlaytimeS"]+SessionDataTable[P1CurrentProfile]["PlaytimeD"]);
 				local SingleLevelNum = 0;
@@ -206,9 +198,9 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 					DoubleLevelNum = math.ceil(SessionDataTable[P1CurrentProfile]["LeveltimeD"]/SessionDataTable[P1CurrentProfile]["PlaytimeD"]);
 					if DoubleLevelNum > 9 then DoubleLevelString = "D"..DoubleLevelNum else DoubleLevelString = "D0"..DoubleLevelNum end;
 				end;
-				SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P1CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP1..")     "..string.format("%04d", math.floor(SessionDataTable[P1CurrentProfile]["Kcals"])));
+				--SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P1CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP1..")     "..string.format("%04d", math.floor(SessionDataTable[P1CurrentProfile]["Kcals"])));
 			else
-				SessionDataText:settext("");
+				--SessionDataText:settext("");
 				player_level_text:settext("0001".." (0%)");
 				local progressbar = self:GetChild("ProgressBarFill");
 				progressbar:zoomto((0),4);
@@ -244,7 +236,7 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 		P1CurrentSongTimeD = 0;
 		P1CurrentLevelTimeS = 0;
 		P1CurrentLevelTimeD = 0;
-		local SessionDataText = self:GetChild("SessionDataText");
+		--local SessionDataText = self:GetChild("SessionDataText");
 		local formattedtimeP1 = FormatTimeLong(SessionDataTable[P1CurrentProfile]["PlaytimeS"]+SessionDataTable[P1CurrentProfile]["PlaytimeD"]);
 		local SingleLevelNum = 0;
 		local SingleLevelString = "S00";
@@ -258,7 +250,7 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 			DoubleLevelNum = math.ceil(SessionDataTable[P1CurrentProfile]["LeveltimeD"]/SessionDataTable[P1CurrentProfile]["PlaytimeD"]);
 			if DoubleLevelNum > 9 then DoubleLevelString = "D"..DoubleLevelNum else DoubleLevelString = "D0"..DoubleLevelNum end;
 		end;
-		SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P1CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP1..")     "..string.format("%04d", math.floor(SessionDataTable[P1CurrentProfile]["Kcals"])));
+		--SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P1CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP1..")     "..string.format("%04d", math.floor(SessionDataTable[P1CurrentProfile]["Kcals"])));
 		(cmd(stoptweening;ShowPlayerName,1))(self);
 		local profile = PROFILEMAN:GetProfile(PLAYER_1);
 		local player_level, to_next =  CalcPlayerLevel(profile:GetVoomax());
@@ -282,7 +274,7 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 			player_level_text:settext("0001".." (0%)");
 			local progressbar = self:GetChild("ProgressBarFill");
 			progressbar:zoomto((0),4);
-			local SessionDataText = self:GetChild("SessionDataText");
+			-- local SessionDataText = self:GetChild("SessionDataText");
 			if SessionDataTable[P1CurrentProfile] ~= nil then
 				local formattedtimeP1 = FormatTimeLong(SessionDataTable[P1CurrentProfile]["PlaytimeS"]+SessionDataTable[P1CurrentProfile]["PlaytimeD"]);
 				local SingleLevelNum = 0;
@@ -297,9 +289,9 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 					DoubleLevelNum = math.ceil(SessionDataTable[P1CurrentProfile]["LeveltimeD"]/SessionDataTable[P1CurrentProfile]["PlaytimeD"]);
 					if DoubleLevelNum > 9 then DoubleLevelString = "D"..DoubleLevelNum else DoubleLevelString = "D0"..DoubleLevelNum end;
 				end;
-				SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P1CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP1..")     "..string.format("%04d", math.floor(SessionDataTable[P1CurrentProfile]["Kcals"])));
+				-- SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P1CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP1..")     "..string.format("%04d", math.floor(SessionDataTable[P1CurrentProfile]["Kcals"])));
 			else
-				SessionDataText:settext("");
+				-- SessionDataText:settext("");
 				player_level_text:settext("0001".." (0%)");
 				local progressbar = self:GetChild("ProgressBarFill");
 				progressbar:zoomto((0),4);
@@ -339,7 +331,7 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 			player_level_text:settext(player_level.." ("..to_next.."%)");
 			local progressbar = self:GetChild("ProgressBarFill");
 			progressbar:zoomto((1.9*to_next),4);
-			local SessionDataText = self:GetChild("SessionDataText");
+			-- local SessionDataText = self:GetChild("SessionDataText");
 			if SessionDataTable[P1CurrentProfile] ~= nil then
 				local formattedtimeP1 = FormatTimeLong(SessionDataTable[P1CurrentProfile]["PlaytimeS"]+SessionDataTable[P1CurrentProfile]["PlaytimeD"]);
 				local SingleLevelNum = 0;
@@ -354,9 +346,9 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 					DoubleLevelNum = math.ceil(SessionDataTable[P1CurrentProfile]["LeveltimeD"]/SessionDataTable[P1CurrentProfile]["PlaytimeD"]);
 					if DoubleLevelNum > 9 then DoubleLevelString = "D"..DoubleLevelNum else DoubleLevelString = "D0"..DoubleLevelNum end;
 				end;
-				SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P1CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP1..")     "..string.format("%04d", math.floor(SessionDataTable[P1CurrentProfile]["Kcals"])));
+				-- SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P1CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP1..")     "..string.format("%04d", math.floor(SessionDataTable[P1CurrentProfile]["Kcals"])));
 			else
-				SessionDataText:settext("");
+				-- SessionDataText:settext("");
 			end;
 			self:y(SCREEN_TOP+20);
 		end;
@@ -366,9 +358,9 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 		local name = self:GetChild("Name");
 		name:settext("");
 		P1CurrentProfile = "";
-		local SessionDataText = self:GetChild("SessionDataText");
+		-- local SessionDataText = self:GetChild("SessionDataText");
 		local player_level_text = self:GetChild("PlayerLevelText");
-		SessionDataText:settext("");
+		-- SessionDataText:settext("");
 		player_level_text:settext("0001".." (0%)");
 		local progressbar = self:GetChild("ProgressBarFill");
 		progressbar:zoomto((0),4);
@@ -439,8 +431,8 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 			avatar:zoomx(-1);
 			local backSessionData = self:GetChild("Back2");
 			backSessionData:zoomx(-1);
-			local SessionDataText = self:GetChild("SessionDataText");
-			SessionDataText:zoomx(-.60);
+			-- local SessionDataText = self:GetChild("SessionDataText");
+			-- SessionDataText:zoomx(-.60);
 			if SessionDataTable[P2CurrentProfile] ~= nil then
 				local formattedtimeP2 = FormatTimeLong(SessionDataTable[P2CurrentProfile]["PlaytimeS"]+SessionDataTable[P2CurrentProfile]["PlaytimeD"]);
 				local SingleLevelNum = 0;
@@ -455,9 +447,9 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 					DoubleLevelNum = math.ceil(SessionDataTable[P2CurrentProfile]["LeveltimeD"]/SessionDataTable[P2CurrentProfile]["PlaytimeD"]);
 					if DoubleLevelNum > 9 then DoubleLevelString = "D"..DoubleLevelNum else DoubleLevelString = "D0"..DoubleLevelNum end;
 				end;
-				SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P2CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP2..")     "..string.format("%04d",math.floor(SessionDataTable[P2CurrentProfile]["Kcals"])));	
+				-- SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P2CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP2..")     "..string.format("%04d",math.floor(SessionDataTable[P2CurrentProfile]["Kcals"])));	
 			else
-				SessionDataText:settext("");
+				-- SessionDataText:settext("");
 				player_level_text:settext("0001".." (0%)");
 				local progressbar = self:GetChild("ProgressBarFill");
 				progressbar:zoomto((0),4);
@@ -493,7 +485,7 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 		P2CurrentSongTimeD=0;
 		P2CurrentLevelTimeS=0;
 		P2CurrentLevelTimeD=0;
-		local SessionDataText = self:GetChild("SessionDataText");
+		-- local SessionDataText = self:GetChild("SessionDataText");
 		local formattedtimeP2 = FormatTimeLong(SessionDataTable[P2CurrentProfile]["PlaytimeS"]+SessionDataTable[P2CurrentProfile]["PlaytimeD"]);
 		local SingleLevelNum = 0;
 		local SingleLevelString = "S00";
@@ -507,7 +499,7 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 			DoubleLevelNum = math.ceil(SessionDataTable[P2CurrentProfile]["LeveltimeD"]/SessionDataTable[P2CurrentProfile]["PlaytimeD"]);
 			if DoubleLevelNum > 9 then DoubleLevelString = "D"..DoubleLevelNum else DoubleLevelString = "D0"..DoubleLevelNum end;
 		end;
-		SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P2CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP2..")     "..string.format("%04d",math.floor(SessionDataTable[P2CurrentProfile]["Kcals"])));
+		-- SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P2CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP2..")     "..string.format("%04d",math.floor(SessionDataTable[P2CurrentProfile]["Kcals"])));
 		(cmd(stoptweening;ShowPlayerName,2))(self);
 		local profile = PROFILEMAN:GetProfile(PLAYER_2);
 		local player_level, to_next =  CalcPlayerLevel(profile:GetVoomax());
@@ -531,7 +523,7 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 			avatarp2:horizalign(right);
 			avatarp2:SetWidth(50);
 			avatarp2:SetHeight(50);
-			local SessionDataText = self:GetChild("SessionDataText");
+			-- local SessionDataText = self:GetChild("SessionDataText");
 			if SessionDataTable[P2CurrentProfile] ~= nil then
 				local formattedtimeP2 = FormatTimeLong(SessionDataTable[P2CurrentProfile]["PlaytimeS"]+SessionDataTable[P2CurrentProfile]["PlaytimeD"]);
 				local SingleLevelNum = 0;
@@ -546,9 +538,9 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 					DoubleLevelNum = math.ceil(SessionDataTable[P2CurrentProfile]["LeveltimeD"]/SessionDataTable[P2CurrentProfile]["PlaytimeD"]);
 					if DoubleLevelNum > 9 then DoubleLevelString = "D"..DoubleLevelNum else DoubleLevelString = "D0"..DoubleLevelNum end;
 				end;
-				SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P2CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP2..")     "..string.format("%04d",math.floor(SessionDataTable[P2CurrentProfile]["Kcals"])));		
+				-- SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P2CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP2..")     "..string.format("%04d",math.floor(SessionDataTable[P2CurrentProfile]["Kcals"])));		
 			else
-				SessionDataText:settext("");
+				-- SessionDataText:settext("");
 				player_level_text:settext("0001".." (0%)");
 				local progressbar = self:GetChild("ProgressBarFill");
 				progressbar:zoomto((0),4);
@@ -592,7 +584,7 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 			player_level_text:settext(player_level.." ("..to_next.."%)");
 			local progressbar = self:GetChild("ProgressBarFill");
 			progressbar:zoomto((1.9*to_next),4);
-			local SessionDataText = self:GetChild("SessionDataText");
+			-- local SessionDataText = self:GetChild("SessionDataText");
 			if SessionDataTable[P2CurrentProfile] ~= nil then
 				local formattedtimeP2 = FormatTimeLong(SessionDataTable[P2CurrentProfile]["PlaytimeS"]+SessionDataTable[P2CurrentProfile]["PlaytimeD"]);
 				local SingleLevelNum = 0;
@@ -607,9 +599,9 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 					DoubleLevelNum = math.ceil(SessionDataTable[P2CurrentProfile]["LeveltimeD"]/SessionDataTable[P2CurrentProfile]["PlaytimeD"]);
 					if DoubleLevelNum > 9 then DoubleLevelString = "D"..DoubleLevelNum else DoubleLevelString = "D0"..DoubleLevelNum end;
 				end;
-				SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P2CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP2..")     "..string.format("%04d",math.floor(SessionDataTable[P2CurrentProfile]["Kcals"])));	
+				-- SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P2CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP2..")     "..string.format("%04d",math.floor(SessionDataTable[P2CurrentProfile]["Kcals"])));	
 			else
-				SessionDataText:settext("");
+				-- SessionDataText:settext("");
 			end;
 			self:y(SCREEN_TOP+20);
 		end;
@@ -619,9 +611,9 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 		local name = self:GetChild("Name");
 		name:settext("");
 		P2CurrentProfile = "";
-		local SessionDataText = self:GetChild("SessionDataText");
+		-- local SessionDataText = self:GetChild("SessionDataText");
 		local player_level_text = self:GetChild("PlayerLevelText");
-		SessionDataText:settext("");
+		-- SessionDataText:settext("");
 		player_level_text:settext("0001".." (0%)");
 		local progressbar = self:GetChild("ProgressBarFill");
 		progressbar:zoomto((0),4);
@@ -684,5 +676,36 @@ t[#t+1] = Def.ActorFrame {
 --     end;
 -- }
 
+t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/EVENT.png"))..{
+	InitCommand=function(s)
+		s:zoom(0.35)
+		s:zoomy(0.3)
+		s:x(SCREEN_CENTER_X)
+		s:y(SCREEN_BOTTOM-12)
+		s:queuecommand("Update")
+	end;
+
+	UpdateCommand=function(s)
+		s:finishtweening()
+		s:sleep(1/60)
+		s:queuecommand("UpdateVisibility")
+	end;
+
+	UpdateVisibilityCommand=function(s)
+		local CurrentScreen = SCREENMAN:GetTopScreen()
+
+		if CurrentScreen ~= nil then
+			local VisibleMetric = THEME:GetMetric(CurrentScreen:GetName(), "ShowCreditDisplay")
+
+			if VisibleMetric ~= nil then
+				s:visible(VisibleMetric)
+			else
+				s:visible(true)
+			end
+		end
+
+		s:queuecommand("Update")
+	end;
+};
 
 return t;

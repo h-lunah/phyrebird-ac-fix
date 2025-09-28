@@ -37,8 +37,4 @@ t[#t+1] = SimplePlatPiu(130,SCREEN_HEIGHT-160)..{ OffCommand=cmd(visible,false);
 --2nd Player
 t[#t+1] = SimplePlatPiu(SCREEN_WIDTH-130,SCREEN_HEIGHT-160)..{ OffCommand=cmd(visible,false); };
 
-t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/FREE_PLAY.png") )..{
-	InitCommand=cmd(zoom,0.45;x,SCREEN_CENTER_X;y,SCREEN_BOTTOM-12);
-};
-
 return t;

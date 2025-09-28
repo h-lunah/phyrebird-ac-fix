@@ -579,7 +579,7 @@ function GetPHighScoresFrameEval( pn )
 	return a;
 	end;
 
--- High scores, Level Ball & Autoplay text
+-- High scores, Level Ball
 if GAMESTATE:IsSideJoined( PLAYER_1 ) then
 t[#t+1] = GetHighScoresFrameEval( PLAYER_1 )..{ InitCommand=cmd(x,cx-275;y,SCREEN_BOTTOM-80); };
 
@@ -625,12 +625,6 @@ t[#t+1] = GetBallLevelTextP1( PLAYER_1, false )..{
 	OffCommand=cmd(stoptweening;playcommand,"Hide";y,SCREEN_BOTTOM-100;sleep,0;linear,.2;y,SCREEN_BOTTOM+100;queuecommand,'HideOnCommand') -- Quando sai da tela
 };
 
-if STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):IsDisqualified() then
-t[#t+1] = LoadFont("_jnr_font")..{
-	InitCommand=cmd(settext,"AutoPlay";x,cx-270;y,SCREEN_BOTTOM-142;zoom,.5);
-	OffCommand=cmd(stoptweening;visible,false);
-};
-end;
 if GAMESTATE:GetCurrentSteps(PLAYER_1):GetAuthorCredit() ~= "" then
 t[#t+1] = LoadFont("SongTitle")..{
 	InitCommand=cmd(settext,"by";x,SCREEN_CENTER_X-135;y,SCREEN_TOP+183;zoom,.3);
@@ -695,12 +689,6 @@ t[#t+1] = GetBallLevelTextP2( PLAYER_2, false )..{
 	OffCommand=cmd(stoptweening;playcommand,"Hide";y,SCREEN_BOTTOM-100;sleep,0;linear,.2;y,SCREEN_BOTTOM+100;queuecommand,'HideOnCommand') -- Quando sai da tela
 };
 
-if STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):IsDisqualified() then
-t[#t+1] = LoadFont("_jnr_font")..{
-	InitCommand=cmd(settext,"AutoPlay";x,SCREEN_CENTER_X+270;y,SCREEN_BOTTOM-142;zoom,.5);
-	OffCommand=cmd(stoptweening;visible,false);
-};
-end;
 end;
 
 -- t[#t+1] = LoadActor( "_recordgrades.lua" )..{
