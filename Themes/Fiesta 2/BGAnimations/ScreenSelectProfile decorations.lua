@@ -39,7 +39,7 @@ t[#t+1] = PlayerMessage(PLAYER_2)..{
 ------------------------------------------------------------------------------------------------------------------
 t[#t+1] = LoadFont("_myriad pro 20px")..{
 	InitCommand=function(self)
-		self:xy(SCREEN_LEFT+10, SCREEN_TOP+25)
+		self:xy(SCREEN_LEFT+10, SCREEN_TOP+35)
 		self:horizalign(left)
         self:vertalign(top)
 		self:settext("v2.00.0\nPIU25-ABCDEFG00 (INT)\nPhyrebird")

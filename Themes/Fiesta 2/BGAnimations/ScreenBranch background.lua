@@ -1,13 +1,6 @@
 local t = Def.ActorFrame{}
 
-local rmin = 0;
-local rmax = 6;
-
-local num = math.random(rmin,rmax);
-
-if num == 6 then
-	num = tostring(num).."_"..GetLanguageText();
-end;
+local num = math.random(0,5);
 
 return Def.ActorFrame {
 	children = {

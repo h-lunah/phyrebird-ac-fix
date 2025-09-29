@@ -1,5 +1,16 @@
 local t = Def.ActorFrame {}
 
+function PIURandomDiscrim()
+	local res = {}
+
+	for i=1,4,1 do
+		local num = math.random(0,9)
+		table.insert(res,num)
+	end
+
+	return "#"..table.concat(res,"")
+end
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Revisa en los metrics de la screen si se deben o no mostrar los creditos
@@ -115,6 +126,10 @@ local function PlayerName( Player )
 			Name = "Name";
 			InitCommand=cmd(horizalign,center;y,15;x,-80;zoom,.85);
 		};
+		t[#t+1] = LoadFont("","_myriad pro bold 20px") .. {
+			Name = "Discrim";
+			InitCommand=cmd(horizalign,center;y,18;x,-20;zoom,.55;diffuse,color("#ff8800"));
+		};
 		t[#t+1] = LoadFont("","ProfileNum") .. {
 			Name = "TextLv";
 			InitCommand=cmd(x,SCREEN_CENTER_X;y,15;zoom,.75;diffuse,0,1,1,1);
@@ -167,16 +182,12 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 		local la = SCREENMAN:GetTopScreen():GetName();
 		if (params.Player == PLAYER_1) then
 			local name = self:GetChild("Name");
+			local discrim = self:GetChild("Discrim");
 			name:settext("GUEST P1");
-			local textLV = self:GetChild("TextLv");
-			textLV:settext("Lv.");
-			textLV:x(-30);
-			local player_level_text = self:GetChild("PlayerLevelText")
-			player_level_text:settext("0001".." (0%)");
-			player_level_text:horizalign(left);
-			player_level_text:x(-20)
-			local progressbar = self:GetChild("ProgressBarFill");
-			progressbar:zoomto((0),4);
+			discrim:settext("");
+			--local textLV = self:GetChild("TextLv");
+			--textLV:settext("Lv.");
+			--textLV:x(-30);
 			P1CurrentProfile = "GUEST P1";
 			local avatar = self:GetChild("Avatar");
 			avatar:Load(THEME:GetPathG("","_avatars/PlayerNumber_P1.png"));
@@ -201,9 +212,6 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 				--SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P1CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP1..")     "..string.format("%04d", math.floor(SessionDataTable[P1CurrentProfile]["Kcals"])));
 			else
 				--SessionDataText:settext("");
-				player_level_text:settext("0001".." (0%)");
-				local progressbar = self:GetChild("ProgressBarFill");
-				progressbar:zoomto((0),4);
 			end;
 			(cmd(stoptweening;y,SCREEN_TOP-50;linear,.2;y,SCREEN_TOP+20))(self);
 		end;
@@ -253,27 +261,18 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 		--SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P1CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP1..")     "..string.format("%04d", math.floor(SessionDataTable[P1CurrentProfile]["Kcals"])));
 		(cmd(stoptweening;ShowPlayerName,1))(self);
 		local profile = PROFILEMAN:GetProfile(PLAYER_1);
-		local player_level, to_next =  CalcPlayerLevel(profile:GetVoomax());
-		player_level = string.format("%04d", player_level)
-		local player_level_text = self:GetChild("PlayerLevelText");
-		player_level_text:settext(player_level.." ("..to_next.."%)");
-		local progressbar = self:GetChild("ProgressBarFill");
-		progressbar:zoomto((1.9*to_next),4)
 		end;
 	HideProfileChangesMessageCommand=function(self,params)
 		if params.pn=='PlayerNumber_P1' then
 			local name = self:GetChild("Name");
+			local discrim = self:GetChild("Discrim");
 			name:settext("GUEST P1");
-			P1CurrentProfile = "GUEST P1";
+			discrim:settext("")
 			local avatar = self:GetChild("Avatar");
 			avatar:Load(THEME:GetPathG("","_avatars/PlayerNumber_P1.png"));
 			avatar:horizalign(left);
 			avatar:SetWidth(50);
 			avatar:SetHeight(50);
-			local player_level_text = self:GetChild("PlayerLevelText")
-			player_level_text:settext("0001".." (0%)");
-			local progressbar = self:GetChild("ProgressBarFill");
-			progressbar:zoomto((0),4);
 			-- local SessionDataText = self:GetChild("SessionDataText");
 			if SessionDataTable[P1CurrentProfile] ~= nil then
 				local formattedtimeP1 = FormatTimeLong(SessionDataTable[P1CurrentProfile]["PlaytimeS"]+SessionDataTable[P1CurrentProfile]["PlaytimeD"]);
@@ -292,9 +291,6 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 				-- SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P1CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP1..")     "..string.format("%04d", math.floor(SessionDataTable[P1CurrentProfile]["Kcals"])));
 			else
 				-- SessionDataText:settext("");
-				player_level_text:settext("0001".." (0%)");
-				local progressbar = self:GetChild("ProgressBarFill");
-				progressbar:zoomto((0),4);
 			end;
 			self:y(SCREEN_TOP+20);
 		end;
@@ -302,7 +298,9 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 	LocalProfileChangeMessageCommand=function(self,params)	--cambio la profile del jugador
 		if params.pn=='PlayerNumber_P1' then
 			local name = self:GetChild("Name");
+			local discrim = self:GetChild("Discrim");
 			name:settext( string.upper(string.sub(params.name,1,8)) ); --corta el nombre hasta 8 letras
+			discrim:settext(PIURandomDiscrim())
 			P1CurrentProfile = params.name;
 			local DisplayNamesTable = PROFILEMAN:GetLocalProfileDisplayNames();
 			local ProfileID = "PlayerNumber_P1";
@@ -325,12 +323,6 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 			avatar:SetHeight(50);
 			
 			local profile = PROFILEMAN:GetLocalProfile(ProfileID);
-			local player_level, to_next =  CalcPlayerLevel(profile:GetVoomax());
-			player_level = string.format("%04d", player_level)
-			local player_level_text = self:GetChild("PlayerLevelText");
-			player_level_text:settext(player_level.." ("..to_next.."%)");
-			local progressbar = self:GetChild("ProgressBarFill");
-			progressbar:zoomto((1.9*to_next),4);
 			-- local SessionDataText = self:GetChild("SessionDataText");
 			if SessionDataTable[P1CurrentProfile] ~= nil then
 				local formattedtimeP1 = FormatTimeLong(SessionDataTable[P1CurrentProfile]["PlaytimeS"]+SessionDataTable[P1CurrentProfile]["PlaytimeD"]);
@@ -361,9 +353,6 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 		-- local SessionDataText = self:GetChild("SessionDataText");
 		local player_level_text = self:GetChild("PlayerLevelText");
 		-- SessionDataText:settext("");
-		player_level_text:settext("0001".." (0%)");
-		local progressbar = self:GetChild("ProgressBarFill");
-		progressbar:zoomto((0),4);
 		self:y(SCREEN_TOP-50);
 	end;
 	JudgmentMessageCommand=function(self,param)
@@ -407,22 +396,12 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 	PlayerStartedSelectProfileMessageCommand=function( self, params )
 		if (params.Player == PLAYER_2) then
 			local name = self:GetChild("Name");
+			local discrim = self:GetChild("Discrim");
 			name:settext("GUEST P2");
+			discrim:settext("");
 			name:rotationy(180)
 			name:x(0)
-			local textLV = self:GetChild("TextLv");
-			textLV:settext("Lv.");
-			textLV:x(-50);
-			textLV:rotationy(180)
 			P2CurrentProfile = "GUEST P2";
-			local player_level_text = self:GetChild("PlayerLevelText")
-			player_level_text:settext("0001".." (0%)");
-			player_level_text:horizalign(left);
-			player_level_text:x(-60);
-			player_level_text:rotationy(180)
-			local progressbar = self:GetChild("ProgressBarFill");
-			progressbar:zoomto((0),4);
-			progressbar:zoomx(-1);
 			local avatar = self:GetChild("Avatar");
 			avatar:Load(THEME:GetPathG("","_avatars/PlayerNumber_P2.png"));
 			avatar:horizalign(right);
@@ -450,9 +429,6 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 				-- SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P2CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP2..")     "..string.format("%04d",math.floor(SessionDataTable[P2CurrentProfile]["Kcals"])));	
 			else
 				-- SessionDataText:settext("");
-				player_level_text:settext("0001".." (0%)");
-				local progressbar = self:GetChild("ProgressBarFill");
-				progressbar:zoomto((0),4);
 			end;
 			(cmd(stoptweening;y,SCREEN_TOP-50;linear,.2;y,SCREEN_TOP+20))(self);
 		end;
@@ -502,22 +478,14 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 		-- SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P2CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP2..")     "..string.format("%04d",math.floor(SessionDataTable[P2CurrentProfile]["Kcals"])));
 		(cmd(stoptweening;ShowPlayerName,2))(self);
 		local profile = PROFILEMAN:GetProfile(PLAYER_2);
-		local player_level, to_next =  CalcPlayerLevel(profile:GetVoomax());
-		player_level = string.format("%04d", player_level)
-		local player_level_text = self:GetChild("PlayerLevelText");
-		player_level_text:settext(player_level.." ("..to_next.."%)");
-		local progressbar = self:GetChild("ProgressBarFill");
-		progressbar:zoomto((1.9*to_next),4)
 		end;
 	HideProfileChangesMessageCommand=function(self,params)
 		if params.pn=='PlayerNumber_P2' then
 			local name = self:GetChild("Name");
+			local discrim = self:GetChild("Discrim");
 			name:settext("GUEST P2");
-			P2CurrentProfile = "GUEST P2";
-			local player_level_text = self:GetChild("PlayerLevelText")
-			player_level_text:settext("0001".." (0%)");
-			local progressbar = self:GetChild("ProgressBarFill");
-			progressbar:zoomto((0),4);
+			discrim:settext("");
+			name:rotationy(180)
 			local avatarp2 = self:GetChild("Avatar");
 			avatarp2:Load(THEME:GetPathG("","_avatars/PlayerNumber_P2.png"));
 			avatarp2:horizalign(right);
@@ -541,23 +509,18 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 				-- SessionDataText:settext(SingleLevelString.." / "..DoubleLevelString.."    "..string.format("%02d",SessionDataTable[P2CurrentProfile]["SongsPlayed"]).." ("..formattedtimeP2..")     "..string.format("%04d",math.floor(SessionDataTable[P2CurrentProfile]["Kcals"])));		
 			else
 				-- SessionDataText:settext("");
-				player_level_text:settext("0001".." (0%)");
-				local progressbar = self:GetChild("ProgressBarFill");
-				progressbar:zoomto((0),4);
 			end;
 			self:y(SCREEN_TOP+20);
 		end;
 	end;
 	LocalProfileChangeMessageCommand=function(self,params)	--cambio la profile del jugador
 		if params.pn=='PlayerNumber_P2' then
-			local player_level_text = self:GetChild("PlayerLevelText")
-			player_level_text:settext("0001".." (0%)");
-			local progressbar = self:GetChild("ProgressBarFill");
-			progressbar:zoomto((0),4);
-			local name = self:GetChild("Name");	
+			local name = self:GetChild("Name");
+			local discrim = self:GetChild("Discrim");
 			name:settext( string.upper(string.sub(params.name,1,8)) ); --corta el nombre hasta 8 letras
+			discrim:settext(PIURandomDiscrim())
 			P2CurrentProfile = params.name;
-			local DisplayNamesTable = PROFILEMAN:GetLocalProfileDisplayNames();
+			local DisplayNamesTUable = PROFILEMAN:GetLocalProfileDisplayNames();
 			local ProfileID = "PlayerNumber_P2";
 			for i=1,#DisplayNamesTable do
 				if DisplayNamesTable[i] == params.name then
@@ -578,12 +541,6 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 			avatarp2:SetHeight(50);
 			
 			local profile = PROFILEMAN:GetLocalProfile(ProfileID);
-			local player_level, to_next =  CalcPlayerLevel(profile:GetVoomax());
-			player_level = string.format("%04d", player_level)
-			local player_level_text = self:GetChild("PlayerLevelText");
-			player_level_text:settext(player_level.." ("..to_next.."%)");
-			local progressbar = self:GetChild("ProgressBarFill");
-			progressbar:zoomto((1.9*to_next),4);
 			-- local SessionDataText = self:GetChild("SessionDataText");
 			if SessionDataTable[P2CurrentProfile] ~= nil then
 				local formattedtimeP2 = FormatTimeLong(SessionDataTable[P2CurrentProfile]["PlaytimeS"]+SessionDataTable[P2CurrentProfile]["PlaytimeD"]);
@@ -612,11 +569,6 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 		name:settext("");
 		P2CurrentProfile = "";
 		-- local SessionDataText = self:GetChild("SessionDataText");
-		local player_level_text = self:GetChild("PlayerLevelText");
-		-- SessionDataText:settext("");
-		player_level_text:settext("0001".." (0%)");
-		local progressbar = self:GetChild("ProgressBarFill");
-		progressbar:zoomto((0),4);
 		self:y(SCREEN_TOP-50);
 	end;
 	JudgmentMessageCommand=function(self,param)
