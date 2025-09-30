@@ -339,7 +339,7 @@ function CalcPlayerLevel(totalexp)
 	local player_level_int = math.floor(player_level_raw);
 	local to_next_level = math.floor(100*(player_level_raw - player_level_int));
   return player_level_int,to_next_level;
-end;
+end
 
 -----------------------------------------------------------------------
 	

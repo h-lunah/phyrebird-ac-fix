@@ -127,6 +127,10 @@ local function PlayerName( Player )
 			InitCommand=cmd(horizalign,center;y,15;x,-80;zoom,.85);
 		};
 		t[#t+1] = LoadFont("","_myriad pro bold 20px") .. {
+			Name = "Title";
+			InitCommand=cmd(horizalign,center;y,-10;x,0;zoom,1);
+		};
+		t[#t+1] = LoadFont("","_myriad pro bold 20px") .. {
 			Name = "Discrim";
 			InitCommand=cmd(horizalign,center;y,18;x,-20;zoom,.55;diffuse,color("#ff8800"));
 		};
@@ -183,8 +187,10 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 		if (params.Player == PLAYER_1) then
 			local name = self:GetChild("Name");
 			local discrim = self:GetChild("Discrim");
+			local title = self:GetChild("Title");
 			name:settext("GUEST P1");
 			discrim:settext("");
+			title:settext("Beginner");
 			--local textLV = self:GetChild("TextLv");
 			--textLV:settext("Lv.");
 			--textLV:x(-30);
@@ -266,8 +272,10 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 		if params.pn=='PlayerNumber_P1' then
 			local name = self:GetChild("Name");
 			local discrim = self:GetChild("Discrim");
+			local title = self:GetChild("Title");
 			name:settext("GUEST P1");
 			discrim:settext("")
+			title:settext("Beginner");
 			local avatar = self:GetChild("Avatar");
 			avatar:Load(THEME:GetPathG("","_avatars/PlayerNumber_P1.png"));
 			avatar:horizalign(left);
@@ -298,9 +306,11 @@ t[#t+1] = PlayerName( PLAYER_1 )..{
 	LocalProfileChangeMessageCommand=function(self,params)	--cambio la profile del jugador
 		if params.pn=='PlayerNumber_P1' then
 			local name = self:GetChild("Name");
+			local title = self:GetChild("Title");
 			local discrim = self:GetChild("Discrim");
 			name:settext( string.upper(string.sub(params.name,1,8)) ); --corta el nombre hasta 8 letras
 			discrim:settext(PIURandomDiscrim())
+			title:settext(GetPlayerTitle(params.pn))
 			P1CurrentProfile = params.name;
 			local DisplayNamesTable = PROFILEMAN:GetLocalProfileDisplayNames();
 			local ProfileID = "PlayerNumber_P1";
@@ -396,9 +406,11 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 	PlayerStartedSelectProfileMessageCommand=function( self, params )
 		if (params.Player == PLAYER_2) then
 			local name = self:GetChild("Name");
+			local title = self:GetChild("Title");
 			local discrim = self:GetChild("Discrim");
 			name:settext("GUEST P2");
 			discrim:settext("");
+			title:settext("Beginner")
 			name:rotationy(180)
 			name:x(0)
 			P2CurrentProfile = "GUEST P2";
@@ -482,9 +494,11 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 	HideProfileChangesMessageCommand=function(self,params)
 		if params.pn=='PlayerNumber_P2' then
 			local name = self:GetChild("Name");
+			local title = self:GetChild("Title");
 			local discrim = self:GetChild("Discrim");
 			name:settext("GUEST P2");
 			discrim:settext("");
+			title:settext("Beginner");
 			name:rotationy(180)
 			local avatarp2 = self:GetChild("Avatar");
 			avatarp2:Load(THEME:GetPathG("","_avatars/PlayerNumber_P2.png"));
@@ -516,9 +530,11 @@ t[#t+1] = PlayerName( PLAYER_2 ) .. {
 	LocalProfileChangeMessageCommand=function(self,params)	--cambio la profile del jugador
 		if params.pn=='PlayerNumber_P2' then
 			local name = self:GetChild("Name");
+			local title = self:GetChild("Title");
 			local discrim = self:GetChild("Discrim");
 			name:settext( string.upper(string.sub(params.name,1,8)) ); --corta el nombre hasta 8 letras
 			discrim:settext(PIURandomDiscrim())
+			title:settext(GetPlayerTitle(params.pn))
 			P2CurrentProfile = params.name;
 			local DisplayNamesTUable = PROFILEMAN:GetLocalProfileDisplayNames();
 			local ProfileID = "PlayerNumber_P2";

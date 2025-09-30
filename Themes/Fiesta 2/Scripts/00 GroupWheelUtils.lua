@@ -14,6 +14,8 @@ local SortsSounds = {
 	{"SO_QUEST", 		"08_QUEST_ZONE.MP3"};
 	{"SO_COOP", 		"43_COOP_PLAY.MP3"};
 	{"SO_RANDOM", 	"02_RANDOM.MP3"};
+	{"SO_JMUSIC", 	"18_J-MUSIC.MP3"};
+	{"SO_XROSS", 	"04_XROSS.mp3"};
 	{"SO_LEVEL_1", 	"19_LEVEL1.MP3"};
 	{"SO_LEVEL_2", 	"20_LEVEL2.MP3"};
 	{"SO_LEVEL_3", 	"21_LEVEL3.MP3"};
@@ -128,6 +130,8 @@ ChannelsGraphics = {
 	["SO_LEVEL_22"] = "C_LV_22.PNG";
 	["SO_LEVEL_23"] = "C_LV_23.PNG";
 	["SO_LEVEL_24"] = "C_LV_24O.PNG";
+	["SO_JMUSIC"] = "C_JM.PNG";
+	["SO_XCROSS"] = "C_XR.png";
 	["01 - 1ST~ZERO"] = 		"C_LOGO1.PNG";
 	["02 - NX~NXA"] = 	"C_NXA.PNG";
     ["03 - FIESTA~FIESTA2"] = "C_FIESTA2.PNG";
@@ -190,6 +194,8 @@ local ChannelsTextCoordSpanish = {
 	["SO_LEVEL_22"] =  "En este canal, puedes jugar canciones de nivel 22" ;
 	["SO_LEVEL_23"] =  "En este canal, puedes jugar canciones de nivel 23" ;
 	["SO_LEVEL_24"] =  "En este canal, puedes jugar canciones de nivel 24 o más" ;
+	["SO_JMUSIC"] =  "En este canal, puedes jugar una variedad de canciones japonesas" ;
+	["SO_XROSS"] =  "En este canal, puedes jugar una variedad de canciones de otros juegos" ;
 }
 
 local ChannelsTextCoordEnglish = {
@@ -238,6 +244,8 @@ local ChannelsTextCoordEnglish = {
 	["SO_LEVEL_22"] =  "In this channel, you can play level 22 difficulty songs" ;
 	["SO_LEVEL_23"] =  "In this channel, you can play level 23 difficulty songs" ;
 	["SO_LEVEL_24"] =  "In this channel, you can play songs that are level 24 difficulty or higher" ;
+	["SO_JMUSIC"] =  "In this channel, you can play a variety of Japanese musics" ;
+	["SO_XROSS"] =  "In this channel, you can play cross licensed songs" ;
 }
 
 Descriptions = {
