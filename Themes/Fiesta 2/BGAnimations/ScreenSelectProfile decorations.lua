@@ -51,4 +51,19 @@ t[#t+1] = LoadFont("_myriad pro 20px")..{
 	end;
 }
 
+t[#t+1] = LoadFont("_myriad pro Blue bold 20px")..{
+	InitCommand=function(self)
+		self:settext("")
+		self:xy(SCREEN_CENTER_X, SCREEN_BOTTOM-40)
+		self:zoom(0.66)
+	end;
+	OnCommand=function(self)
+		if IsNetConnected() then
+			self:settext("ONLINE")
+		else
+			self:settext("OFFLINE")
+		end
+	end;
+}
+
 return t

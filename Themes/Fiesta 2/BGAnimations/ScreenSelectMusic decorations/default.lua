@@ -294,22 +294,6 @@ t[#t+1] = LoadActor("_timer")..{
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-t[#t+1] = Def.ActorFrame {
-	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_TOP+65;diffusealpha,0;zoom,0.35);
-	GoBackSelectingGroupMessageCommand=cmd(stoptweening;diffusealpha,0;sleep,.3;linear,.2;diffusealpha,1;sleep,2;linear,.2;diffusealpha,0);
-	StartSelectingSongMessageCommand=cmd(stoptweening;linear,.2;diffusealpha,0);
-	children = {
-		LoadActor(THEME:GetPathG("","Messages/back.png"));
-		LoadActor(THEME:GetPathG("","Messages/back_glow.png"))..{
-			InitCommand=cmd(blend,"BlendMode_Add");
-			OnCommand=cmd(diffusealpha,.8);
-		};
-		LoadActor(THEME:GetPathG("","Messages/goback_"..GetLanguageText()..".png"))..{
-			OnCommand=cmd(zoom,1);
-		};
-	};
-}
-
 t[#t+1] = LoadActor( THEME:GetPathS("","Sounds/ST_BGM (loop)") )..{
 	OnCommand=cmd(stop);
 	GoBackSelectingGroupMessageCommand=cmd(stoptweening;play);

@@ -1,7 +1,19 @@
 local function GetStageNumberActor()
 	local first_digit;
 	local second_digit;
-	local stage = "00"
+	if GAMESTATE:IsEventMode() then
+		local stage = "00"
+	else
+		local stage = STATSMAN:GetStagesPlayed()+1
+
+		if ( stage > 99 ) then
+			first_digit = 9
+			second_digit = 9
+		else
+			first_digit = math.floor(stage/10)
+			second_digit = stage - (first_digit-10)
+		end
+	end
 		
 	return Def.ActorFrame {
 		LoadActor( THEME:GetPathG("","ScreenGameplay/STAGE_FM") ).. {

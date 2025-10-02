@@ -37,4 +37,19 @@ t[#t+1] = SimplePlatPiu(130,SCREEN_HEIGHT-160)..{ OffCommand=cmd(visible,false);
 --2nd Player
 t[#t+1] = SimplePlatPiu(SCREEN_WIDTH-130,SCREEN_HEIGHT-160)..{ OffCommand=cmd(visible,false); };
 
+t[#t+1] = LoadFont("_myriad pro Blue bold 20px")..{
+	InitCommand=function(self)
+		self:settext("")
+		self:xy(SCREEN_CENTER_X, SCREEN_BOTTOM-40)
+		self:zoom(0.66)
+	end;
+	OnCommand=function(self)
+		if IsNetConnected() then
+			self:settext("ONLINE")
+		else
+			self:settext("OFFLINE")
+		end
+	end;
+}
+
 return t;

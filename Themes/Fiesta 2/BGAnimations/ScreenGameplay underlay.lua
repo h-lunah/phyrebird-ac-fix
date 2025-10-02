@@ -3,7 +3,7 @@ local function GetStageNumberActor()
 	local first_digit;
 	local second_digit;
 	local stage = STATSMAN:GetStagesPlayed()+1;
-
+	
 	if( stage > 99 ) then
 		first_digit = 9;
 		second_digit = 9;
@@ -11,7 +11,7 @@ local function GetStageNumberActor()
 		first_digit = math.floor(stage/10);
 		second_digit = stage - (first_digit*10);
 	end;
-
+		
 	return Def.ActorFrame {
 		LoadActor( THEME:GetPathG("","ScreenGameplay/STAGE_FM") ).. {
 			InitCommand=cmd(FromTop,28);
@@ -55,9 +55,9 @@ end;
 local function GetPlayerPosition( player )
 	local P1PosX = SCREEN_CENTER_X-159;
 	local P2PosX = SCREEN_CENTER_X+159;
-
+	
 	local style = GAMESTATE:GetCurrentSteps(player):GetStepsType();
-
+	
 	if IsUnderAttackForPlayer( player ) then
 		if style == 'StepsType_Pump_Single' or style == 'StepsType_Pump_Couple' then
 			if player == PLAYER_1 then return P1PosX; else return P2PosX; end;
@@ -65,7 +65,7 @@ local function GetPlayerPosition( player )
 			return SCREEN_CENTER_X;
 		end;
 	end;
-
+	
 	if style == 'StepsType_Pump_Single' or style == 'StepsType_Pump_Couple' then
 		if player == PLAYER_1 then return P1PosX; else return P2PosX; end;
 	else
@@ -116,13 +116,13 @@ if GAMESTATE:IsSideJoined(PLAYER_1) then
 	local HSList = PROFILEMAN:GetProfile(PLAYER_1):GetHighScoreList(cur_song,cur_steps):GetHighScores();
 	if HSList ~= nil and #HSList ~= 0 then
 		PersonalBest = math.floor(HSList[1]:GetScore()/100);
-		if PersonalBest > 2000000 then
+		if PersonalBest > 2000000 then 
 			PersonalBest = 0;
-		elseif PersonalBest > 1000000 then
+		elseif PersonalBest > 1000000 then 
 			PersonalBest = PersonalBest - 1000000;
 		end;
 	end;
-
+	
 	local pscoreP1 = 0;
 	t[#t+1] = Def.Actor{
 		JudgmentMessageCommand=function(self,param)
@@ -196,7 +196,7 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 
 	P2mods = P2speed..P2judge
 
-
+	
 	--P2 Score Frame--
 	local PersonalBest = 0;
 	local cur_song = GAMESTATE:GetCurrentSong();
@@ -204,9 +204,9 @@ if GAMESTATE:IsSideJoined(PLAYER_2) then
 	local HSList = PROFILEMAN:GetProfile(PLAYER_2):GetHighScoreList(cur_song,cur_steps):GetHighScores();
 	if HSList ~= nil and #HSList ~= 0 then
 		PersonalBest = math.floor(HSList[1]:GetScore()/100);
-		if PersonalBest > 2000000 then
+		if PersonalBest > 2000000 then 
 			PersonalBest = 0;
-		elseif PersonalBest > 1000000 then
+		elseif PersonalBest > 1000000 then 
 			PersonalBest = PersonalBest - 1000000;
 		end;
 	end;

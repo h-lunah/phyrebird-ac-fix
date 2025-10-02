@@ -128,7 +128,7 @@ local function PlayerName( Player )
 		};
 		t[#t+1] = LoadFont("","_myriad pro bold 20px") .. {
 			Name = "Title";
-			InitCommand=cmd(horizalign,center;y,-10;x,0;zoom,1);
+			InitCommand=cmd(horizalign,center;y,-10;x,0;zoom,1;uppercase,true);
 		};
 		t[#t+1] = LoadFont("","_myriad pro bold 20px") .. {
 			Name = "Discrim";
@@ -149,6 +149,38 @@ local function PlayerName( Player )
 				self:play();
 			end;
 		};
+
+		for i=1,6,1 do
+			t[#t+1] = LoadActor(THEME:GetPathG("","heart_base"))..{
+				InitCommand=function(self)
+					self:x(75+20*i)
+					self:y(15)
+				end;
+			}
+
+			t[#t+1] = LoadActor(THEME:GetPathG("","heart_full"))..{
+				InitCommand=function(self)
+					self:x(75+20*i)
+					self:y(15)
+				end;
+				OnCommand=function(self)
+					local screen = SCREENMAN:GetTopScreen()
+					if screen:GetName() == "ScreenSelectMusic" and i <= 2 then
+						self:diffuseshift()
+						self:blend("BlendMode_Add")
+						self:effectcolor1(color("#ffffff"))
+						self:effectcolor2(color("#000000"))
+						self:effectperiod(3)
+					else
+						self:effectcolor1(color("#000000"))
+					end
+					self:queuecommand("Check")
+				end;
+				CheckCommand=function(self)
+					self:sleep(1/60):queuecommand("On")
+				end;
+			}
+		end
 		
 	return t;
 end;
@@ -644,12 +676,11 @@ t[#t+1] = Def.ActorFrame {
 --     end;
 -- }
 
-t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/EVENT.png"))..{
+t[#t+1] = Def.Sprite{}..{
 	InitCommand=function(s)
-		s:zoom(0.35)
-		s:zoomy(0.3)
 		s:x(SCREEN_CENTER_X)
 		s:y(SCREEN_BOTTOM-12)
+
 		s:queuecommand("Update")
 	end;
 
@@ -670,6 +701,16 @@ t[#t+1] = LoadActor(THEME:GetPathG("","Common Resources/EVENT.png"))..{
 			else
 				s:visible(true)
 			end
+		end
+
+		if GAMESTATE:IsEventMode() then
+			s:Load(THEME:GetPathG("","Common Resources/EVENT.png"))
+			s:zoomx(0.35)
+			s:zoomy(0.3)
+		else
+			s:Load(THEME:GetPathG("","Common Resources/FREE_PLAY.png"))
+			s:zoomx(0.45)
+			s:zoomy(0.4)
 		end
 
 		s:queuecommand("Update")
