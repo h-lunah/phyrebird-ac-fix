@@ -162,23 +162,7 @@ local function PlayerName( Player )
 				InitCommand=function(self)
 					self:x(75+20*i)
 					self:y(15)
-				end;
-				OnCommand=function(self)
-					local screen = SCREENMAN:GetTopScreen()
-					if screen:GetName() == "ScreenSelectMusic" and i <= 2 then
-						self:diffuseshift()
-						self:blend("BlendMode_Add")
-						self:effectcolor1(color("#ffffff"))
-						self:effectcolor2(color("#000000"))
-						self:effectperiod(3)
-					else
-						self:effectcolor1(color("#000000"))
-					end
-					self:queuecommand("Check")
-				end;
-				CheckCommand=function(self)
-					self:sleep(1/60):queuecommand("On")
-				end;
+				end
 			}
 		end
 		

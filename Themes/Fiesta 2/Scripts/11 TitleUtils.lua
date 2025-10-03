@@ -31,6 +31,12 @@ titleList = {
         [99] = "The Master"
 }
 
+-- Set your custom titles here.
+customTitles = {
+    [PLAYER_1] = "",
+    [PLAYER_2] = "",
+}
+
 function GetPlayerTitle(pn)
     local keys = {}
     for k in pairs(titleList) do
@@ -41,8 +47,10 @@ function GetPlayerTitle(pn)
 
     for i=#keys, 1, -1 do
         local k = keys[i]
-        if player_lvl <= k then
+        if player_lvl <= k and customTitles[pn] == "" then
             return titleList[k]
+        elseif customTitles[pn] ~= "" then
+            return customTitles[pn]
         end
     end
 

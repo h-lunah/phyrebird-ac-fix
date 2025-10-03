@@ -39,10 +39,26 @@ t[#t+1] = PlayerMessage(PLAYER_2)..{
 ------------------------------------------------------------------------------------------------------------------
 t[#t+1] = LoadFont("_myriad pro 20px")..{
 	InitCommand=function(self)
+		local random_id = ""
+		random_id = random_id.."PIU25-"
+
+		local ascii
+		local char
+		
+		for i=1,9,1 do
+			repeat
+				ascii = math.random(48,90)
+			
+			until (ascii <= 57) or (ascii >= 65)
+
+			char = string.char(ascii)
+			random_id = random_id..char
+		end
+
 		self:xy(SCREEN_LEFT+10, SCREEN_TOP+35)
 		self:horizalign(left)
         self:vertalign(top)
-		self:settext("v2.00.0\nPIU25-ABCDEFG00 (INT)\nPhyrebird")
+		self:settext("v2.00.0\n"..random_id.." (INT)\nPhyrebird")
 		self:zoom(0.5)
 	end;
 	OffCommand=function(self)
